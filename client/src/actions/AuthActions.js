@@ -4,7 +4,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from './Types';
 import jwt_decode from 'jwt-decode';
 
 export const registerUser = (userData, history) => dispatch => {
-    axios.post('/api/users/register', userDate)
+    axios.post('/api/users/register', userData)
         .then(res => history.push('/Login'))
         .catch(err => dispatch({
             type: GET_ERRORS,
@@ -18,7 +18,7 @@ export const loginUser = userData => dispatch => {
         const {token} = res.data;
         localStorage.setItem('jwtToken', token);
         SetAuthToken(token);
-        const decode = jwt_decode(token);
+        const decoded = jwt_decode(token);
         dispatch(setCurrentUser(decoded));
     }).catch(err => dispatch({
         type: GET_ERRORS,
