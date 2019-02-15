@@ -13,6 +13,8 @@ import {setCurrentUser, logoutUser} from './actions/AuthActions';
 import store from './store';
 
 //Components 
+import Feed from './components/Feed';
+import Landing from './components/Landing';
 import Login from './components/Login';
 import Register from './components/Register';
 
@@ -36,8 +38,12 @@ class App extends Component {
         <Router>
           <div className="App">
             <Container>
+              <Route path='/' exact component={Landing} />
               <Route path='/Login' exact component={Login} />
               <Route path='/Register' exact component={Register} />
+              <Switch>
+                <SecureRoute path='/Feed' exact component={Feed} />
+              </Switch>
             </Container>
           </div>
         </Router>

@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const keys = require('../config/Keys');
+const keys = require('../../config/Keys');
 
-const validateLoginInput = require('../validation/Login');
+const validateLoginInput = require('../../validation/Login');
 
-const user = require('../models/Users');
+const user = require('../../models/Users');
 
 const login_user = async (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);

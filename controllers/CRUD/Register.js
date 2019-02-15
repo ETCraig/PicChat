@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
-const validateRegisterInput = require('../validation/Register');
+const validateRegisterInput = require('../../validation/Register');
 
-const user = require('../models/Users');
+const user = require('../../models/Users');
 
 const register_user = async (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
