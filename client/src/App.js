@@ -16,6 +16,7 @@ import store from './store';
 import Feed from './components/Feed';
 import Landing from './components/Landing';
 import Login from './components/Login';
+import NavBar from './components/NavBar';
 import Register from './components/Register';
 
 if(localStorage.jwtToken) {
@@ -37,6 +38,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
+            <NavBar />
             <Container>
               <Route path='/' exact component={Landing} />
               <Route path='/Login' exact component={Login} />

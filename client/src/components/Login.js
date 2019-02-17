@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
+import '../styles/Login.css';
+
 import { connect } from 'react-redux';
+import {
+    Container,
+    Col,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Button
+} from 'reactstrap';
 import { loginUser } from '../actions/AuthActions';
 import PropTypes from 'prop-types';
 
@@ -44,24 +55,34 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Login</h1>
-                <form noValidate onSubmit={this.onSubmit}>
-                    <input
-                        name='email'
-                        type='email'
-                        placeholder='Email'
-                        onChange={this.onChange}
-                    />
-                    <input
-                        name='password'
-                        type='password'
-                        placeholder='Password'
-                        onChange={this.onChange}
-                    />
-                    <button type='submit'>Login</button>
-                </form>
-            </div>
+            <Container className="Login-Container">
+                <h2>Login</h2>
+                <Form noValidate onSubmit={this.onSubmit} className="Login-Form">
+                    <Col>
+                        <FormGroup>
+                            <Label>Email</Label>
+                            <Input
+                                name='email'
+                                type='email'
+                                placeholder='Email'
+                                onChange={this.onChange}
+                            />
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup>
+                            <Label>Password</Label>
+                            <Input
+                                name='password'
+                                type='password'
+                                placeholder='Password'
+                                onChange={this.onChange}
+                            />
+                        </FormGroup>
+                    </Col>
+                    <Button>Submit</Button>
+                </Form>
+            </Container>
         );
     }
 }
