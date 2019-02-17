@@ -5,7 +5,7 @@ const users = require('./Users');
 
 function delegateRoutesFor(app) {
     app.use('/api/users', users)
-
+    app.use('/api/stripe', stripe)
     return app;
 }
 
