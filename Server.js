@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const delegateRoutes = require('./routes/DelegateRoutes');
 
 const app = express();
@@ -13,6 +14,10 @@ const db = require('./config/Keys').mongoURI;
 mongoose.connect(db)
     .then(() => console.log('MongoDB Connected.'))
     .catch(err => console.log(err));
+
+app.use(passport.initialize());
+
+require('./config/Passport')(passport);
 
 delegateRoutes(app);
 

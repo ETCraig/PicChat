@@ -8,7 +8,7 @@ export const registerUser = (userData, history) => dispatch => {
         .then(res => history.push('/Login'))
         .catch(err => dispatch({
             type: GET_ERRORS,
-            payload: err.res.data
+            payload: err
         })
     );
 }

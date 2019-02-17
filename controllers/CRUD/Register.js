@@ -7,12 +7,15 @@ const validateRegisterInput = require('../../validation/Register');
 const User = require('../../models/Users');
 
 const register_user = async (req, res) => {
+    console.log('HIT')
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
+        console.log('HIT2')
         return res.status(400).json(errors);
     }
     User.findOne({ "email": req.body.email }).then(user => {
         if (user) {
+            console.log('HIT3')
             errors.email = 'Email already in Use.'
             return res.status(400).json(errors);
         } else {

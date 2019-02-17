@@ -4,30 +4,30 @@ const isEmpty = require('./isEmpty');
 module.exports = function validateRegisterInput(data) {
     let errors = {};
 
-    data.userName = !isEmpty(data.userName) ? data.userName: '';
-    data.firstName = !isEmpty(data.firstName) ? data.firstName: '';
-    data.lastName = !isEmpty(data.lastName) ? data.lastName: '';
+    data.user_name = !isEmpty(data.user_name) ? data.user_name: '';
+    data.first_name = !isEmpty(data.first_name) ? data.first_name: '';
+    data.last_name = !isEmpty(data.last_name) ? data.last_name: '';
     data.email = !isEmpty(data.email) ? data.email: '';
     data.password = !isEmpty(data.password) ? data.password: '';
     data.password2 = !isEmpty(data.password2) ? data.password2: '';
 
-    if(!Validator.isLength(data.userName, {min: 5, max: 25})) {
-        errors.userName = 'Name must be 5-20 characters.';
+    if(!Validator.isLength(data.user_name, {min: 5, max: 25})) {
+        errors.user_name = 'Name must be 5-20 characters.';
     }
-    if(Validator.isEmpty(data.userName)) {
-        errors.userName = 'Name is Required.';
+    if(Validator.isEmpty(data.user_name)) {
+        errors.user_name = 'Name is Required.';
     }
-    if(!Validator.isLength(data.firstName, {min: 2, max: 25})) {
-        errors.firstName = 'First name must be 2-25 characters.'
+    if(!Validator.isLength(data.first_name, {min: 2, max: 25})) {
+        errors.first_name = 'First name must be 2-25 characters.'
     }
-    if(Validator.isEmpty(data.firstName)) {
-        errors.firstName = 'Name is Required.';
+    if(Validator.isEmpty(data.first_name)) {
+        errors.first_name = 'Name is Required.';
     }
-    if(!Validator.isLength(data.lastName, {min: 2, max: 25})) {
-        errors.lastName = 'First name must be 2-25 characters.'
+    if(!Validator.isLength(data.last_name, {min: 2, max: 25})) {
+        errors.last_name = 'First name must be 2-25 characters.'
     }
-    if(Validator.isEmpty(data.lastName)) {
-        errors.lastName = 'Name is Required.';
+    if(Validator.isEmpty(data.last_name)) {
+        errors.last_name = 'Name is Required.';
     }
     if(Validator.isEmpty(data.email)) {
         errors.email = 'Email is Required.';
