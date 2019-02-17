@@ -4,19 +4,19 @@ const bcrypt = require('bcryptjs');
 
 const validateRegisterInput = require('../../validation/Register');
 
-const user = require('../../models/Users');
+const User = require('../../models/Users');
 
 const register_user = async (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
         return res.status(400).json(errors);
     }
-    user.findOne({ "email": req.body.email }).then(user => {
+    User.findOne({ "email": req.body.email }).then(user => {
         if (user) {
             errors.email = 'Email already in Use.'
             return res.status(400).json(errors);
         } else {
-            const newUser = new user({
+            const newUser = new User({
                 user_name: req.body.user_name,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,

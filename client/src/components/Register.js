@@ -9,9 +9,9 @@ class Register extends Component {
         super();
 
         this.state = {
-            userName: '',
-            firstName: '',
-            lastName: '',
+            user_name: '',
+            first_name: '',
+            last_name: '',
             email: '',
             password: '',
             password2: '',
@@ -36,18 +36,18 @@ class Register extends Component {
     }
     onSubmit(e) {
         let {
-            userName,
-            firstName,
-            lastName,
+            user_name,
+            first_name,
+            last_name,
             email,
             password,
             password2
         } = this.state;
         e.preventDefault();
         const newUser = {
-            userName,
-            firstName,
-            lastName,
+            user_name,
+            first_name,
+            last_name,
             email,
             password,
             password2
@@ -60,23 +60,23 @@ class Register extends Component {
                 <h1>Create Your New Account</h1>
                 <form noValidate onSubmit={this.onSubmit}>
                     <input
-                        name='userName'
+                        name='user_name'
                         type='name'
-                        placeholder='userName'
+                        placeholder='user_name'
                         value={this.state.name}
                         onChange={this.onChange}
                     />
                     <input
-                        name='firstName'
+                        name='first_name'
                         type='name'
-                        placeholder='firstName'
+                        placeholder='first_name'
                         value={this.state.name}
                         onChange={this.onChange}
                     />
                     <input
-                        name='lastName'
+                        name='last_name'
                         type='name'
-                        placeholder='lastName'
+                        placeholder='last_name'
                         value={this.state.name}
                         onChange={this.onChange}
                     />
