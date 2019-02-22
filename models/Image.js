@@ -25,10 +25,6 @@ const ImageSchema = new Schema({
             user: {
                 type: Schema.Types.ObjectId,
                 ref: 'users'
-            },
-            date: {
-                type: Date,
-                default: Date.now
             }
         }
     ],
@@ -37,13 +33,13 @@ const ImageSchema = new Schema({
             user: {
                 type: Schema.Types.ObjectId,
                 ref: 'users'
-            },
-            date: {
-                type: Date,
-                default: Date.now
             }
         }
     ],
+    comments: {
+        type: Schema.Types.ObjectId,
+        ref: 'comments'
+    },
     by_creator: {
         type: Schema.Types.ObjectId,
         ref: 'users'
@@ -57,4 +53,4 @@ const ImageSchema = new Schema({
     }
 });
 
-module.exports = mongoose.module('image', ImageSchema);
+module.exports = mongoose.model('image', ImageSchema);
