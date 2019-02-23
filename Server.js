@@ -10,6 +10,8 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const delegateRoutes = require('./routes/DelegateRoutes');
 
+const Image = require('./models/Image');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,34 +34,43 @@ let gfs;
 
 conn.once('open', () => {
     gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('uploads');
+    gfs.collection('content');
 });
 
 const storage = new GridFsStorage({
     url: DB,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
-            crypto.randomBytes(16, (err, buf) => {
-                if (err) {
-                    return reject(err);
-                }
-                const filename = buf.toString('hex') + path.extname(file.originalname);
-                const fileInfo = {
-                    filename: filename,
-                    bucketName: 'uploads'
-                };
-                resolve(fileInfo);
-            });
+            const filename = req.body.filename + path.extname(file.originalname);
+            const fileInfo = {
+                filename: filename,
+                bucketName: 'content'
+            }
+            resolve(fileInfo);
         });
     }
 });
+
 const upload = multer({ storage });
 
-//Upload Img
-app.post('/upload', upload.single('file'), (req, res) => {
-    res.redirect('/');
-});
+const Images = require('./models/Image');
 
+app.get('/images', (req, res) => {
+    console.log(req.locals.user)
+    Images.find()
+    .populate("fileID")
+    .then(files => res.send(files))
+    .catch(err => res.send(err))
+  });
+
+
+app.post('/upload', upload.any('file'), (req, res) => {
+    const Image = new Images({
+        image_file: req.files._id,
+    });
+    Image.save();
+    res.status(200).send('true')
+});
 
 
 require('./config/Passport')(passport);

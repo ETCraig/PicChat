@@ -2,18 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ImageSchema = new Schema({
-    image_url: {
-        type: String,
-        required: true
+    image_file: {
+        type: Schema.Types.ObjectId
     },
     title: {
         type: String,
-        required: true
+        // required: true
     },
     description: {
         type: String,
-        default: 'Description Here.',
-        required: true
+        default: 'Description Here.'
+        // required: true
     },
     tags: [
         {
@@ -53,4 +52,4 @@ const ImageSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('image', ImageSchema);
+module.exports = images = mongoose.model('images', ImageSchema);

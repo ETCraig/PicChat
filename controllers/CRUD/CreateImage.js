@@ -1,5 +1,3 @@
-'use strict';
-
 const Image = require('../../models/Image');
 
 const create_image = async (req, res) => {
