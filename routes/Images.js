@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const passport = require('passport');
 const path = require('path');
+const mongoose = require('mongoose');
 const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
-const CREATE_IMAGE = require('../controllers/CRUD/CreateImage');
-
 const DB = require('../config/Keys').mongoURI;
 
+
+//Practice Gridfs Images
 const conn = mongoose.createConnection(DB);
 
 let gfs;
@@ -24,7 +23,6 @@ conn.once('open', () => {
 const storage = new GridFsStorage({
     url: DB,
     file: (req, file) => {
-        console.log('HIT')
         return new Promise((resolve, reject) => {
             const filename = req.body.filename + path.extname(file.originalname);
             const fileInfo = {
@@ -38,14 +36,43 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-router.post('/images/upload', upload.any('file'), (req, res) => {
-    console.log('HIT Through')
+const Images = require('../models/Image');
+
+router.get('/images', (req, res) => {
+    Images.find().then(files => {
+        let imageIds = files.map(function (elem) {
+            return {
+                image_file: elem.image_file
+            }
+        });
+        console.log(imageIds);
+        gfs.files.find().toArray((rr, files) => {
+            if (!files || files.length === 0) {
+                res.render('index', { files: false });
+            } else {
+                files.map(file => {
+                    if (file.contentType === 'image/jpeg' || file.contentType === 'image.png') {
+                        file.isImage = true;
+                    } else {
+                        file.isImage = false;
+                    }
+                });
+                console.log({ files: files });
+            }
+        });
+    });
+});
+
+
+router.post('/upload/', upload.array('file'), (req, res) => {
+    console.log(req.files[0].id)
+    console.log(req.body)
     const Image = new Images({
-        image_file: req.files._id,
-        title: 'tjhkejsdfn'
+        image_file: req.files[0].id,
+        // description: req.params
     });
     Image.save();
-    res.status(200).send('true')
+    res.status(200).send('true');
 });
 
 module.exports = router;

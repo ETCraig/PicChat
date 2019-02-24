@@ -12,6 +12,8 @@ const delegateRoutes = require('./routes/DelegateRoutes');
 
 const Image = require('./models/Image');
 
+const imgRoutes = require('./controllers/CRUD/CreateImage');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,20 +58,39 @@ const upload = multer({ storage });
 const Images = require('./models/Image');
 
 app.get('/images', (req, res) => {
-    console.log(req.locals.user)
-    Images.find()
-    .populate("fileID")
-    .then(files => res.send(files))
-    .catch(err => res.send(err))
-  });
+    Images.find().then(files => {
+        let imageIds = files.map(function (elem) {
+            return {
+                image_file: elem.image_file
+            }
+        });
+        console.log(imageIds);
+        gfs.files.find().toArray((rr, files) => {
+            if (!files || files.length === 0) {
+                res.render('index', { files: false });
+            } else {
+                files.map(file => {
+                    if (file.contentType === 'image/jpeg' || file.contentType === 'image.png') {
+                        file.isImage = true;
+                    } else {
+                        file.isImage = false;
+                    }
+                });
+                console.log({ files: files });
+            }
+        });
+    });
+});
 
 
-app.post('/upload', upload.any('file'), (req, res) => {
+app.post('/images/upload', upload.array('file'), (req, res) => {
+    console.log(req.files[0].id)
     const Image = new Images({
-        image_file: req.files._id,
+        image_file: req.files[0].id,
+        // by_creator: req.user.id
     });
     Image.save();
-    res.status(200).send('true')
+    res.status(200).send('true');
 });
 
 

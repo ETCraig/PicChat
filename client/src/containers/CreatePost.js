@@ -1,43 +1,69 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    FormGroup,
-    Label,
-    Input
-} from 'reactstrap';
 import Styled from 'styled-components';
 
 class CreatePost extends Component {
-    // constructor() {
-    //     super();
+    constructor() {
+        super()
 
-    //     this.sate = {
-    //         images: []
-    //     }
-    // }
+        this.state = {
+            feedImages: [],
+            selectedFile: null,
+            description: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
     // componentDidMount() {
-    //     axios.get('/files').then(res => {
-    //         console.log('RES', res.data)
-    //         this.setState({images: res.data})
-    //     })
+    //     axios.get('/api/images/images').then(res => {
+    //         console.log(res.data)
+    //         this.setState({ feedImages: res.data });
+    //         console.log(this.state.feedImages)
+    //     });
     // }
+    handleChange(e) {
+        this.setState({[e.target.name]: e.target.value});
+        console.log(this.state.description)
+    }
+    handleSelectedFile = event => {
+        this.setState({
+          selectedFile: event.target.files[0],
+        })
+      }
+      handleUpload = () => {
+          let description = this.state.description;
+          let title = 'myTitle'
+          let body = {
+            description,
+            title
+          };
+        const data = new FormData()
+        data.append('file', this.state.selectedFile, description, title)
+        
+        axios
+          .post(`/api/images/upload/`, data, body)
+          .then(res => {
+            console.log(res.statusText)
+          })
+    
+      }
     render() {
-        // let images = this.state.images;
-        return(
+        let displayImages = this.state.feedImages;
+        return (
             <div>
-                <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <div>
-                        <input type="file" name="file" id="file" />
-                        <label for="file">Choose File</label>
-                    </div>
-                    <input type="submit" value="Submit" />
+                <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+                    <input type="file" name="" id="" onChange={this.handleSelectedFile} />
+                    <button onClick={this.handleUpload}>Upload</button>
+                    <input name="description" onChange={this.handleChange} />
                 </form>
+                {displayImages.map((image, i) => {
+                    return (
+                        <div>
+                            <h1>{image.description}</h1>
+                            <img src={image.image_file} />
+                        </div>
+                    );
+                })}
             </div>
         );
     }
