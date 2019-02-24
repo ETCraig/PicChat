@@ -65,14 +65,17 @@ router.get('/images', (req, res) => {
 
 
 router.post('/upload/', upload.array('file'), (req, res) => {
-    console.log(req.files[0].id)
-    console.log(req.body)
+    try{
+        console.log(req.files[0].id)
     const Image = new Images({
         image_file: req.files[0].id,
         // description: req.params
     });
     Image.save();
-    res.status(200).send('true');
+    res.status(200).json(req.files[0].id);
+    }catch(err) {
+        throw err;
+    }
 });
 
 module.exports = router;

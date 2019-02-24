@@ -7,7 +7,7 @@ function getJWT() {
         : console.log("no token");
 }
 
-const uploadNewImage = async body => {
+export const uploadNewImage = async (data) => {
     console.log('Services')
     const jwt = getJWT();
     let auth = {
@@ -17,8 +17,11 @@ const uploadNewImage = async body => {
         }
     };
     console.log('Past')
-    return axios.get(`${baseURL}/images/upload`, auth, body)
-        .then(res => res)
+    await axios.post('/api/images/upload', data)
+        .then(res => {
+            console.log('res', res.data)
+            return res;
+        })
         .catch(err => {
             console.log(err)
             throw err;

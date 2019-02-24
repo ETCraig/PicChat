@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
+import axios from 'axios';
+import {uploadNewImage} from '../services/Image.Services';
+ 
 import Styled from 'styled-components';
 
 class CreatePost extends Component {
@@ -31,21 +33,14 @@ class CreatePost extends Component {
         })
       }
       handleUpload = () => {
-          let description = this.state.description;
-          let title = 'myTitle'
-          let body = {
-            description,
-            title
-          };
+        let title = 'maTitle';
+        let description = this.state.description;
+        let body = [title, description];
         const data = new FormData()
-        data.append('file', this.state.selectedFile, description, title)
-        
-        axios
-          .post(`/api/images/upload/`, data, body)
-          .then(res => {
-            console.log(res.statusText)
-          })
-    
+        data.append('file', this.state.selectedFile)
+        uploadNewImage(data, body).then(res => {
+            console.log('RES', res)
+        }); 
       }
     render() {
         let displayImages = this.state.feedImages;

@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 const path = require('path');
 const mongoose = require('mongoose');
@@ -6,6 +7,9 @@ const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+
+module.exports = create_image = async (req, res) => {
+    try{
 
 const DB = require('../../config/Keys').mongoURI;
 
@@ -64,12 +68,16 @@ router.get('/images', (req, res) => {
 });
 
 
-router.post('/upload', upload.array('file'), (req, res) => {
-    console.log(req.files.id)
-    const Image = new Images({
-        image_file: req.files[0].id,
-        by_creator: req.user.id
-    });
-    Image.save();
-    res.status(200).send('true');
-});
+            upload.array('file')
+            console.log(req.files[0].id)
+            const Image = new Images({
+            image_file: req.files[0].id,
+                // description: req.params
+            });
+            Image.save();
+            // await upload_image_data(body)
+    }catch(err) {
+        errors.password = 'Failed at Create_Image.';
+        return res.status(400).json(err);
+    }
+}
