@@ -25,15 +25,15 @@ class NavBar extends Component {
         console.log(isAuthenticated)
 
         const userLinks = (
-            <Nav navbar>
+            <Nav className='navbar-nav ml-auto' navbar>
                 <NavItem>
-                    <Link to='/profile:id' style={{ cursor: 'pointer' }}>Profile</Link>
+                    <Link to='/Profile/5c68cd59a8171f45680d22e7' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
                 </NavItem>
                 <NavItem>
-                    <Link to='/library' style={{ cursor: 'pointer' }}>Library</Link>
+                    <Link to='/library' className='nav-link' style={{ cursor: 'pointer' }}>Library</Link>
                 </NavItem>
                 <NavItem>
-                    <NavLink onClick={this.onLogoutClick.bind(this)} style={{ cursor: 'pointer' }}>Logout</NavLink>
+                    <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>
                 </NavItem>
             </Nav>
         );

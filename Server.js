@@ -30,68 +30,68 @@ app.use(passport.initialize());
 
 
 //Practice Gridfs Images
-const conn = mongoose.createConnection(DB);
+// const conn = mongoose.createConnection(DB);
 
-let gfs;
+// let gfs;
 
-conn.once('open', () => {
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('content');
-});
+// conn.once('open', () => {
+//     gfs = Grid(conn.db, mongoose.mongo);
+//     gfs.collection('content');
+// });
 
-const storage = new GridFsStorage({
-    url: DB,
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-            const filename = req.body.filename + path.extname(file.originalname);
-            const fileInfo = {
-                filename: filename,
-                bucketName: 'content'
-            }
-            resolve(fileInfo);
-        });
-    }
-});
+// const storage = new GridFsStorage({
+//     url: DB,
+//     file: (req, file) => {
+//         return new Promise((resolve, reject) => {
+//             const filename = req.body.filename + path.extname(file.originalname);
+//             const fileInfo = {
+//                 filename: filename,
+//                 bucketName: 'content'
+//             }
+//             resolve(fileInfo);
+//         });
+//     }
+// });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
-const Images = require('./models/Image');
+// const Images = require('./models/Image');
 
-app.get('/images', (req, res) => {
-    Images.find().then(files => {
-        let imageIds = files.map(function (elem) {
-            return {
-                image_file: elem.image_file
-            }
-        });
-        console.log(imageIds);
-        gfs.files.find().toArray((rr, files) => {
-            if (!files || files.length === 0) {
-                res.render('index', { files: false });
-            } else {
-                files.map(file => {
-                    if (file.contentType === 'image/jpeg' || file.contentType === 'image.png') {
-                        file.isImage = true;
-                    } else {
-                        file.isImage = false;
-                    }
-                });
-                console.log({ files: files });
-            }
-        });
-    });
-});
+// app.get('/images', (req, res) => {
+//     Images.find().then(files => {
+//         let imageIds = files.map(function (elem) {
+//             return {
+//                 image_file: elem.image_file
+//             }
+//         });
+//         console.log(imageIds);
+//         gfs.files.find().toArray((rr, files) => {
+//             if (!files || files.length === 0) {
+//                 res.render('index', { files: false });
+//             } else {
+//                 files.map(file => {
+//                     if (file.contentType === 'image/jpeg' || file.contentType === 'image.png') {
+//                         file.isImage = true;
+//                     } else {
+//                         file.isImage = false;
+//                     }
+//                 });
+//                 console.log({ files: files });
+//             }
+//         });
+//     });
+// });
 
 
-app.post('/images/upload', upload.array('file'), (req, res) => {
-    console.log(req.files[0].id)
-    const Image = new Images({
-        image_file: req.files[0].id,
-        // by_creator: req.user.id
-    });
-    Image.save();
-    res.status(200).send('true');
-});
+// app.post('/images/upload', upload.array('file'), (req, res) => {
+//     console.log(req.files[0].id)
+//     const Image = new Images({
+//         image_file: req.files[0].id,
+//         // by_creator: req.user.id
+//     });
+//     Image.save();
+//     res.status(200).send('true');
+// });
 
 
 require('./config/Passport')(passport);
