@@ -18,7 +18,7 @@ router.post('/login', LOGIN_USER);
 router.get(
     '/profile/:userId', 
     passport.authenticate('jwt', {
-        session: true
+        session: false
     }),
     GET_USER_PROFILE
 );
