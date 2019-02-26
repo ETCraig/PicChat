@@ -19,11 +19,8 @@ export const getUserProfile = async userId => {
         }
     };
     console.log(userId, auth)
-    await axios.get(`/api/users/profile/${userId}`, auth)
-        .then(res => {
-            console.log(res)
-            return res;
-        })
+    return axios.get(`/api/users/profile/${userId}`, auth)
+        .then(res => res)
         .catch(err => {
             console.log(err)
             throw err
