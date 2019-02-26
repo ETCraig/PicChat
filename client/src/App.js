@@ -12,6 +12,9 @@ import SecureRoute from './utils/SecureRoute';
 import SetAuthToken from './utils/SetAuthToken';
 import {setCurrentUser, logoutUser} from './actions/AuthActions';
 import store from './store';
+import {StripeProvider} from 'react-stripe-elements';
+
+const STRIPE_PUP_KEY = process.env;
 
 //Components 
 import Feed from './components/Feed';
@@ -38,23 +41,25 @@ if(localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <NavBar />
-            <Container>
-              <Route path='/' exact component={Landing} />
-              <Route path='/Login' exact component={Login} />
-              <Route path='/Register' exact component={Register} />
-              <Switch>
-                <SecureRoute path='/Feed' exact component={Feed} />
-                <SecureRoute path='/Orders' exact component={Orders} />
-                <SecureRoute path='/Profile/:userId' exact component={Profile} />
-              </Switch>
-            </Container>
-          </div>
-        </Router>
-      </Provider>
+      <StripeProvider apiKey={STRIPE_PUP_KEY}>
+        <Provider store={store}>
+          <Router>
+            <div className="App">
+              <NavBar />
+              <Container>
+                <Route path='/' exact component={Landing} />
+                <Route path='/Login' exact component={Login} />
+                <Route path='/Register' exact component={Register} />
+                <Switch>
+                  <SecureRoute path='/Feed' exact component={Feed} />
+                  <SecureRoute path='/Orders' exact component={Orders} />
+                  <SecureRoute path='/Profile/:userId' exact component={Profile} />
+                </Switch>
+              </Container>
+            </div>
+          </Router>
+        </Provider>
+      </StripeProvider>
     );
   }
 }

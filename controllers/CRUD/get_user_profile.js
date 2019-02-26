@@ -7,7 +7,6 @@ module.exports = get_user_profile = async (req, res) => {
         console.log('USER', user_id)
         let profile = req.params.userId;
         console.log('PROFILE', profile);
-
         user.findById(user_id).then(owner => {
             console.log(owner)
             res.status(200).json(owner)
