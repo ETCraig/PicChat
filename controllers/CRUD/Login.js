@@ -31,7 +31,7 @@ const login_user = async (req, res) => {
                     keys.secretOrKey,
                     { expiresIn: 100 },
                     (err, token) => {
-                        res.json({ success: true, token: 'Bearer' + token });
+                        res.json({ success: true, token: 'Bearer ' + token });
                     }
                 );
             } else {

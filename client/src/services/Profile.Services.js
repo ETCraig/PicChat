@@ -8,12 +8,13 @@ function getJWT() {
   }
 
 export const getUserProfile = async userId => {
+    console.log(localStorage)
     try{
     console.log('HIT CALL')
-    const jwt = getJWT();
+    const JWT = getJWT();
     let auth = {
         headers: {
-            Authorization: jwt,
+            Authorization: JWT,
             "Content-Type": "application/json"
         }
     };

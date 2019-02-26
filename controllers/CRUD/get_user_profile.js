@@ -7,7 +7,7 @@ module.exports = get_user_profile = async (req, res) => {
     let profile = req.params.userId;
     console.log('PROFILE', profile);
     try {
-
+        res.status(200).json(true)
     } catch (err) {
         let errors = {};
         errors.profile = "Failed at get_user_profile.";
