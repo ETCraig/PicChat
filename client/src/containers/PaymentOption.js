@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import {deletePaymentMethod} from '../services/Stripe.Services';
 import styled from 'styled-components';
 
 const PaymentOptionDiv = styled.div`
@@ -34,7 +35,7 @@ const PaymentOptionDiv = styled.div`
       }
 `
 
-class PaymentOptions extends Component {
+class PaymentOption extends Component {
     constructor(props) {
         super(props);
     }

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from '../store';
+import { getErrors } from '../actions/ErrorActions';
 
 function getJWT() {
     return localStorage.getItem("jwt")
@@ -6,23 +8,62 @@ function getJWT() {
         : console.log("no token");
 }
 
-export const addCard = async (token, creator_id, promo_code) => {
+export const getPaymentMethods = () => {
     const jwt = getJWT();
     let auth = {
         headers: {
             Authorization: jwt,
-            "Content-Type": "application/json"
+            "Content-Type": 'application/json'
         }
     };
-    let body = {
-        tokenID: token,
-        creatorID: creator_id,
-        promo: promo_code
-    };
-    return axios.post('/stripe/add_card_sub', auth, body)
+
+    return axios.get('/api/stripe/sources', auth)
         .then(res => res)
         .catch(err => {
-            console.log(err)
-            throw err
+            let { response: { data } } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
+
+export const createPaymentMethod = tokenId => {
+    const jwt = getJWT();
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": 'application/json'
+        }
+    };
+
+    return axios.post('/api/stripe/create_payment_method', {tokenId}, auth)
+        .then(res => res)
+        .catch(err => {
+            let { response: { data } } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
+
+export const deletePaymentMethod = sourceId => {
+    const jwt = getJWT();
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": 'application/json'
+        }
+    };
+
+    return axios.delete(`/api/stripe/delete_payment_method/${sourceId}`, auth )
+        .then(res => res)
+        .catch(err => {
+            let { response: { data } } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
         });
 }

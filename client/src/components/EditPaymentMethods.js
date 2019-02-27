@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import {getPaymentMethods} from '../services/Stripe.Services';
 import styled from 'styled-components';
 
 const Container = styled.div`

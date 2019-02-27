@@ -1,4 +1,3 @@
-import { baseURL } from '../baseURL';
 import axios from 'axios';
 import { getErrors } from '../actions/ErrorActions';
 import { getUpdatedUser } from '../actions/AuthActions';
