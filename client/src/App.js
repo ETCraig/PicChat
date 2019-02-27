@@ -12,6 +12,7 @@ import SetAuthToken from './utils/SetAuthToken';
 import { setCurrentUser, logoutUser } from './actions/AuthActions';
 import store from './store';
 //Components 
+import EditPaymentMethods from './components/EditPaymentMethod';
 import Feed from './components/Feed';
 import Landing from './components/Landing';
 import Login from './components/Login';
@@ -47,6 +48,8 @@ class App extends Component {
                 <SecureRoute path='/Feed' exact component={Feed} />
                 <SecureRoute path='/Orders' exact component={Orders} />
                 <SecureRoute path='/Profile/:userId' exact component={Profile} />
+                <SecureRoute path='/Profile/edit' exact component={Edit} />
+                <SecureRoute path='/Profile/edit/payment-methods' exact component={EditPaymentMethods} />
               </Switch>
             </Container>
           </div>
