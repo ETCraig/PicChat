@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {addCard} from '../services/Stripe.Services';
 import {
     Elements,
     injectStripe,
@@ -64,12 +65,12 @@ class SubscribeModal extends Component {
     render() {
         let {cards} = this.state;
         return(
-            <Elements>
+            // <Elements>
                 <Modal 
                     isOpen={this.state.modal}
                     style={{marginTop: '100px'}}
                 >
-                    <ModalHeader toggle={this.toggle}>Subscribe Payment</ModalHeader>
+                    <ModalHeader>Subscribe Payment</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.handleSubscribe}>
                             <FormGroup>
@@ -94,6 +95,7 @@ class SubscribeModal extends Component {
                                     onFocus={handleFocus}
                                     onReady={handleReady}
                                 />
+                                <Label>Postal Code</Label>
                                 <PostalCodeElement 
                                     onBlur={handleBlur}
                                     onChange={handleChange}
@@ -113,7 +115,7 @@ class SubscribeModal extends Component {
                         </Form>
                     </ModalBody>
                 </Modal>
-            </Elements>
+            // </Elements>
         );
     }
 }

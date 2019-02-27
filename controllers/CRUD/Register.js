@@ -26,7 +26,7 @@ const register_user = async (req, res) => {
                 email: req.body.email,
                 password: req.body.password
             });
-            bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.genSalt(1000, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
                     newUser.password = hash;

@@ -19,8 +19,8 @@ class Login extends Component {
         super();
 
         this.state = {
-            email: '',
-            password: '',
+            email: 'helloboy@gmail.com',
+            password: 'HelloBoyz',
             errors: {}
         }
         this.onChange = this.onChange.bind(this);
