@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const stripe = require('../../validation/Stripe');
 
-module.exports = get_payment_methods = async (res, res) => {
+module.exports = get_payment_methods = async (req, res) => {
 
     console.log('USER', req.user);
     let { stripe_customer_id } = req.user;

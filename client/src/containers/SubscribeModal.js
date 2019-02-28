@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {addCard} from '../services/Stripe.Services';
+// import {addCard} from '../services/Stripe.Services';
 import {
     Elements,
     injectStripe,
@@ -47,20 +47,20 @@ class SubscribeModal extends Component {
     };
     handleSubscribe = ev => {
         ev.preventDefault();
-        if(this.props.stripe) {
-            this.props.stripe.createToken().then(payload => {
-                addCard(payload.token, this.state.creator_id, this.state.promo_code)
-                    .then(res => {
-                        this.setState({modal: false});
-                        console.log('res.data', res.data)
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            });
-        } else {
-            console.log("Stripe.js hasn't loaded yet.");
-        }
+        // if(this.props.stripe) {
+        //     this.props.stripe.createToken().then(payload => {
+        //         addCard(payload.token, this.state.creator_id, this.state.promo_code)
+        //             .then(res => {
+        //                 this.setState({modal: false});
+        //                 console.log('res.data', res.data)
+        //             })
+        //             .catch(err => {
+        //                 console.log(err)
+        //             })
+        //     });
+        // } else {
+        //     console.log("Stripe.js hasn't loaded yet.");
+        // }
     }
     render() {
         let {cards} = this.state;

@@ -61,7 +61,7 @@ class EditPaymentMethods extends Component {
             });
     }
     render() {
-        let { paymentOptions } = this.state;
+        let { paymentMethods } = this.state;
         // let { handlePaymentModal } = this.context;
         return (
             <Container>
@@ -70,12 +70,12 @@ class EditPaymentMethods extends Component {
                     <p>An overview of your payment methods.</p>
                     <h5>Credits and Debits</h5>
                     <OptionGrid>
-                        {paymentOptions.length ? paymentOptions.map((source, index) => (
-                            <PaymentOption key={index} source={source} updateListOfPaymentOptions={this.updateListOfPaymentOptions} />
+                        {/* {paymentMethods.length ? paymentMethods.map((source, index) => (
+                            <PaymentOption key={index} source={source} updateListOfPaymentMethods={this.updateListOfPaymentMethods} />
                         )) :
                             <div>
                                 <p>No credit or debit cards on file.</p>
-                            </div>}
+                            </div>} */}
                     </OptionGrid>
                     <h5>Add a New Payment Method</h5>
 

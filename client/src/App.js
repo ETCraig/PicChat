@@ -13,7 +13,7 @@ import { setCurrentUser, logoutUser } from './actions/AuthActions';
 import store from './store';
 //Components 
 import EditGeneral from './components/EditGeneral';
-import EditPaymentMethods from './components/EditPaymentMethod';
+import EditPaymentMethods from './components/EditPaymentMethods';
 import Feed from './components/Feed';
 import Landing from './components/Landing';
 import Login from './components/Login';

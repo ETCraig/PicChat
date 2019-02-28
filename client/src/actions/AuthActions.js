@@ -3,6 +3,14 @@ import SetAuthToken from '../utils/SetAuthToken';
 import { GET_ERRORS, SET_CURRENT_USER } from './Types';
 import jwt_decode from 'jwt-decode';
 
+export function saveItem(item, selectedValue) {
+    try {
+        localStorage.setItem(item, selectedValue);
+    } catch (error) {
+        console.error("AsyncStorage error: " + error.message);
+    }
+}
+
 function getJWT() {
     return localStorage.getItem("jwt")
         ? localStorage.getItem("jwt")
@@ -32,7 +40,7 @@ export const loginUser = userData => dispatch => {
     }));
 }
 
-export const getUpdatedUser = () => {
+export const getUpdatedUser = () => dispatch => {
     const jwt = getJWT();
     let auth = {
         headers: {
