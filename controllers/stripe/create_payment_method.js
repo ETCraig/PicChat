@@ -9,7 +9,7 @@ module.exports = create_payment_method = async (req, res) => {
 
     try {
         console.log(req.body)
-        let {tokenId} = req.body;
+        let { tokenId } = req.body;
         console.log('TOK', tokenId.id)
         let { stripe_customer_id, _id: user_id } = req.user;
         let user = await Users.findOne({ _id: user_id });
@@ -82,7 +82,6 @@ module.exports = create_payment_method = async (req, res) => {
     } catch (err) {
         let errors = {};
         errors.videos = "failed at create_payment_method.";
-        console.log('err 404')
         res.status(404).json(errors);
     }
 }

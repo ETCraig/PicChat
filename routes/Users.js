@@ -5,10 +5,14 @@ const jwt = require('jsonwebtoken');
 const keys = require('../config/Keys');
 const passport = require('passport');
 
-const GET_UPDATED_USER = require('../controllers/CRUD/get_updated_user');
-const GET_USER_PROFILE = require('../controllers/CRUD/get_user_profile');
-const LOGIN_USER = require('../controllers/CRUD/Login');
-const REGISTER_USER = require('../controllers/CRUD/Register');
+const GET_UPDATED_USER = require('../controllers/users/get_updated_user');
+const GET_USER_PROFILE = require('../controllers/users/get_user_profile');
+const LOGIN_USER = require('../controllers/users/Login');
+const REGISTER_USER = require('../controllers/users/Register');
+const UPDATE_FIRST_NAME = require('../controllers/users/update_first_name');
+const UPDATE_LAST_NAME = require('../controllers/users/update_last_name');
+const UPDATE_USER_EMAIL = require('../controllers/users/update_user_email');
+const UPDATE_USER_NAME = require('../controllers/users/update_user_name');
 
 const User = require('../models/Users');
 console.log('HIT TWO')
@@ -29,6 +33,34 @@ router.get('/latest',
         session: false
     }),
     GET_UPDATED_USER
+);
+
+router.post('/user_name',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UPDATE_USER_NAME
+);
+
+router.post('/email',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UPDATE_USER_EMAIL
+);
+
+router.post('/first_name',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UPDATE_FIRST_NAME
+);
+
+router.post('/last_name',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UPDATE_LAST_NAME
 );
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {

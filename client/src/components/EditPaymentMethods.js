@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import AddPaymentMethod from '../containers/AddPaymentMethod';
-import {capitalize} from '../utils/Capitalize';
+import { capitalize } from '../utils/Capitalize';
 import { Elements } from 'react-stripe-elements';
 import { getPaymentMethods, deletePaymentMethod } from '../services/Stripe.Services';
 import styled from 'styled-components';
@@ -140,9 +140,9 @@ class EditPaymentMethods extends Component {
     handleDelete(source_id) {
         deletePaymentMethod(source_id)
             .then(res => {
-               if(res.status === 200) {
-                   console.log('Deleted.');
-               } 
+                if (res.status === 200) {
+                    console.log('Deleted.');
+                }
             })
             .catch(err => {
                 throw err;
