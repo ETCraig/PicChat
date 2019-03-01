@@ -1,5 +1,5 @@
 const Users = require('../../models/Users');
-const validateEmailInput = require('../../validation/LastName');
+const validateEmailInput = require('../../validation/Email');
 
 module.exports = update_user_email = async (req, res) => {
     const { errors, isValid } = validateEmailInput(req.body);
