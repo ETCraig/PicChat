@@ -49,7 +49,7 @@ export const createPaymentMethod = (tokenId) => {
         });
 }
 
-export const deletePaymentMethod = sourceId => {
+export const deletePaymentMethod = (source_id) => {
     const jwt = getJWT();
     let auth = {
         headers: {
@@ -58,7 +58,7 @@ export const deletePaymentMethod = sourceId => {
         }
     };
 
-    return axios.delete(`/api/stripe/delete_payment_method/${sourceId}`, auth )
+    return axios.delete(`/api/stripe/delete_payment_method/${source_id}`, auth )
         .then(res => res)
         .catch(err => {
             let { response: { data } } = err;

@@ -3,19 +3,19 @@ const router = express.Router();
 const passport = require('passport');
 const stripe = require('../../validation/Stripe');
 
-module.exports = delete_payment_method = async () => {
+module.exports = delete_payment_method = async (req, res) => {
 
     try {
-        let source_id = req.body.sourceId;
-        console.log('SourceId', source_id);
+        let sourceId = req.params;
+        console.log('SourceId', sourceId);
         let { stripe_customer_id } = req.user;
         stripe.customers.deleteSource(
             stripe_customer_id,
-            source_id,
+            sourceId,
             function (err, source) {
                 console.log('ERR', err);
                 console.log('SOURCE', source);
-                if (source.status === 'consumed') {
+                if (source === null) {
                     res.sendStatus(200);
                 }
                 if (err) {

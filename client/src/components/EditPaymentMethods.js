@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AddPaymentMethod from '../containers/AddPaymentMethod';
 import {capitalize} from '../utils/Capitalize';
 import { Elements } from 'react-stripe-elements';
-import { getPaymentMethods } from '../services/Stripe.Services';
+import { getPaymentMethods, deletePaymentMethod } from '../services/Stripe.Services';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -137,6 +137,17 @@ class EditPaymentMethods extends Component {
     currentModal() {
         this.setState({ modal: true });
     }
+    handleDelete(source_id) {
+        deletePaymentMethod(source_id)
+            .then(res => {
+               if(res.status === 200) {
+                   console.log('Deleted.');
+               } 
+            })
+            .catch(err => {
+                throw err;
+            });
+    }
     render() {
         let { paymentMethods } = this.state;
         // let { handlePaymentModal } = this.context;
@@ -149,6 +160,8 @@ class EditPaymentMethods extends Component {
                     <OptionGrid>
                         {paymentMethods.length ? paymentMethods.map((source, index) => (
                             <PaymentOption key={index}>
+                                <button onClick={() => this.handleDelete(source.id)}>Delete</button>
+
                                 <InfoContainer>
                                     <InfoLast>
                                         {capitalize(source.card.funding)} **{source.card.last4}
