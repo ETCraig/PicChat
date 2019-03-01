@@ -85,6 +85,7 @@ class EditGeneral extends Component {
         this.setState({open: false});
     }
     render() {
+        const {auth} = this.props;
         return(
             <div>
                 <Container>
