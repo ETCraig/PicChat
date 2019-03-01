@@ -135,3 +135,47 @@ export const changeLastName = async last_name => {
             return { message: "Didn't Update Last Name..." }
         });
 }
+
+export const verifyPasswordConfirm = async password => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+
+    return axios.post('/api/users/verify_password', password, auth)
+        .catch(res => {
+            if (res.status === 200) {
+                store.dispatch(getErrors({}));
+                return res.status;
+            }
+        })
+        .catch(err => {
+            store.dispatch(getErrors(err));
+        });
+}
+
+export const changeUserPassword = async password => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+
+    return axios.post('/api/users/password', password, auth)
+        .then(res => {
+            if (res.status === 200) {
+                store.dispatch(getUpdatedUser());
+                store.dispatch(getErrors({}));
+            }
+        })
+        .catch(err => {
+            store.dispatch(getErrors(err));
+        });
+}

@@ -13,6 +13,7 @@ import { setCurrentUser, logoutUser } from './actions/AuthActions';
 import store from './store';
 //Components 
 import EditGeneral from './components/EditGeneral';
+import EditPassword from './components/EditPassword';
 import EditPaymentMethods from './components/EditPaymentMethods';
 import Feed from './components/Feed';
 import Landing from './components/Landing';
@@ -50,6 +51,7 @@ class App extends Component {
                 <SecureRoute path='/Orders' exact component={Orders} />
                 <SecureRoute path='/Profile/:userId' exact component={Profile} />
                 <SecureRoute path='/edit' exact component={EditGeneral} />
+                <SecureRoute path='/edit-password' exact component={EditPassword} />
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
               </Switch>
             </Container>

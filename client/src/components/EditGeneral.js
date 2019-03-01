@@ -136,6 +136,7 @@ class EditGeneral extends Component {
                         <Button onClick={this.handleSubmit}>Save Changes</Button>
                     </Form>
                 </Container>
+                <Link to='/edit-password'><button>Edit Password</button></Link>
                 <Link to='/payment-methods'><button>Payment Methods</button></Link>
             </div>
         );
