@@ -6,7 +6,7 @@ const CREATE_PAYMENT_METHOD = require('../controllers/stripe/create_payment_meth
 const DELETE_PAYMENT_METHOD = require('../controllers/stripe/delete_payment_method');
 const GET_PAYMENT_METHODS = require('../controllers/stripe/get_payment_methods');
 
-router.post('/sources',
+router.get('/sources',
     passport.authenticate('jwt', {
         session: false
     }),

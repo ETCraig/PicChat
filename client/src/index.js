@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 ReactDOM.render(
-<StripeProvider apiKey="'pk_test_66bOxz04WKoiKNjEWHr3W0dS'">
+<StripeProvider apiKey='pk_test_66bOxz04WKoiKNjEWHr3W0dS'>
     <Provider store={store}>
         <App />
     </Provider>

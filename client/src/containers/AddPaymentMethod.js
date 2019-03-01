@@ -16,6 +16,7 @@ const handleClick = () => { };
 const handleFocus = () => { };
 const handleReady = () => { };
 
+
 const Label = styled.div`
   color: #262626;
   padding: 10px;
@@ -32,15 +33,19 @@ const Form = styled.form.attrs({
 `;
 
 class AddPaymentMethod extends Component {
-    handleSubmit = e => {
+    constructor(props) {
+        super(props);
+    }
+    handleSubscribe = e => {
         e.preventDefault();
+        console.log('HIT')
         if (this.props.stripe) {
             this.props.stripe.createToken().then(payload =>
                 createPaymentMethod(payload.token)
                     .then(res => {
                         if (res.status === 200) {
                             console.log('ADDED', res);
-                            this.props.updatePaymentMethods();
+                            // this.props.updatePaymentMethods();
                         }
                     })
                     .catch(err => {
@@ -84,8 +89,7 @@ class AddPaymentMethod extends Component {
                         onReady={handleReady}
                     />
                     <Label>Coupon Code</Label>
-                    <Input type='text' name='promo_code' onChange={this.handlePromoCode} />
-                    <button style={{ marginTop: '2rem', background: '#3897f0', marginLeft: '5px' }}>Subscribe</button>
+                    <button style={{ marginTop: '2rem', background: '#3897f0', marginLeft: '5px' }}>Add</button>
                 </Form>
             </div>
         );

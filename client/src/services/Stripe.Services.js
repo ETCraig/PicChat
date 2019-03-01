@@ -9,6 +9,7 @@ function getJWT() {
 }
 
 export const getPaymentMethods = () => {
+    console.log('Lols Hit')
     const jwt = getJWT();
     let auth = {
         headers: {
@@ -28,7 +29,7 @@ export const getPaymentMethods = () => {
         });
 }
 
-export const createPaymentMethod = tokenId => {
+export const createPaymentMethod = (tokenId) => {
     const jwt = getJWT();
     let auth = {
         headers: {
@@ -36,7 +37,7 @@ export const createPaymentMethod = tokenId => {
             "Content-Type": 'application/json'
         }
     };
-
+    console.log(tokenId)
     return axios.post('/api/stripe/create_payment_method', {tokenId}, auth)
         .then(res => res)
         .catch(err => {

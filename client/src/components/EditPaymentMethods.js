@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import AddPaymentMethod from '../containers/AddPaymentMethod';
+import {Elements} from 'react-stripe-elements';
 import {getPaymentMethods} from '../services/Stripe.Services';
 import styled from 'styled-components';
 
@@ -31,8 +33,10 @@ class EditPaymentMethods extends Component {
         super(props);
 
         this.state = {
-            paymentMethods: []
+            paymentMethods: [],
+            modal: false
         }
+        this.currentModal = this.currentModal.bind(this);
     }
     componentDidMount() {
         getPaymentMethods()
@@ -60,6 +64,22 @@ class EditPaymentMethods extends Component {
                 throw err
             });
     }
+    handleModal() {
+        if(!this.state.modal) {
+            return(
+                <div />
+            );
+        } else {
+            return(
+                <Elements>
+                    <AddPaymentMethod />
+                </Elements>
+            )
+        }
+    }
+    currentModal() {
+        this.setState({modal: true});
+    }
     render() {
         let { paymentMethods } = this.state;
         // let { handlePaymentModal } = this.context;
@@ -81,8 +101,9 @@ class EditPaymentMethods extends Component {
 
                     <h5>Credit or Debit Cards</h5>
                     <p>SideCoach accepts all major credit and debit cards.</p>
-                    {/* <button onClick={() => openAddPaymentOptionModal()}>Add a card</button> */}
+                    <button onClick={this.currentModal}>Add a card</button>
                 </MainColumn>
+                {this.handleModal()}
             </Container>
         );
     }

@@ -6,6 +6,7 @@ import {
     changeFirstName, 
     changeLastName
 } from '../services/Profile.Services';
+import {Link} from 'react-router-dom';
 
 class EditGeneral extends Component {
     state = {
@@ -76,7 +77,7 @@ class EditGeneral extends Component {
     render() {
         return(
             <div>
-
+                <Link to='/payment-methods'><button>Payment Methods</button></Link>
             </div>
         );
     }

@@ -8,12 +8,14 @@ const Users = require('../../models/Users')
 module.exports = create_payment_method = async (req, res) => {
 
     try {
-        let { token_id } = req.body.tokenId;
+        console.log(req.body)
+        let {tokenId} = req.body;
+        console.log('TOK', tokenId.id)
         let { stripe_customer_id, _id: user_id } = req.user;
         let user = await Users.findOne({ _id: user_id });
-
+        console.log('USER', user, stripe_customer_id)
         if (stripe_customer_id) {
-            stripe.customer.retrieve(
+            stripe.customers.retrieve(
                 stripe_customer_id,
                 function async(err, customer) {
                     if (err) {
@@ -33,7 +35,7 @@ module.exports = create_payment_method = async (req, res) => {
                             stripe.sources.create({
                                 type: 'card',
                                 currency: 'usd',
-                                token: token_id.id,
+                                token: tokenId.id,
                                 owner: {
                                     email: req.user.email
                                 }
@@ -55,7 +57,7 @@ module.exports = create_payment_method = async (req, res) => {
                         stripe.sources.create({
                             type: 'card',
                             currency: 'usd',
-                            token: token_id.id,
+                            token: tokenId.id,
                             owner: {
                                 email: req.user.email
                             }
@@ -80,6 +82,7 @@ module.exports = create_payment_method = async (req, res) => {
     } catch (err) {
         let errors = {};
         errors.videos = "failed at create_payment_method.";
+        console.log('err 404')
         res.status(404).json(errors);
     }
 }
