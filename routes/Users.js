@@ -13,6 +13,8 @@ const UPDATE_FIRST_NAME = require('../controllers/users/update_first_name');
 const UPDATE_LAST_NAME = require('../controllers/users/update_last_name');
 const UPDATE_USER_EMAIL = require('../controllers/users/update_user_email');
 const UPDATE_USER_NAME = require('../controllers/users/update_user_name');
+const UPDATE_USER_PASSWORD = require('../controllers/users/update_user_password');
+const VERIFY_USER_PASSWORD = require('../controllers/users/verify_user_password');
 
 const User = require('../models/Users');
 console.log('HIT TWO')
@@ -61,6 +63,20 @@ router.post('/last_name',
         session: false
     }),
     UPDATE_LAST_NAME
+);
+
+router.post('/verify_password',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    VERIFY_USER_PASSWORD
+);
+
+router.post('/password', 
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UPDATE_USER_PASSWORD
 );
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {

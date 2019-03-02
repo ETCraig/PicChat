@@ -145,8 +145,8 @@ export const verifyPasswordConfirm = async password => {
             "Content-Type": "application/json"
         }
     };
-
-    return axios.post('/api/users/verify_password', password, auth)
+    console.log(password)
+    return axios.post(`/api/users/verify_password`, password, auth)
         .catch(res => {
             if (res.status === 200) {
                 store.dispatch(getErrors({}));
@@ -154,11 +154,12 @@ export const verifyPasswordConfirm = async password => {
             }
         })
         .catch(err => {
+            console.log(err)
             store.dispatch(getErrors(err));
         });
 }
 
-export const changeUserPassword = async password => {
+export const changeUserPassword = async data => {
     const jwt = getJWT();
 
     let auth = {
@@ -167,8 +168,8 @@ export const changeUserPassword = async password => {
             "Content-Type": "application/json"
         }
     };
-
-    return axios.post('/api/users/password', password, auth)
+    console.log(data)
+    return axios.post('/api/users/password', data, auth)
         .then(res => {
             if (res.status === 200) {
                 store.dispatch(getUpdatedUser());

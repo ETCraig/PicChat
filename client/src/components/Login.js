@@ -20,7 +20,7 @@ class Login extends Component {
 
         this.state = {
             email: 'userthree@gmail.com',
-            password: 'Usethree',
+            password: 'Usefour',
             errors: {}
         }
         this.onChange = this.onChange.bind(this);

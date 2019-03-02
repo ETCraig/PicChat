@@ -102,6 +102,11 @@ class EditGeneral extends Component {
                 <Container>
                     <Form>
                         <Col>
+                            <Form>
+                                <img src={this.state.user.avatar} type="file" />
+                            </Form>
+                        </Col>
+                        <Col>
                             <Label>Username</Label>
                             <Input
                                 name='user_name'

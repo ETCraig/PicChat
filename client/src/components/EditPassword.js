@@ -20,19 +20,21 @@ class EditPassword extends Component {
     }
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
+        console.log(this.state.newPassword)
     }
-    handleUpdate() {
+    verifyPassword = async () => {
+        const { oldPassword: password } = this.state
+        const isVerified = await verifyPasswordConfirm({ password });
+        if (isVerified) this.setState({ oldMatch: true });
+    }
+    handleUpdate = () => {
+        console.log(this.state.newPassword)
         const { newPassword: password, confirmPassword } = this.state;
         const data = {
             password,
             confirmPassword
         };
         changeUserPassword(data);
-    }
-    verifyPassword = async () => {
-        const { old_password: password } = this.state
-        const isVerified = await verifyPasswordConfirm({ password });
-        if (isVerified) this.setState({ oldMatch: true });
     }
     render() {
         const { oldMatch } = this.state;
@@ -41,9 +43,9 @@ class EditPassword extends Component {
                 <h3>Change Password</h3>
                 <br />
                 <Input
-                    name="old_password"
+                    name="oldPassword"
                     type="password"
-                    onChange={this.handleChange('old_password')}
+                    onChange={this.handleChange('oldPassword')}
                 />
                 {oldMatch ? <h4>Successfully Verified!</h4> : <h4>Please verify your password.</h4>}
 
