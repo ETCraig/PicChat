@@ -180,3 +180,20 @@ export const changeUserPassword = async data => {
             store.dispatch(getErrors(err));
         });
 }
+
+export const getProfileHandle = async handle => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+
+    return axios.get(`/api/users/handle/${handle}`, auth)
+        .then(res => res)
+        .catch(err => {
+            throw err;
+        });
+}

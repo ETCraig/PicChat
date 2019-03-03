@@ -24,6 +24,7 @@ class Register extends Component {
             email: '',
             password: '',
             password2: '',
+            handle: '',
             errors: {}
         }
         this.onChange = this.onChange.bind(this);
@@ -50,7 +51,8 @@ class Register extends Component {
             last_name,
             email,
             password,
-            password2
+            password2,
+            handle
         } = this.state;
         e.preventDefault();
         const newUser = {
@@ -59,7 +61,8 @@ class Register extends Component {
             last_name,
             email,
             password,
-            password2
+            password2,
+            handle
         }
         console.log(newUser)
         this.props.registerUser(newUser, this.props.history);
@@ -132,6 +135,17 @@ class Register extends Component {
                                 type='password'
                                 placeholder='Confirm Password'
                                 value={this.state.password2}
+                                onChange={this.onChange}
+                            />
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup>
+                            <Input
+                                name='handle'
+                                type='text'
+                                placeholder='Url Handle'
+                                value={this.state.handle}
                                 onChange={this.onChange}
                             />
                         </FormGroup>

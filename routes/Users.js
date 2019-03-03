@@ -6,6 +6,7 @@ const keys = require('../config/Keys');
 const passport = require('passport');
 
 const GET_UPDATED_USER = require('../controllers/users/get_updated_user');
+const GET_USER_HANDLE = require('../controllers/users/get_user_handle');
 const GET_USER_PROFILE = require('../controllers/users/get_user_profile');
 const LOGIN_USER = require('../controllers/users/Login');
 const REGISTER_USER = require('../controllers/users/Register');
@@ -77,6 +78,13 @@ router.post('/password',
         session: false
     }),
     UPDATE_USER_PASSWORD
+);
+
+router.get('/handle/:handle', 
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    GET_USER_HANDLE
 );
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {

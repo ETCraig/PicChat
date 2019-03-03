@@ -29,6 +29,7 @@ const register_user = async (req, res) => {
                     last_name: req.body.last_name,
                     email: req.body.email,
                     password: req.body.password,
+                    handle: req.body.handle,
                     stripe_customer_id: customer.id
                 });
                 bcrypt.genSalt(10, (err, salt) => {

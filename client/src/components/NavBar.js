@@ -27,11 +27,14 @@ class NavBar extends Component {
         const userLinks = (
             <Nav className='navbar-nav ml-auto' navbar>
                 <NavItem>
-                    <Link to='/Profile/5c68cd59a8171f45680d22e7' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
+                    <Link to='/Profile/:user' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
                 </NavItem>
                 <NavItem>
                     <Link to='/library' className='nav-link' style={{ cursor: 'pointer' }}>Library</Link>
                 </NavItem>
+                <NavLink>
+                    <Link to='/User/tester-user' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>
+                </NavLink>
                 <NavItem>
                     <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>
                 </NavItem>

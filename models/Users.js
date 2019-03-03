@@ -27,6 +27,11 @@ const UserSchema = new Schema({
         type: String,
         default: 'https://s3.us-east-2.amazonaws.com/sidecoach-storage-1/default/avatar.png',
     },
+    handle: {
+        type: String,
+        required: true,
+        unique: true
+    },
     stripe_customer_id: {
         type: String
     },

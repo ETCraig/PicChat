@@ -51,8 +51,6 @@ class Profile extends Component {
                 <h1>Profile Page</h1>
                 <img src={this.state.user.avatar} />
                 <h1>{this.state.user.user_name}</h1>
-                <button onClick={this.handleModal}>Subscribe</button>
-                {this.currentModal()}
             </div>
         );
     }
