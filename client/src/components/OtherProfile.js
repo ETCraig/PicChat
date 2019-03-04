@@ -12,6 +12,7 @@ class Profile extends Component {
             user: [],
             modal: false
         }
+        this.handleSubscribeModal = this.handleSubscribeModal.bind(this);
     }
     componentDidMount() {
         console.log('Mounting');
@@ -24,12 +25,19 @@ class Profile extends Component {
                 }
             });
     }
+    handleSubscribeModal() {
+
+    }
     render() {
         return (
             <div>
                 <img src={this.state.user.avatar} />
                 <h1>{this.state.user.user_name}</h1>
-                <button>Subscribe</button>
+                <button
+                    onClick={this.handleSubscribeModal}
+                >
+                    Subscribe
+                </button>
             </div>
         );
     }

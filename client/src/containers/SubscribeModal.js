@@ -19,103 +19,54 @@ import {
     Label
 } from 'reactstrap';
 
-const handleBlur = () => {};
-const handleChange = change => {};
-const handleClick = () => {};
-const handleFocus = () => {};
-const handleReady = () => {};
+import {
+    getPaymentMethods, 
+    subscribeToCreator
+} from '../services/Stripe.Services';
 
 class SubscribeModal extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            body: '',
             modal: true,
-            creator_id: this.props.creator,
-            promo_code: ''
-        };
-        this.handlePromoCode = this.handlePromoCode.bind(this);
-        this.handleSubscribe = this.handleSubscribe.bind(this); 
+            cards: [],
+            selected: [],
+            creator: this.props.creator_id
+        }
+        this.handleSubscribe = this.handleSubscribe.bind(this);
     }
-    toggle = () => {
-        this.setState({modal: !this.state.model});
-    };
-    handlePromoCode = e => {
-        this.setState({[e.target.name]: e.target.value});
-        console.log(this.state.promo_code);
-    };
-    handleSubscribe = ev => {
-        ev.preventDefault();
-        // if(this.props.stripe) {
-        //     this.props.stripe.createToken().then(payload => {
-        //         addCard(payload.token, this.state.creator_id, this.state.promo_code)
-        //             .then(res => {
-        //                 this.setState({modal: false});
-        //                 console.log('res.data', res.data)
-        //             })
-        //             .catch(err => {
-        //                 console.log(err)
-        //             })
-        //     });
-        // } else {
-        //     console.log("Stripe.js hasn't loaded yet.");
-        // }
+    componentDidMount() {
+        getPaymentMethods()
+            .then(({status, data}) => {
+                if(status === 200) {
+                    if(data.data.length) {
+                        this.setState({cards: data});
+                        this.setState({selected: data.data[0].id});
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    handleSubscribe() {
+        let sourceId = this.state.selected;
+        let creatorId = this.state.creator;
+        subscribeToCreator(sourceId, creatorId)
+            .then(({status, data}) => {
+                if(status === 200) {
+                    this.setState({modal: false})
+                } else {
+                    console.log('Err.');
+                }
+            });
     }
     render() {
-        let {cards} = this.state;
         return(
-            // <Elements>
-                <Modal 
-                    isOpen={this.state.modal}
-                    style={{marginTop: '100px'}}
-                >
-                    <ModalHeader>Subscribe Payment</ModalHeader>
-                    <ModalBody>
-                        <Form onSubmit={this.handleSubscribe}>
-                            <FormGroup>
-                                <Label>Card Number</Label>
-                                <CardNumberElement 
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    onFocus={handleFocus}
-                                    onReady={handleReady}
-                                />
-                                <Label>Expiration Date</Label>
-                                <CardExpiryElement 
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    onFocus={handleFocus}
-                                    onReady={handleReady}
-                                />
-                                <Label>CVC</Label>
-                                <CardCVCElement 
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    onFocus={handleFocus}
-                                    onReady={handleReady}
-                                />
-                                <Label>Postal Code</Label>
-                                <PostalCodeElement 
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    onFocus={handleFocus}
-                                    onReady={handleReady}
-                                />
-                                <Label>Coupon Code</Label>
-                                <Input type='text' name='promo_code' onChange={this.handlePromoCode} />
-                                <Button 
-                                    color='dark'
-                                    style={{marginTop: '2rem', background: '#3897f0', marginLeft: '5px'}}
-                                    block
-                                >
-                                Subscribe
-                                </Button>
-                            </FormGroup>
-                        </Form>
-                    </ModalBody>
-                </Modal>
-            // </Elements>
+            <div>
+
+            </div>
         );
     }
 }

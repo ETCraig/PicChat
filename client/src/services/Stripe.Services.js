@@ -9,8 +9,8 @@ function getJWT() {
 }
 
 export const getPaymentMethods = () => {
-    console.log('Lols Hit')
     const jwt = getJWT();
+
     let auth = {
         headers: {
             Authorization: jwt,
@@ -31,6 +31,7 @@ export const getPaymentMethods = () => {
 
 export const createPaymentMethod = (tokenId) => {
     const jwt = getJWT();
+
     let auth = {
         headers: {
             Authorization: jwt,
@@ -38,7 +39,7 @@ export const createPaymentMethod = (tokenId) => {
         }
     };
     console.log(tokenId)
-    return axios.post('/api/stripe/create_payment_method', {tokenId}, auth)
+    return axios.post('/api/stripe/create_payment_method', { tokenId }, auth)
         .then(res => res)
         .catch(err => {
             let { response: { data } } = err;
@@ -51,6 +52,7 @@ export const createPaymentMethod = (tokenId) => {
 
 export const deletePaymentMethod = (source_id) => {
     const jwt = getJWT();
+
     let auth = {
         headers: {
             Authorization: jwt,
@@ -58,10 +60,38 @@ export const deletePaymentMethod = (source_id) => {
         }
     };
 
-    return axios.delete(`/api/stripe/delete_payment_method/${source_id}`, auth )
+    return axios.delete(`/api/stripe/delete_payment_method/${source_id}`, auth)
         .then(res => res)
         .catch(err => {
             let { response: { data } } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
+
+export const subscribeToCreator = (sourceId, creatorId) => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": 'application/json'
+        }
+    };
+
+    let body = {
+        sourceId,
+        creatorId
+    }
+
+    return axios.post('/api/stripe/subscribe', body, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
             if (data) {
                 store.dispatch(getErrors(data));
             }
