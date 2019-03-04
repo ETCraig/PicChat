@@ -74,7 +74,6 @@ class Register extends Component {
                 <Form noValidate onSubmit={this.onSubmit} className="Login-Form">
                     <Col>
                         <FormGroup>
-                            <Label>User Name</Label>
                             <Input
                                 name='user_name'
                                 type='name'

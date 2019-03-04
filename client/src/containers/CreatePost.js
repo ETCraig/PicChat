@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
-import axios from 'axios';
 import {uploadNewImage} from '../services/Image.Services';
  
-import Styled from 'styled-components';
-
 class CreatePost extends Component {
     constructor() {
         super()
@@ -55,7 +52,7 @@ class CreatePost extends Component {
                     return (
                         <div>
                             <h1>{image.description}</h1>
-                            <img src={image.image_file} />
+                            <img src={image.image_file} alt='Feed' />
                         </div>
                     );
                 })}

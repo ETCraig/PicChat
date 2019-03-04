@@ -1,4 +1,3 @@
-import { baseURL } from '../baseURL';
 import axios from 'axios';
 
 function getJWT() {
@@ -17,7 +16,7 @@ export const uploadNewImage = async (data) => {
         }
     };
     console.log('Past')
-    await axios.post('/api/images/upload', data)
+    await axios.post('/api/images/upload', data, auth)
         .then(res => {
             console.log('res', res.data)
             return res;

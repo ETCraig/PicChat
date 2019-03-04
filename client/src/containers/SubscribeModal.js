@@ -1,22 +1,17 @@
 import React, {Component} from 'react';
 // import {addCard} from '../services/Stripe.Services';
+// import {
+//     Elements,
+//     injectStripe,
+//     CardNumberElement,
+//     CardExpiryElement,
+//     CardCVCElement,
+//     PostalCodeElement
+// } from 'react-stripe-elements';
 import {
-    Elements,
-    injectStripe,
-    CardNumberElement,
-    CardExpiryElement,
-    CardCVCElement,
-    PostalCodeElement
-} from 'react-stripe-elements';
-import {
-    Button,
-    Input,
     Modal,
     ModalHeader,
-    ModalBody,
-    Form,
-    FormGroup,
-    Label
+    ModalBody
 } from 'reactstrap';
 
 import {

@@ -12,7 +12,6 @@ import styled from 'styled-components';
 
 const handleBlur = () => { };
 const handleChange = change => { };
-const handleClick = () => { };
 const handleFocus = () => { };
 const handleReady = () => { };
 
@@ -33,9 +32,6 @@ const Form = styled.form.attrs({
 `;
 
 class AddPaymentMethod extends Component {
-    constructor(props) {
-        super(props);
-    }
     handleSubscribe = e => {
         e.preventDefault();
         console.log('HIT')

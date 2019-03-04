@@ -4,7 +4,6 @@ import {
     Container,
     Col,
     Form,
-    FormGroup,
     Label,
     Input,
     Button
@@ -102,9 +101,7 @@ class EditGeneral extends Component {
                 <Container>
                     <Form>
                         <Col>
-                            <Form>
-                                <img src={this.state.user.avatar} type="file" />
-                            </Form>
+                            <img src={this.state.user.avatar} alt='User Avatar' />
                         </Col>
                         <Col>
                             <Label>Username</Label>

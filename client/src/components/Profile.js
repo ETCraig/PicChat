@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
-import {Elements} from 'react-stripe-elements';
 import { getUserProfile } from '../services/Profile.Services';
 import {Link} from 'react-router-dom';
-import Styled from 'styled-components';
-import SubscribeModal from '../containers/SubscribeModal';
 
 class Profile extends Component {
     constructor(props) {
@@ -13,7 +10,6 @@ class Profile extends Component {
         this.state = {
             user: [],
         }
-        this.handleModal = this.handleModal.bind(this);
     }
     componentDidMount() {
         console.log('Passing')
@@ -31,7 +27,7 @@ class Profile extends Component {
             <div>
                 <Link to='/edit'><button>Edit</button></Link>
                 <h1>Profile Page</h1>
-                <img src={this.state.user.avatar} />
+                <img src={this.state.user.avatar} alt='User Avatar' />
                 <h1>{this.state.user.user_name}</h1>
             </div>
         );

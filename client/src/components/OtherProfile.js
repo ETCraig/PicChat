@@ -4,7 +4,7 @@ import { Elements } from 'react-stripe-elements';
 import {getProfileHandle} from '../services/Profile.Services';
 import SubscribeModal from '../containers/SubscribeModal';
 
-class Profile extends Component {
+class OtherProfile extends Component {
     constructor(props) {
         super(props);
 
@@ -46,13 +46,13 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <img src={this.state.user.avatar} />
+                <img src={this.state.user.avatar} alt='User Avatar' />
                 <h1>{this.state.user.user_name}</h1>
                 <button onClick={this.handleSubscribeModal}>Subscribe</button>
-                {this.currentModal}
+                {this.currentModal()}
             </div>
         );
     }
 }
 
-export default Profile;
+export default OtherProfile;

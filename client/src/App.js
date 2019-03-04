@@ -51,7 +51,7 @@ class App extends Component {
                 <SecureRoute path='/Feed' exact component={Feed} />
                 <SecureRoute path='/Orders' exact component={Orders} />
                 <SecureRoute path='/Profile/:userId' exact component={Profile} />
-                <SecureRoute path='/User/:handle' exact component={OtherProfile} />
+                <SecureRoute path='/Creator/:handle' exact component={OtherProfile} />
                 <SecureRoute path='/edit' exact component={EditGeneral} />
                 <SecureRoute path='/edit-password' exact component={EditPassword} />
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
