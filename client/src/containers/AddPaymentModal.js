@@ -1,37 +1,29 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
+import {
+    Button,
+    Form,
+    Label,
+    Modal
+} from 'reactstrap';
+import {createPaymentMethod} from '../services/Stripe.Services';
 import {
     injectStripe,
     CardNumberElement,
     CardExpiryElement,
     CardCVCElement,
     PostalCodeElement
-} from 'react-stripe-elements';
-import { createPaymentMethod } from '../services/Stripe.Services';
-import styled from 'styled-components';
+} from 'react-stripe-elements'
 
 const handleBlur = () => { };
 const handleChange = change => { };
 const handleFocus = () => { };
 const handleReady = () => { };
 
-
-const Label = styled.div`
-  color: #262626;
-  padding: 10px;
-`;
-
-const Form = styled.form.attrs({
-  className: props => props.className || "Form"
-})`
-  background-color: white;
-  padding: 2rem;
-  border: 1px solid #efefef;
-  border-radius: 2px;
-  width: 100%;
-`;
-
-class AddPaymentMethod extends Component {
+class AddPaymentModal extends Component {
+    state= {
+        modal: true
+    }
     handleSubscribe = e => {
         e.preventDefault();
         console.log('HIT')
@@ -41,7 +33,7 @@ class AddPaymentMethod extends Component {
                     .then(res => {
                         if (res.status === 200) {
                             console.log('ADDED', res);
-                            // this.props.updatePaymentMethods();
+                            this.setState({modal: false});
                         }
                     })
                     .catch(err => {
@@ -53,9 +45,10 @@ class AddPaymentMethod extends Component {
         }
     }
     render() {
-        return (
-            <div>
+        return(
+            <Modal isOpen={this.state.modal}>
                 <Form onSubmit={this.handleSubscribe}>
+                    <Label>Add New Payment Method</Label>
                     <Label>Card Number</Label>
                     <CardNumberElement
                         onBlur={handleBlur}
@@ -84,11 +77,11 @@ class AddPaymentMethod extends Component {
                         onFocus={handleFocus}
                         onReady={handleReady}
                     />
-                    <button style={{ marginTop: '2rem', background: '#3897f0', marginLeft: '5px' }}>Add</button>
+                    <Button style={{ marginTop: '2rem', background: '#3897f0', marginLeft: '5px' }}>Add</Button>
                 </Form>
-            </div>
+            </Modal>
         );
     }
 }
 
-export default injectStripe(AddPaymentMethod);
+export default injectStripe(AddPaymentModal);

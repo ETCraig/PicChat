@@ -1,6 +1,6 @@
 const Receipts = require('../../models/Receipts');
 const Subscriptions = require('../../models/Subscription');
-const Plan = require('../../models/Plan');
+const Plans = require('../../models/Plan');
 const stripe = require('../../validation/Stripe');
 
 module.exports = subscribe_to_creator = async (req, res) => {
@@ -10,16 +10,21 @@ module.exports = subscribe_to_creator = async (req, res) => {
     console.log(user, creator, source);
     try {
         let plan = await Plans.find({ "creator_id": creator });
-        let plan_id = plan.plan_id;
+        console.log('PLAN', plan);
+        let plan_id = plan[0].plan_id;
+        console.log(plan_id)
         stripe.subscriptions.create({
-            customer: stripe_customer_id,
+            customer: user,
             items: [{ plan: plan_id }],
             default_source: source,
             billing: 'charge_automatically'
         }, function (err, Subscription) {
+            console.log('ERR', err);
+            console.log('SUB', Subscription);
             let time = Subscription.created;
             let subId = Subscription.id;
-            stripe.charges.list({ created: time }, function (err, charges) {
+            stripe.charges.list({ created: time, limit: 1 }, function (err, charges) {
+                console.log('ERR', err);
                 console.log('CHARGES', charges);
                 let amount = charges.data[0].amount;
                 let currency = charges.data[0].currency;

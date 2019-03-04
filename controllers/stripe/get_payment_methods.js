@@ -20,7 +20,7 @@ module.exports = get_payment_methods = async (req, res) => {
                     errors.get_payment_methods = "Failed at stripe.customers.listSources"
                     return res.status(500).json(errors)
                 }
-                console.log('Sources', sources);
+                console.log('Sources', sources.data[0].card);
                 res.status(200).json(sources);
             });
     } catch (err) {
