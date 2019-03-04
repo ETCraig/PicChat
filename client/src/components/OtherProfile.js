@@ -21,23 +21,35 @@ class Profile extends Component {
                 let { status, data } = res;
                 if (status === 200) {
                     console.log(data);
-                    this.setState({ ...data, isReady: true });
+                    this.setState({ user: data[0] });
+                    console.log(this.state.user)
                 }
             });
     }
+    currentModal() {
+        if (!this.state.modal) {
+            return (
+                <div />
+            );
+        } else {
+            let creator_id = this.state.user._id;
+            return (
+                <Elements>
+                    <SubscribeModal creator={creator_id} />
+                </Elements>
+            );
+        }
+    }
     handleSubscribeModal() {
-
+        this.setState({modal: true})
     }
     render() {
         return (
             <div>
                 <img src={this.state.user.avatar} />
                 <h1>{this.state.user.user_name}</h1>
-                <button
-                    onClick={this.handleSubscribeModal}
-                >
-                    Subscribe
-                </button>
+                <button onClick={this.handleSubscribeModal}>Subscribe</button>
+                {this.currentModal}
             </div>
         );
     }

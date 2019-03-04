@@ -12,7 +12,6 @@ class Profile extends Component {
 
         this.state = {
             user: [],
-            modal: false
         }
         this.handleModal = this.handleModal.bind(this);
     }
@@ -26,23 +25,6 @@ class Profile extends Component {
             this.setState({ user: data });
             console.log(this.state.user)
         });
-    }
-    currentModal() {
-        if (!this.state.modal) {
-            return (
-                <div />
-            );
-        } else {
-            let creator_id = this.state.user._id;
-            return (
-                <Elements>
-                    <SubscribeModal creator={creator_id} />
-                </Elements>
-            );
-        }
-    }
-    handleModal() {
-        this.setState({modal: true})
     }
     render() {
         return (

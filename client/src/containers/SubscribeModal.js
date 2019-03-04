@@ -64,11 +64,14 @@ class SubscribeModal extends Component {
     }
     render() {
         return(
-            <div>
-
-            </div>
+            <Modal>
+                <ModalBody>
+                    <ModalHeader>Subscribe</ModalHeader>
+                    
+                </ModalBody>
+            </Modal>
         );
     }
 }
 
-export default injectStripe(SubscribeModal);
+export default SubscribeModal;

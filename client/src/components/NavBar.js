@@ -33,7 +33,7 @@ class NavBar extends Component {
                     <Link to='/library' className='nav-link' style={{ cursor: 'pointer' }}>Library</Link>
                 </NavItem>
                 <NavLink>
-                    <Link to='/User/tester-user' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>
+                    <Link to='/User/product1' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>
                 </NavLink>
                 <NavItem>
                     <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>
