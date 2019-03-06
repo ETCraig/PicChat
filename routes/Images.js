@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const path = require('path');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
@@ -8,6 +9,8 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
 const DB = require('../config/Keys').mongoURI;
+
+const UPLOAD_NEW_IMAGE = require('../controllers/CRUD/CreateImage');
 
 
 //Practice Gridfs Images
@@ -38,6 +41,14 @@ const upload = multer({ storage });
 
 const Images = require('../models/Image');
 
+router.post('/upload', 
+    upload.any(),
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UPLOAD_NEW_IMAGE
+);
+
 router.get('/images', (req, res) => {
     Images.find().then(files => {
         let imageIds = files.map(function (elem) {
@@ -58,24 +69,30 @@ router.get('/images', (req, res) => {
                     }
                 });
                 console.log({ files: files });
+                res.status(200).json(files);
             }
         });
     });
 });
 
 
-router.post('/upload/', upload.array('file'), (req, res) => {
-    try{
-        console.log(req.files[0].id)
-    const Image = new Images({
-        image_file: req.files[0].id,
-        // description: req.params
-    });
-    Image.save();
-    res.status(200).json(req.files[0].id);
-    }catch(err) {
-        throw err;
-    }
-});
+// router.post('/upload/', upload.any(), (req, res) => {
+//     try{
+//         let uri = req.files[0];
+//         console.log('URI', uri);
+//         let {description, title} = req.body;
+//         console.log('BODY', description, title);
+//         const Image = new Images({
+//             image_file: req.files[0].id,
+//             title: title,
+//             description: description,
+//             by_creator: req.user._id
+//         });
+//         Image.save();
+//         res.status(200).json(req.files[0].id);
+//     }catch(err) {
+//         throw err;
+//     }
+// });
 
 module.exports = router;
