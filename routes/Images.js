@@ -41,7 +41,7 @@ const upload = multer({ storage });
 
 const Images = require('../models/Image');
 
-router.post('/upload', 
+router.post('/upload',
     upload.any(),
     passport.authenticate('jwt', {
         session: false
@@ -49,50 +49,45 @@ router.post('/upload',
     UPLOAD_NEW_IMAGE
 );
 
-router.get('/images', (req, res) => {
-    Images.find().then(files => {
-        let imageIds = files.map(function (elem) {
-            return {
-                image_file: elem.image_file
-            }
-        });
-        console.log(imageIds);
+
+router.get('/images', async (req, res) => {
+    try {
         gfs.files.find().toArray((rr, files) => {
             if (!files || files.length === 0) {
                 res.render('index', { files: false });
             } else {
                 files.map(file => {
-                    if (file.contentType === 'image/jpeg' || file.contentType === 'image.png') {
+                    if (file.contentType === 'image/jpg' || file.contentType === 'image/png') {
                         file.isImage = true;
                     } else {
                         file.isImage = false;
                     }
                 });
-                console.log({ files: files });
                 res.status(200).json(files);
             }
-        });
+        });        
+    } catch (e) {
+        let errors = {}
+        errors.videos = "Could not find images."
+        res.status(404).json(errors)
+    }
+})
+
+router.get('/one/:filename', (req, res) => {
+    console.log('HIT ONE');
+    console.log(req.params.filename)
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+        console.log(err, file)
+        if (!file || file.length === 0) {
+            return res.status(404).json({ err: 'NO FILE.' });
+        }
+        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+            const readstream = gfs.createReadStream(file.filename);
+            readstream.pipe(res);
+        } else {
+            res.status(404).json({ err: 'NOT IMAGE' });
+        }
     });
 });
-
-
-// router.post('/upload/', upload.any(), (req, res) => {
-//     try{
-//         let uri = req.files[0];
-//         console.log('URI', uri);
-//         let {description, title} = req.body;
-//         console.log('BODY', description, title);
-//         const Image = new Images({
-//             image_file: req.files[0].id,
-//             title: title,
-//             description: description,
-//             by_creator: req.user._id
-//         });
-//         Image.save();
-//         res.status(200).json(req.files[0].id);
-//     }catch(err) {
-//         throw err;
-//     }
-// });
 
 module.exports = router;

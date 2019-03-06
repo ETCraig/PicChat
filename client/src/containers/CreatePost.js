@@ -22,7 +22,8 @@ class CreatePost extends Component {
     componentDidMount() {
         axios.get('/api/images/images').then(res => {
             console.log(res.data)
-            this.setState({ feedImages: res.data });
+            let data = res.data;
+            this.setState({ feedImages: data });
             console.log(this.state.feedImages)
         });
     }
@@ -42,7 +43,7 @@ class CreatePost extends Component {
                 fileType,
                 mimeType: file.type,
                 selectedFile: event.target.files[0],
-            })
+            });
         }
     }
     handleUpload = () => {
@@ -78,7 +79,8 @@ class CreatePost extends Component {
                     return (
                         <div key={i}>
                             <h1>{image.description}</h1>
-                            <img src={image.image_file} alt='Feed' style={{width: '200px', height: '200px'}} />
+                            <img src={`/api/images/one/${image.filename}`} alt='Feed' style={{width: '200px', height: '200px'}} />
+                            {/* <img src={image.filename} alt='Feed' style={{width: '200px', height: '200px'}} /> */}
                         </div>
                     );
                 })}
