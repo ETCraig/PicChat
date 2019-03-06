@@ -193,7 +193,7 @@ class SubscribeModal extends Component {
                                     cardList.map((source, i) => (
                                         <CardOption key={i}>
                                             <Radio 
-                                                checked={this.state.selected == source.id}
+                                                checked={this.state.selected === source.id}
                                                 value={source.id}
                                                 onChange={this.handleRadio}
                                                 color='primary'

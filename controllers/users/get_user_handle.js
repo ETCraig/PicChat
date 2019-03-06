@@ -1,4 +1,5 @@
 const Users = require('../../models/Users');
+const Subscriptions = require('../../models/Subscription');
 
 module.exports = get_user_handle = async (req, res) => {
     try {
@@ -12,9 +13,29 @@ module.exports = get_user_handle = async (req, res) => {
                 'last_name',
                 'email'
             ]
-        )
+        );
         console.log(userData)
-        let data = await Promise.all(userData);
+        console.log(userData[0]._id)
+        let checkSubscribed = await Subscriptions.find(
+            {
+                $and: [
+                    { "to_creator": userData[0]._id },
+                    { "from_user": req.user._id },
+                    { "active": true }
+                ]
+            }
+        );
+        console.log(checkSubscribed)
+        const [user, subed] = await Promise.all([userData, checkSubscribed]);
+        console.log(user, subed);
+        let data = {
+            user,
+            subscribed: false
+        };
+        console.log(subed.length)
+        if(subed.length <= 1) {
+            data.subscribed = true
+        }
         console.log(data)
         res.status(200).json(data)
     } catch (err) {
