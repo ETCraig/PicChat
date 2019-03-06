@@ -6,12 +6,27 @@ import {
     ModalHeader,
     ModalBody
 } from 'reactstrap';
+import {unsubscribeFromCreator} from '../services/Stripe.Services';
 
-const UnsubscribeModal = (props) => {
+function UnsubscribeModal(props) {
+    const handleUnsubscribe = e => {
+        console.log(props.creator);
+        let creatorId = props.creator
+        unsubscribeFromCreator(creatorId)
+            .then(res => {
+                let {status, data} = res;
+                if(status === 200) {
+                    console.log('Success');
+                } else {
+                    console.log('Err');
+                }
+            });
+    }
     return (
         <Modal isOpen={true}>
             <ModalBody>
-                <ModalHeader>Unsubscribe Modal</ModalHeader>
+                <ModalHeader>Are you Sure?</ModalHeader>
+                <Button onClick={handleUnsubscribe}>Yes</Button>
             </ModalBody>
         </Modal>
     );

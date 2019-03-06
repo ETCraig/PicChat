@@ -6,7 +6,8 @@ const CREATE_PAYMENT_METHOD = require('../controllers/stripe/create_payment_meth
 const DELETE_PAYMENT_METHOD = require('../controllers/stripe/delete_payment_method');
 const GET_PAYMENT_METHODS = require('../controllers/stripe/get_payment_methods');
 const SUBSCRIBE_TO_CREATOR = require('../controllers/stripe/subscribe_to_creator');
-
+const UNSUBSCRIBE_FROM_CREATOR = require('../controllers/stripe/unsubscribe_from_coach');
+console.log('Stripe')
 router.get('/sources',
     passport.authenticate('jwt', {
         session: false
@@ -33,6 +34,13 @@ router.post('/subscribe',
         session: false
     }),
     SUBSCRIBE_TO_CREATOR
+);
+
+router.post('/unsubscribe',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UNSUBSCRIBE_FROM_CREATOR
 );
 
 module.exports = router;

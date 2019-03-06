@@ -98,3 +98,26 @@ export const subscribeToCreator = (sourceId, creatorId) => {
             throw err;
         });
 }
+
+export const unsubscribeFromCreator = (creatorId) => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": 'application/json'
+        }
+    };
+    console.log(creatorId);
+    return axios.post('/api/stripe/unsubscribe', {creatorId}, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
