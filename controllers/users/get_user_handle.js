@@ -33,7 +33,7 @@ module.exports = get_user_handle = async (req, res) => {
             subscribed: false
         };
         console.log(subed.length)
-        if(subed.length <= 1) {
+        if(subed.length >= 1) {
             data.subscribed = true
         }
         console.log(data)
