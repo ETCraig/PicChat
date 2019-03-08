@@ -21,7 +21,7 @@ const SubscriptionSchema = new Schema({
     },
     images: [
         {
-            imag_library_item: {
+            image_library_item: {
                 type: Schema.Types.ObjectId,
                 ref: 'image_library'
             }

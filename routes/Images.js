@@ -10,7 +10,7 @@ const Grid = require('gridfs-stream');
 
 const DB = require('../config/Keys').mongoURI;
 
-const UPLOAD_NEW_IMAGE = require('../controllers/CRUD/CreateImage');
+const UPLOAD_NEW_IMAGE = require('../controllers/imgs/CreateImage');
 
 
 //Practice Gridfs Images
@@ -73,10 +73,10 @@ router.get('/images', async (req, res) => {
     }
 })
 
-router.get('/one/:filename', (req, res) => {
+router.get('/one/:filename', async (req, res) => {
     console.log('HIT ONE');
-    console.log(req.params.filename)
-    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    console.log(req.params.filename);
+    let image = await gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
         console.log(err, file)
         if (!file || file.length === 0) {
             return res.status(404).json({ err: 'NO FILE.' });
@@ -88,6 +88,7 @@ router.get('/one/:filename', (req, res) => {
             res.status(404).json({ err: 'NOT IMAGE' });
         }
     });
+    // let data = await Images.findOne(file)
 });
 
 module.exports = router;
