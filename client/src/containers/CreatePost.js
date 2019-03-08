@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
-import { uploadNewImage } from '../services/Image.Services';
+import {Link} from 'react-router-dom';
+import { getFeedImages, uploadNewImage } from '../services/Image.Services';
 
 class CreatePost extends Component {
     constructor() {
@@ -20,7 +21,8 @@ class CreatePost extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
     componentDidMount() {
-        axios.get('/api/images/images').then(res => {
+        getFeedImages()
+            .then(res => {
             console.log(res.data)
             let data = res.data;
             this.setState({ feedImages: data });
@@ -79,7 +81,7 @@ class CreatePost extends Component {
                     return (
                         <div key={i}>
                             <h1>{image.description}</h1>
-                            <img src={`/api/images/one/${image.filename}`} alt='Feed' style={{width: '200px', height: '200px'}} />
+                            <Link to={`/view/${image._id}`}><img src={`/api/images/one/${image.filename}`} alt='Feed' style={{width: '200px', height: '200px'}} /></Link>
                             {/* <img src={image.filename} alt='Feed' style={{width: '200px', height: '200px'}} /> */}
                         </div>
                     );

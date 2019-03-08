@@ -10,6 +10,8 @@ const Grid = require('gridfs-stream');
 
 const DB = require('../config/Keys').mongoURI;
 
+const SAVE_CREATOR_IMAGE = require('../controllers/imgs/save_creator_image');
+const UNSAVE_CREATOR_IMAGE = require('../controllers/imgs/unsave_creator_image');
 const UPLOAD_NEW_IMAGE = require('../controllers/imgs/CreateImage');
 
 
@@ -40,7 +42,7 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 const Images = require('../models/Image');
-
+console.log('YO BOY!')
 router.post('/upload',
     upload.any(),
     passport.authenticate('jwt', {
@@ -49,6 +51,19 @@ router.post('/upload',
     UPLOAD_NEW_IMAGE
 );
 
+router.post('/save/:image_id',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    SAVE_CREATOR_IMAGE
+);
+
+router.post('/unsave/:image_id',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UNSAVE_CREATOR_IMAGE
+);
 
 router.get('/images', async (req, res) => {
     try {

@@ -23,6 +23,7 @@ import Orders from './components/Orders';
 import OtherProfile from './components/OtherProfile';
 import Profile from './components/Profile';
 import Register from './components/Register';
+import ViewImage from './components/ViewImage';
 
 if (localStorage.jwtToken) {
   SetAuthToken(localStorage.jwtToken);
@@ -55,6 +56,7 @@ class App extends Component {
                 <SecureRoute path='/edit' exact component={EditGeneral} />
                 <SecureRoute path='/edit-password' exact component={EditPassword} />
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
+                <SecureRoute path='/view/:image_id' exact component={ViewImage} />
               </Switch>
             </Container>
           </div>

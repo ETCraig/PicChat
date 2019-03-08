@@ -2,8 +2,8 @@ const Subscriptions = require('../../models/Subscription');
 const ImageLibrary = require('../../models/ImageLibrary');
 
 module.exports = save_creator_image = async (req, res) => {
-    let imageID = {};
-    let user = req.user._id;
+    let imageID = req.params.image_id;
+    let user = req.body.userId;
     let creator = req.body.creatorId;
     console.log(imageID, user, creator);
     try {
