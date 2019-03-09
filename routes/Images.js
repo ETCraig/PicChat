@@ -78,6 +78,7 @@ router.get('/images', async (req, res) => {
                         file.isImage = false;
                     }
                 });
+                console.log(files)
                 res.status(200).json(files);
             }
         });        

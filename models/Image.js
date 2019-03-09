@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const ImageSchema = new Schema({
     image_file: {
-        type: Schema.Types.ObjectId,
-        ref: "content.files"
+        type: String,
+        required: true
     },
     title: {
         type: String,

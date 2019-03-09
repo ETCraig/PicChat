@@ -9,8 +9,10 @@
   "author": "E.T. Craig",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.418.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "datauri": "^1.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "gridfs-stream": "^1.1.1",
