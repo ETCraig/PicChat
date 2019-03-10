@@ -40,7 +40,7 @@ export const getFeedImages = async () => {
         }
     };
 
-    return axios.get('/api/images/images', auth)
+    return axios.get('/api/images/feed', auth)
         .then(res => res)
         .catch(err => {
             let {
@@ -53,7 +53,7 @@ export const getFeedImages = async () => {
         });
 }
 
-export const saveCreatorImage = async (image_id, creator_id) => {
+export const getSingleImage = async (image_id) => {
     const jwt = getJWT();
 
     let auth = {
@@ -63,9 +63,7 @@ export const saveCreatorImage = async (image_id, creator_id) => {
         }
     };
 
-    let body = { creator_id }
-
-    return axios.post(`/api/images/save/${image_id}`, body, auth)
+    return axios.get(`/api/images/single/${image_id}`, auth)
         .then(res => res)
         .catch(err => {
             let {
@@ -78,7 +76,30 @@ export const saveCreatorImage = async (image_id, creator_id) => {
         });
 }
 
-export const unsaveCreatorImage = async (image_id, creator_id) => {
+export const saveCreatorImage = async (image_id) => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+    console.log(image_id)
+    return axios.post(`/api/images/save/${image_id}`, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
+
+export const unsaveCreatorImage = async (image_id) => {
     const jwt = getJWT();
 
     let auth = {
@@ -88,9 +109,7 @@ export const unsaveCreatorImage = async (image_id, creator_id) => {
         }
     };
 
-    let body = { creator_id }
-
-    return axios.post(`/api/images/unsave/${image_id}`, body, auth)
+    return axios.post(`/api/images/unsave/${image_id}`, auth)
         .then(res => res)
         .catch(err => {
             let {

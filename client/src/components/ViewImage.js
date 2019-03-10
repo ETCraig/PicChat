@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import SaveBtn from '../containers/SaveBtn';
-import { getFeedImages, saveCreatorImage, unsaveCreatorImage } from '../services/Image.Services';
+import { getSingleImage, saveCreatorImage, unsaveCreatorImage } from '../services/Image.Services';
 
 class ViewImage extends Component {
     constructor(props) {
@@ -10,35 +10,39 @@ class ViewImage extends Component {
         this.state = {
             image: [],
             creator: [],
-            likes: 0,
-            dislikes: 0,
-            isSaved: false
+            likeCount: 0,
+            dislikeCount: 0,
+            liked: 0,
+            disliked: 0,
+            isSaved: false,
+            isSubscribed: false
         }
         this.handleSaveBtn = this.handleSaveBtn.bind(this);
         this.handleUnsaveImg = this.handleUnsaveImg.bind(this);
     }
     componentDidMount() {
-        getFeedImages()
+        let image_id = this.props.match.params.image_id;
+        console.log(image_id)
+        getSingleImage(image_id)
             .then(res => {
                 console.log(res.data)
                 let data = res.data;
-                this.setState({ image: data });
-                console.log(this.state.feedImages)
+                this.setState({ ...data });
+                console.log(this.state.image)
             });
     }
-    handleSaveBtn() {
+    handleSaveBtn(image) {
+        let image_id = image;
         return (
             <SaveBtn
                 isImgSaved={this.state.isSaved}
-                handleSave={() => this.handleSaveImg()}
-                handleUnsave={() => this.handleUnsaveImg()}
+                handleSave={() => this.handleSaveImg(image_id)}
+                handleUnsave={() => this.handleUnsaveImg(image_id)}
             />
         );
     }
-    handleSaveImg() {
-        let { image_id } = this.props.match.params;
-        let creator_id = this.state.creator._id;
-        saveCreatorImage(image_id, creator_id)
+    handleSaveImg(image_id) {
+        saveCreatorImage(image_id)
             .then(res => {
                 let { status, data } = res;
                 if (status === 200) {
@@ -50,10 +54,8 @@ class ViewImage extends Component {
                 throw err;
             });
     }
-    handleUnsaveImg() {
-        let { image_id } = this.props.match.params;
-        let creator_id = this.state.creator._id;
-        unsaveCreatorImage(image_id, creator_id)
+    handleUnsaveImg(image_id) {
+        unsaveCreatorImage(image_id)
             .then(res => {
                 let { status, data } = res;
                 if (status === 200) {
@@ -66,9 +68,12 @@ class ViewImage extends Component {
             });
     }
     render() {
+        let image = this.state.image;
         return (
             <div>
-                
+                <h1>{image.description}</h1>
+                <img src={image.image_file} alt='Feed' style={{ width: '200px', height: '200px' }} />
+                {this.handleSaveBtn(image._id)}
             </div>
         );
     }

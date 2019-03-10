@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
+import FeedImages from '../containers/FeedImages';
 import {Link} from 'react-router-dom';
-import { getFeedImages, uploadNewImage } from '../services/Image.Services';
+import { uploadNewImage } from '../services/Image.Services';
 
 class CreatePost extends Component {
     constructor() {
         super()
 
         this.state = {
-            feedImages: [],
             selectedFile: null,
             description: '',
             title: '',
@@ -19,15 +19,6 @@ class CreatePost extends Component {
             uri: ''
         }
         this.handleChange = this.handleChange.bind(this);
-    }
-    componentDidMount() {
-        getFeedImages()
-            .then(res => {
-            console.log(res.data)
-            let data = res.data;
-            this.setState({ feedImages: data });
-            console.log(this.state.feedImages)
-        });
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -67,7 +58,6 @@ class CreatePost extends Component {
         }
     }
     render() {
-        let displayImages = this.state.feedImages;
         return (
             <div>
                 {/* <form onSubmit={this.handleSubmit} encType="multipart/form-data"> */}
@@ -77,15 +67,7 @@ class CreatePost extends Component {
                     <input name="title" onChange={this.handleChange} placeholder='title' />
                     <input name="description" onChange={this.handleChange} placeholder='description' />
                 {/* </form> */}
-                {displayImages.map((image, i) => {
-                    return (
-                        <div key={i}>
-                            <h1>{image.description}</h1>
-                            <Link to={`/view/${image._id}`}><img src={`/api/images/one/${image.filename}`} alt='Feed' style={{width: '200px', height: '200px'}} /></Link>
-                            {/* <img src={image.filename} alt='Feed' style={{width: '200px', height: '200px'}} /> */}
-                        </div>
-                    );
-                })}
+                <FeedImages />
             </div>
         );
     }

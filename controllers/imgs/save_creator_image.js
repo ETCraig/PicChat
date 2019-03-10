@@ -1,12 +1,16 @@
 const Subscriptions = require('../../models/Subscription');
+const Image = require('../../models/Image');
 const ImageLibrary = require('../../models/ImageLibrary');
 
 module.exports = save_creator_image = async (req, res) => {
     let imageID = req.params.image_id;
-    let user = req.body.userId;
-    let creator = req.body.creatorId;
-    console.log(imageID, user, creator);
+    let user = req.user._id;
+    console.log(imageID, user);
     try {
+        let findCreator = await Image.findById(imageID);
+        console.log(findCreator);
+        let creator = findCreator.by_creator;
+        console.log(creator);
         let subscription = await Subscriptions.findOne(
             {"to_creator": creator, "from_user": user, active: true}
         );

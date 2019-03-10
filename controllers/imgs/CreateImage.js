@@ -21,27 +21,31 @@ module.exports = create_image = async (req, res) => {
     const published = Date.now();
     upload(req, res, async function (err) {
         try {
+            console.log('Hit the Inside.')
             let uri = req.files[0];
             let {description, title, tags} = req.body;
-            let imageSize = uwi.size;
-
+            console.log(description, title, tags);
+            console.log(uri)
             var datauri = new ImageDatauri();
-            datauri.format('.png', buffer);
+            datauri.format('.png', uri.buffer);
             let {mimetype} = datauri;
-
+            console.log('Passed datauri')
             if(mimetype === 'image/png' || mimetype === 'image/jpg') {
                 let {content} = datauri;
                 buf = new Buffer(content.replace(/^data:video\/\w+;base64,/, ""), "base64");
                 let params = {
                     Bucket: bucketName,
                     Body: buf,
-                    Key: `user/${req.user._id}/images/${published}.png`,
+                    Key: `user/${req.user.id}/images/${published}.png`,
                     ContentType: mimetype,
                     ACL: 'public-read'
                 };
                 S3.upload(params, (err, data) => {
+                    console.log('ERR', err);
+                    console.log('DATA', data)
+                    console.log(data.Location)
                     let imageFields = {
-                        image_file: data.location,
+                        image_file: data.Location,
                         title: title,
                         description: description,
                         tags: [],
@@ -54,10 +58,12 @@ module.exports = create_image = async (req, res) => {
                     })
                 })
             } else {
+                let errors = {};
                 errors.video = "Please upload a image that's a .png or .jpg"
                 res.status(404).json(errors)
             }
         } catch (err) {
+            let errors = {};
             errors.password = 'Failed at Create_Image.';
             return res.status(400).json(err);
         }
