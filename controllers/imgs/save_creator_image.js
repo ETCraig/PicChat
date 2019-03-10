@@ -12,7 +12,7 @@ module.exports = save_creator_image = async (req, res) => {
         let creator = findCreator.by_creator;
         console.log(creator);
         let subscription = await Subscriptions.findOne(
-            {"to_creator": creator, "from_user": user, active: true}
+            { "to_creator": creator, "from_user": user, active: true }
         );
         console.log(subscription);
 
@@ -29,7 +29,7 @@ module.exports = save_creator_image = async (req, res) => {
                 });
                 subscription.save()
                     .then(subscription_item => {
-                        res.status(200).json({isSaved: true});
+                        res.status(200).json({ isSaved: true });
                     })
                     .catch(err => {
                         errors = {};

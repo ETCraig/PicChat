@@ -1,7 +1,7 @@
 const Image = require('../../models/Image');
 
 module.exports = get_feed_images = async (req, res) => {
-    try{
+    try {
         const images = await Image.find();
         console.log(images);
         res.status(200).json(images);

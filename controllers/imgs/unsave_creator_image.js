@@ -1,12 +1,16 @@
 const Subscriptions = require('../../models/Subscription');
+const Image = require('../../models/Image');
 const ImageLibrary = require('../../models/ImageLibrary');
 
 module.exports = unsave_creator_image = async (req, res) => {
-    let imageID = {};
+    let imageID = req.params.image_id;
     let user = req.user._id;
-    let creator = req.body.creatorId;
-    console.log(imageID, user, creator);
+    console.log(imageID, user);
     try {
+        let findCreator = await Image.findById(imageID);
+        console.log(findCreator);
+        let creator = findCreator.by_creator;
+        console.log(creator)
         ImageLibrary.findOneAndDelete(
             { $and: [{ "user": user }, { "image": imageID }] },
             function (err, Image) {

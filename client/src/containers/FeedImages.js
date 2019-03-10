@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { getFeedImages } from '../services/Image.Services';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class FeedImages extends Component {
     constructor(props) {

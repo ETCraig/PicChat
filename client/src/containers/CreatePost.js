@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 import FeedImages from '../containers/FeedImages';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { uploadNewImage } from '../services/Image.Services';
 
 class CreatePost extends Component {
@@ -40,16 +40,16 @@ class CreatePost extends Component {
         }
     }
     handleUpload = () => {
-        let {title, description, uri} = this.state;
-        if(uri) {
+        let { title, description, uri } = this.state;
+        if (uri) {
             var data = new FormData();
 
             data.append("image", uri);
             data.append("title", `${title}`);
             data.append("description", `${description}`);
             uploadNewImage(data)
-                .then(({status, data}) => {
-                    if(status === 200) {
+                .then(({ status, data }) => {
+                    if (status === 200) {
                         console.log('Success.');
                     } else {
                         console.log('Err.');
@@ -61,11 +61,11 @@ class CreatePost extends Component {
         return (
             <div>
                 {/* <form onSubmit={this.handleSubmit} encType="multipart/form-data"> */}
-                    <img src={this.state.image} style={{width: '200px', height: '200px'}}/>
-                    <input type="file" name="" id="" onChange={this.handleSelectedFile} />
-                    <button onClick={this.handleUpload}>Upload</button>
-                    <input name="title" onChange={this.handleChange} placeholder='title' />
-                    <input name="description" onChange={this.handleChange} placeholder='description' />
+                <img src={this.state.image} style={{ width: '200px', height: '200px' }} />
+                <input type="file" name="" id="" onChange={this.handleSelectedFile} />
+                <button onClick={this.handleUpload}>Upload</button>
+                <input name="title" onChange={this.handleChange} placeholder='title' />
+                <input name="description" onChange={this.handleChange} placeholder='description' />
                 {/* </form> */}
                 <FeedImages />
             </div>

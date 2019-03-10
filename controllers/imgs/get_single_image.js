@@ -29,31 +29,31 @@ module.exports = get_single_image = async (req, res) => {
         let creatorId = data.creator._id;
         console.log('CREATOR', creatorId)
         const findSubscription = await Subscriptions.findOne({
-            "from_user": userId, 
+            "from_user": userId,
             "to_creator": creatorId,
             "active": true
         });
         const findSavedImage = await ImageLibrary.findOne({
-            "user": userId, 
+            "user": userId,
             "image": imageId
         });
         let [subId, imageSaved] = await Promise.all([findSubscription, findSavedImage]);
         console.log('FINDS', subId, imageSaved);
-        if(req.user) {
+        if (req.user) {
             image.likes.find(elem => {
-                if(elem.user.toString() === userId.toString()) {
+                if (elem.user.toString() === userId.toString()) {
                     data.liked = true
                 }
             });
             image.dislikes.find(elem => {
-                if(elem.user.toString() === userId.toString()) {
+                if (elem.user.toString() === userId.toString()) {
                     data.disliked = true
                 }
             });
-            if(imageSaved) {
+            if (imageSaved) {
                 data.isSaved = true
             }
-            if(subId.length !== 0) {
+            if (subId.length !== 0) {
                 data.isSubscribed = true
             }
         }
