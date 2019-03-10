@@ -12,6 +12,7 @@ const LOGIN_USER = require('../controllers/users/Login');
 const REGISTER_USER = require('../controllers/users/Register');
 const UPDATE_FIRST_NAME = require('../controllers/users/update_first_name');
 const UPDATE_LAST_NAME = require('../controllers/users/update_last_name');
+const UPDATE_USER_AVATAR = require('../controllers/users/update_user_avatar');
 const UPDATE_USER_EMAIL = require('../controllers/users/update_user_email');
 const UPDATE_USER_NAME = require('../controllers/users/update_user_name');
 const UPDATE_USER_PASSWORD = require('../controllers/users/update_user_password');
@@ -78,6 +79,13 @@ router.post('/password',
         session: false
     }),
     UPDATE_USER_PASSWORD
+);
+
+router.post('/avatar',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UPDATE_USER_AVATAR
 );
 
 router.get('/handle/:handle', 

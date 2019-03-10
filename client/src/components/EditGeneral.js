@@ -12,7 +12,8 @@ import {
     changeUserName,
     changeEmail,
     changeFirstName,
-    changeLastName
+    changeLastName,
+    changeUserAvatar
 } from '../services/Profile.Services';
 import { getUserProfile } from '../services/Profile.Services';
 import { Link } from 'react-router-dom';
@@ -20,10 +21,15 @@ import { Link } from 'react-router-dom';
 class EditGeneral extends Component {
     state = {
         user: [],
+        avatar: '',
         user_name: '',
         email: '',
         first_name: '',
         last_name: '',
+        uri: '',
+        fileType: '',
+        mimeType: '',
+        selectedFile: null,
         open: false,
         data: '',
         variant: ''
@@ -35,15 +41,45 @@ class EditGeneral extends Component {
             console.log(res)
             let { data } = res;
             console.log(data)
-            this.setState({ user: data });
-            console.log(this.state.user)
+            this.setState({ user: data, avatar: data.avatar });
+            console.log(this.state)
         });
     }
     handleChange = name => e => {
         this.setState({ [name]: e.target.value });
     }
+    handleSelectedFile = event => {
+        let file = event.target.files[0];
+        console.log(file);
+        console.log(file.type);
+        if (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/gif') {
+            let uriParts = file.type.split('/');
+            let fileType = uriParts[uriParts.length - 1];
+            this.setState({
+                avatar: URL.createObjectURL(file),
+                uri: file,
+                fileType,
+                mimeType: file.type,
+                selectedFile: event.target.files[0]
+            });
+        }
+    }
     handleSubmit = () => {
-        const { user_name, email, first_name, last_name } = this.state;
+        const { avatar, user_name, email, first_name, last_name, uri } = this.state;
+        console.log(uri)
+        if (uri) {
+            var data = new FormData();
+            data.append('avatar', uri);
+            console.log(data)
+            changeUserAvatar(data)
+                .then(({ status, data }) => {
+                    if (status === 200) {
+                        this.setState({ open: true, data, variant: 'Success' });
+                    } else {
+                        this.setState({ open: true, data, variant: 'Error' });
+                    }
+                });
+        }
         if (user_name !== '') {
             changeUserName({ user_name })
                 .then(({ status, data }) => {
@@ -101,7 +137,8 @@ class EditGeneral extends Component {
                 <Container>
                     <Form>
                         <Col>
-                            <img src={this.state.user.avatar} alt='User Avatar' />
+                            <img src={this.state.avatar} alt='User Avatar' style={{ width: '200px', height: '200px' }} />
+                            <Input type='file' onChange={this.handleSelectedFile} />
                         </Col>
                         <Col>
                             <Label>Username</Label>

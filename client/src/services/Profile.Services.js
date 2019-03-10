@@ -181,6 +181,32 @@ export const changeUserPassword = async data => {
         });
 }
 
+export const changeUserAvatar = async data => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            Accept: "application/json",
+            contentType: false,
+            cache: false,
+            processData: false
+        }
+    };
+
+    return axios.post('/api/users/avatar', data, auth)
+        .then(res => {
+            if(res.status === 200) {
+                store.dispatch(getUpdatedUser());
+                return {status: res.status}
+            }
+        })
+        .catch(err => {
+            store.dispatch(getErrors(err));
+            return err;
+        });
+}
+
 export const getProfileHandle = async handle => {
     const jwt = getJWT();
 
