@@ -23,20 +23,18 @@ module.exports = create_image = async (req, res) => {
         try {
             console.log('Hit the Inside.')
             let uri = req.files[0];
-            let {description, title, tags} = req.body;
-            console.log(description, title, tags);
-            console.log(uri)
+            let { description, title, tags } = req.body;
+            console.log('URI', uri)
             var datauri = new ImageDatauri();
             datauri.format('.png', uri.buffer);
-            let {mimetype} = datauri;
-            console.log('Passed datauri')
-            if(mimetype === 'image/png' || mimetype === 'image/jpg') {
-                let {content} = datauri;
-                buf = new Buffer(content.replace(/^data:video\/\w+;base64,/, ""), "base64");
+            let { mimetype } = datauri;
+            if (mimetype === 'image/png' || mimetype === 'image/jpg') {
+                let { content } = datauri;
+                buf = new Buffer(content.replace(/^data:image\/\w+;base64,/, ""), "base64");
                 let params = {
                     Bucket: bucketName,
                     Body: buf,
-                    Key: `user/${req.user.id}/images/${published}.png`,
+                    Key: `user/${req.user.id}/images/${Date.now()}.png`,
                     ContentType: mimetype,
                     ACL: 'public-read'
                 };
@@ -51,7 +49,7 @@ module.exports = create_image = async (req, res) => {
                         tags: [],
                         by_creator: req.user._id
                     }
-                    if(tags && tags.length) tags.forEach(tag => imageFields.tags.push(tag));
+                    if (tags && tags.length) tags.forEach(tag => imageFields.tags.push(tag));
                     let newImage = new Image(imageFields);
                     newImage.save().then(image => {
                         res.status(200).json(image);

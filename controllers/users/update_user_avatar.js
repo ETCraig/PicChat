@@ -26,7 +26,7 @@ module.exports = update_user_avatar = async (req, res) => {
             console.log(req.files)
             console.log('inside')
             let uri = req.files[0];
-            console.log(uri)
+            console.log('URI', uri)
             var datauri = new AvatarDatauri();
             datauri.format('.png', uri.buffer);
             let { mimetype } = datauri
