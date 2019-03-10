@@ -18,6 +18,7 @@ app.use(methodOverride('_method'));
 
 const DB = require('./config/Keys').mongoURI;
 
+mongoose.set('useFindAndModify', false);
 mongoose.connect(DB)
     .then(() => console.log('MongoDB Connected.'))
     .catch(err => console.log(err));
