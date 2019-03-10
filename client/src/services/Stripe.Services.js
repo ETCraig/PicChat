@@ -109,7 +109,30 @@ export const unsubscribeFromCreator = (creatorId) => {
         }
     };
     console.log(creatorId);
-    return axios.post('/api/stripe/unsubscribe', {creatorId}, auth)
+    return axios.post('/api/stripe/unsubscribe', { creatorId }, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
+
+export const getReceiptsList = async limit => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": 'application/json'
+        }
+    };
+
+    return axios.get(`/api/stripe/receipts?page=1&limit=${limit}`, auth)
         .then(res => res)
         .catch(err => {
             let {
