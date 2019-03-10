@@ -122,4 +122,50 @@ export const unsaveCreatorImage = async (image_id) => {
         });
 }
 
+export const likeCreatorImage = async (image_id) => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+
+    return axios.post(`/api/images/like/${image_id}`, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        })
+}
+
+export const dislikeCreatorImage = async (image_id) => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+
+    return axios.post(`/api/images/dislike/${image_id}`, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
+
 export default uploadNewImage;

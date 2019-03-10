@@ -4,7 +4,9 @@ const passport = require('passport');
 
 const GET_FEED_IMAGES = require('../controllers/imgs/get_feed_images');
 const GET_SINGLE_IMAGE = require('../controllers/imgs/get_single_image');
+const LIKE_CREATOR_IMAGE = require('../controllers/imgs/like_creator_image');
 const SAVE_CREATOR_IMAGE = require('../controllers/imgs/save_creator_image');
+const UNLIKE_CREATOR_IMAGE = require('../controllers/imgs/dislike_creator_image');
 const UNSAVE_CREATOR_IMAGE = require('../controllers/imgs/unsave_creator_image');
 const UPLOAD_NEW_IMAGE = require('../controllers/imgs/CreateImage');
 
@@ -42,6 +44,20 @@ router.post('/unsave/:image_id',
         session: false
     }),
     UNSAVE_CREATOR_IMAGE
+);
+
+router.post('/like/:image_id',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    LIKE_CREATOR_IMAGE
+);
+
+router.post('/dislike/:image_id',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    UNLIKE_CREATOR_IMAGE
 );
 
 module.exports = router;

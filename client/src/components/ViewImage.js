@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 
 import SaveBtn from '../containers/SaveBtn';
-import { getSingleImage, saveCreatorImage, unsaveCreatorImage } from '../services/Image.Services';
+import {
+    dislikeCreatorImage,
+    getSingleImage,
+    likeCreatorImage,
+    saveCreatorImage,
+    unsaveCreatorImage
+} from '../services/Image.Services';
 
 class ViewImage extends Component {
     constructor(props) {
@@ -12,8 +18,8 @@ class ViewImage extends Component {
             creator: [],
             likeCount: 0,
             dislikeCount: 0,
-            liked: 0,
-            disliked: 0,
+            liked: false,
+            disliked: false,
             isSaved: false,
             isSubscribed: false
         }
@@ -67,12 +73,52 @@ class ViewImage extends Component {
                 throw err;
             });
     }
+    likeImage = image_id => {
+        console.log(image_id)
+        likeCreatorImage(image_id)
+            .then(res => {
+                let { data, status } = res;
+                if (status === 200) {
+                    this.setState({ ...data });
+                }
+            })
+            .catch(err => {
+                throw err
+            });
+    }
+    dislikeImage = image_id => {
+        console.log(image_id)
+        dislikeCreatorImage(image_id)
+            .then(res => {
+                let { data, status } = res;
+                if (status === 200) {
+                    this.setState({ ...data });
+                }
+            })
+            .catch(err => {
+                throw err
+            });
+    }
     render() {
-        let image = this.state.image;
+        let { image, liked, disliked, likeCount, dislikeCount } = this.state;
         return (
             <div>
                 <h1>{image.description}</h1>
                 <img src={image.image_file} alt='Feed' style={{ width: '200px', height: '200px' }} />
+                <button
+                    onClick={() => this.likeImage(image._id)}
+                    style={{ color: (!liked) ? "blue" : "red" }}
+                >
+                    Like
+                </button>
+                <label>{likeCount}</label>
+                <button
+                    onClick={() => this.dislikeImage(image._id)}
+                    style={{ color: (!disliked) ? "blue" : "red" }}
+                >
+                    Unlike
+                </button>
+                <label>{dislikeCount}</label>
                 {this.handleSaveBtn(image._id)}
             </div>
         );
