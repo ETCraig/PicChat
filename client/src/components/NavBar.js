@@ -30,7 +30,7 @@ class NavBar extends Component {
                     <Link to='/Profile/5c845bf9be7413697c0fb1c5' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
                 </NavItem>
                 <NavItem>
-                    <Link to='/library' className='nav-link' style={{ cursor: 'pointer' }}>Library</Link>
+                    <Link to='/Receipts' className='nav-link' style={{ cursor: 'pointer' }}>Receipts</Link>
                 </NavItem>
                 <NavItem>
                     <Link to='/Creator/testfeed' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>

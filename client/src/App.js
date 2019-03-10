@@ -19,7 +19,7 @@ import Feed from './components/Feed';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
-import Orders from './components/Orders';
+import Receipts from './components/Receipts';
 import OtherProfile from './components/OtherProfile';
 import Profile from './components/Profile';
 import Register from './components/Register';
@@ -50,7 +50,7 @@ class App extends Component {
               <Route path='/Register' exact component={Register} />
               <Switch>
                 <SecureRoute path='/Feed' exact component={Feed} />
-                <SecureRoute path='/Orders' exact component={Orders} />
+                <SecureRoute path='/Receipts' exact component={Receipts} />
                 <SecureRoute path='/Profile/:userId' exact component={Profile} />
                 <SecureRoute path='/Creator/:handle' exact component={OtherProfile} />
                 <SecureRoute path='/edit' exact component={EditGeneral} />
