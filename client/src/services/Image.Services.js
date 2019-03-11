@@ -30,7 +30,7 @@ export const uploadNewImage = async data => {
         });
 }
 
-export const getFeedImages = async () => {
+export const getFeedImages = async limit => {
     const jwt = getJWT();
 
     let auth = {
@@ -40,7 +40,7 @@ export const getFeedImages = async () => {
         }
     };
 
-    return axios.get('/api/images/feed', auth)
+    return axios.get(`api/images/feed?page=1&limit=${limit}`, auth)
         .then(res => res)
         .catch(err => {
             let {

@@ -2,19 +2,29 @@ const Image = require('../../models/Image');
 const Subscriptions = require('../../models/Subscription');
 
 module.exports = get_feed_images = async (req, res) => {
+    let limit = req.query;
     let user = req.user._id;
     try {
         console.log('USER', user)
-        let subscriptions = await Subscriptions.find({"from_user": user});
+        let subscriptions = await Subscriptions.find({ "from_user": user });
         console.log(subscriptions);
         var creatorArray = [];
         await subscriptions.map(function (elem) {
             creatorArray.push(elem.to_creator)
         });
         console.log(creatorArray)
-        let images = await Image.find({"by_creator": creatorArray});
-        console.log(images)
-        res.status(200).json(images);
+        let feedImages = await Image.find({ "by_creator": creatorArray })
+            .sort({ date: -1 })
+            .limit(Number(limit));
+        console.log('IMAGES', images)
+        let maxLength = images.length;
+        console.log('LENGTH', maxLength)
+        let data = {
+            feedImages,
+            maxLength,
+            limit
+        }
+        res.status(200).json(data);
     } catch (e) {
         let errors = {}
         errors.endpoint = "get_feed_images."
