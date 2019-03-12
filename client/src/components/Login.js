@@ -2,15 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Login.css';
 
 import { connect } from 'react-redux';
-import {
-    Container,
-    Col,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Button
-} from 'reactstrap';
+import {Link} from 'react-router-dom';
 import { loginUser } from '../actions/AuthActions';
 import PropTypes from 'prop-types';
 
@@ -55,34 +47,50 @@ class Login extends Component {
 
     render() {
         return (
-            <Container className="Login-Container">
-                <h2>Login</h2>
-                <Form noValidate onSubmit={this.onSubmit} className="Login-Form">
-                    <Col>
-                        <FormGroup>
-                            <Label>Email</Label>
-                            <Input
-                                name='email'
-                                type='email'
-                                placeholder='Email'
-                                onChange={this.onChange}
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col>
-                        <FormGroup>
-                            <Label>Password</Label>
-                            <Input
-                                name='password'
-                                type='password'
-                                placeholder='Password'
-                                onChange={this.onChange}
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Button>Submit</Button>
-                </Form>
-            </Container>
+            <div id='Login'>
+                <div className='login-wrap'>
+                    <div className='login-left'>
+                        <div className='login-content'>
+                            <div className='login-title'>
+                                <h1>Welcome Back!</h1>
+                            </div>
+                            <form noValidate onSubmit={this.onSubmit}>
+                                <div>
+                                    <label>Email</label>
+                                    <input type='email' name='email' className='login-input' onChange={this.onChange} />
+                                </div>
+                                <div>
+                                    <label>Password</label>
+                                    <input type='password' name='password' className='login-input' onChange={this.onChange} />
+                                </div>
+                                <button className='login-btn'>Sign In</button>
+                            </form>
+                            <div className='login-links'>
+                                <a href='www.google.com'>Forgot Password</a>
+                            </div>
+                            <div className='login-or'>
+                                <hr className='hr' />
+                                <apn>OR</apn>
+                                <hr className='hr' />
+                            </div>
+                            <Link to='/Register' className='login-second-btn'>Create an Account</Link>
+                        </div>
+                        <footer id='login-footer'>
+                            <p>Copyright &copy; 2019, E.T. Craig All Rights Reserved</p>
+                            <div>
+                                <a href='https://github.com/ETCraig/PicChat'>Source Code</a> | <a href='https://www.linkedin.com/in/ethan-craig-93000015a/'>Creator</a>
+                            </div>
+                        </footer>
+                    </div>
+                    <div className='login-right'>
+                        <div id='login-img-wrap'>
+                            <div className='login-img-content'>
+                                <h1 className='login-text'><strong>Follow the Best</strong></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

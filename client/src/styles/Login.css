@@ -1,16 +1,237 @@
-.Login-Container {
-    text-align: left;
-    padding: 1em;
-    margin: 1em;
-    border: 2px solid #d3d3d3;
-    border-radius: .5em;
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-    width: 600px;
-    margin-top: 100px;
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+* {
+  box-sizing: border-box;
+}
+
+.login-title h1 {
+  font-weight: 300;
+  font-size: 40px;
+  font-family: 'Oswald', sans-serif;
+  text-decoration-color: #c91717;
+}
+
+#Login {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background: #333;
+  color: #fff;
+  overflow: hidden;
+  height: 100%;
+}
+
+.Login h1, h2,
+h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+.login-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-right {
+  flex: 1;
+}
+
+/* Sign In */
+.login-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  padding-bottom: 1rem;
+}
+
+.login-content form {
+  width: 80%;
+  padding-bottom: 3rem;
+}
+
+.login-content .login-title {
+  margin-bottom: 8vh;
+}
+
+.login-content .login-title img {
+  width: 300px;
+}
+
+.login-content label {
+  font-size: 0.9rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+.login-content .login-input {
+  margin-bottom: 1.3rem;
+  width: 100%;
+  border-radius: 2px;
+  background: #181818;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 0.5rem 1rem;
+  line-height: 1.3rem;
+}
+
+.login-content .login-btn {
+  width: 100%;
+}
+
+.login-content .login-second-btn,
+.login-or,
+.login-links {
+  width: 60%;
+}
+
+.login-content .links a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-content .login-or {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+
+.login-content .login-or .hr {
+  flex: auto;
+  border: none;
+  height: 1px;
+  background: #aaa;
+}
+
+.login-content .login-or span {
+  color: #ccc;
+  padding: 0 0.8rem;
+}
+
+/* Showcase */
+#login-img-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('https://images.pexels.com/photos/163148/instagram-cell-phone-tablet-device-163148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center / cover;
+  height: 100vh;
+  text-align: center;
+}
+
+#login-img-wrap .login-text {
+  font-size: 3rem;
+  width: 100%;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+#login-img-wrap .login-text {
+  width: 60%;
+  margin: auto;
+}
+
+/* Footer */
+#login-footer {
+  color: #ccc;
+  text-align: center;
+  font-size: 0.8rem;
+  max-width: 80%;
+  padding-top: 5rem;
+}
+
+#login-footer a {
+  color: #c91717;
+  text-decoration: underline;
+}
+
+/* Button */
+.login-btn {
+  padding: 0.7rem 1rem;
+  height: 2.7rem;
+  display: block;
+  border: 0;
+  border-radius: 2px;
+  font-weight: 500;
+  background: #c91717;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.login-btn:hover {
+  background-color: #c91717;
+}
+
+.login-second-btn {
+  padding: 0.7rem 1rem;
+  height: 2.7rem;
+  display: block;
+  border: 1px solid #f4f4f4;
+  border-radius: 2px;
+  font-weight: 500;
+  background: none;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.login-second-btn:hover {
+  border-color: #c91717;
+  color: #c91717;
+}
+
+/* Media Queries */
+@media (min-width: 1200px) {
+  .login-left {
+    flex: 4;
   }
-  
-  .Login-Form {
-    padding: 1em;
+
+  .login-right {
+    flex: 6;
   }
+}
+
+@media (max-width: 768px) {
+  #Login {
+    overflow: auto;
+  }
+
+  .login-right {
+    display: none;
+  }
+
+  .login-left {
+    justify-content: start;
+    margin-top: 4vh;
+  }
+
+  .login-content .login-title {
+    margin-bottom: 2vh;
+  }
+
+  .login-content .login-input {
+    margin-bottom: 0.7rem;
+  }
+
+  #login-footer {
+    padding-top: 1rem;
+  }
+}

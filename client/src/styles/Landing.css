@@ -1,4 +1,4 @@
-body {
+#Landing {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background: #333;
@@ -8,18 +8,18 @@ body {
     text-align: center;
 }
 
-img {
+#Landing img {
     display: block;
     width: 100%;
     height: auto;
 }
 
-h1, h2, h3 {
+#Landing h1, h2, h3 {
     margin: 0;
     padding: 1em 0;
 }
 
-p {
+#Landing p {
     margin: 0;
     padding: 1em 0;
 }

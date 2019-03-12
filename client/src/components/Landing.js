@@ -9,7 +9,7 @@ import MongoImg from '../assets/bandwidth-close-up-computer-1148820.jpg';
 
 const Landing = () => {
     return (
-        <body>
+        <body id='Landing'>
             <header id='header' className='grid'>
                 <div className='bg-image'>
                     <div className='content-wrap'>

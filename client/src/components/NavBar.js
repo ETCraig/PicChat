@@ -55,7 +55,7 @@ class NavBar extends Component {
             <div>
                 <Navbar style={{background: '#333'}}>
                     <Container>
-                        <NavbarBrand>PicChat</NavbarBrand>
+                        <NavbarBrand style={{color: '#c91717'}}><strong>PicChat</strong></NavbarBrand>
                         {isAuthenticated ? userLinks : authLinks}
                     </Container>
                 </Navbar>
