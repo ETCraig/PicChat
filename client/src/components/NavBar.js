@@ -25,35 +25,35 @@ class NavBar extends Component {
         console.log(isAuthenticated)
 
         const userLinks = (
-            <Nav className='navbar-nav ml-auto' navbar>
-                <NavItem>
+            <Nav className='navbar-nav ml-auto' style={{margin: '10px'}}>
+                <NavItem style={{margin: '10px'}}>
                     <Link to='/Profile/5c845bf9be7413697c0fb1c5' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
                 </NavItem>
-                <NavItem>
+                <NavItem style={{margin: '10px'}}>
                     <Link to='/Receipts' className='nav-link' style={{ cursor: 'pointer' }}>Receipts</Link>
                 </NavItem>
-                <NavItem>
+                <NavItem style={{margin: '10px'}}>
                     <Link to='/Creator/testfeed' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>
                 </NavItem>
-                <NavItem>
+                <NavItem style={{margin: '10px'}}>
                     <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>
                 </NavItem>
             </Nav>
         );
 
         const authLinks = (
-            <Nav navbar>
-                <NavItem>
+            <Nav>
+                <NavItem style={{margin: '10px'}}>
                     <Link to='/Register'>Sign Up</Link>
                 </NavItem>
-                <NavItem>
+                <NavItem style={{margin: '10px'}}>
                     <Link to='/Login'>Login</Link>
                 </NavItem>
             </Nav>
         );
         return (
             <div>
-                <Navbar color='dark'>
+                <Navbar style={{background: '#333'}}>
                     <Container>
                         <NavbarBrand>PicChat</NavbarBrand>
                         {isAuthenticated ? userLinks : authLinks}

@@ -5,7 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { clearCurrentUser } from './actions/UserActions';
-import { Container } from 'reactstrap';
+// import { Container } from 'reactstrap';
 import jwt_decode from 'jwt-decode';
 import SecureRoute from './utils/SecureRoute';
 import SetAuthToken from './utils/SetAuthToken';
@@ -25,9 +25,9 @@ import Profile from './components/Profile';
 import Register from './components/Register';
 import ViewImage from './components/ViewImage';
 
-if (localStorage.jwtToken) {
-  SetAuthToken(localStorage.jwtToken);
-  const decoded = jwt_decode(localStorage.jwtToken);
+if (localStorage.jwt) {
+  SetAuthToken(localStorage.jwt);
+  const decoded = jwt_decode(localStorage.jwt);
   store.dispatch(setCurrentUser(decoded));
   const currentTime = Date.now() / 3000;
 
@@ -44,7 +44,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar />
-            <Container>
+            {/* <Container> */}
               <Route path='/' exact component={Landing} />
               <Route path='/Login' exact component={Login} />
               <Route path='/Register' exact component={Register} />
@@ -58,7 +58,7 @@ class App extends Component {
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
                 <SecureRoute path='/view/:image_id' exact component={ViewImage} />
               </Switch>
-            </Container>
+            {/* </Container> */}
           </div>
         </Router>
     );
