@@ -23,43 +23,30 @@ class NavBar extends Component {
     render() {
         const { isAuthenticated } = this.props.auth;
         console.log(isAuthenticated)
-
-        const userLinks = (
-            <Nav className='navbar-nav ml-auto' style={{margin: '10px'}}>
-                <NavItem style={{margin: '10px'}}>
-                    <Link to='/Profile/5c845bf9be7413697c0fb1c5' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
-                </NavItem>
-                <NavItem style={{margin: '10px'}}>
-                    <Link to='/Receipts' className='nav-link' style={{ cursor: 'pointer' }}>Receipts</Link>
-                </NavItem>
-                <NavItem style={{margin: '10px'}}>
-                    <Link to='/Creator/testfeed' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>
-                </NavItem>
-                <NavItem style={{margin: '10px'}}>
-                    <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>
-                </NavItem>
-            </Nav>
-        );
-
-        const authLinks = (
-            <Nav>
-                <NavItem style={{margin: '10px'}}>
-                    <Link to='/Register'>Sign Up</Link>
-                </NavItem>
-                <NavItem style={{margin: '10px'}}>
-                    <Link to='/Login'>Login</Link>
-                </NavItem>
-            </Nav>
-        );
         return (
-            <div>
-                <Navbar style={{background: '#333'}}>
+            isAuthenticated ? (
+                <div>
+                <Navbar style={{ background: isAuthenticated ? '#333' : 'transparent' }} >
                     <Container>
-                        <NavbarBrand style={{color: '#c91717'}}><strong>PicChat</strong></NavbarBrand>
-                        {isAuthenticated ? userLinks : authLinks}
+                        <NavbarBrand style={{ color: isAuthenticated ? '#c91717' : 'transparent' }}><strong>PicChat</strong></NavbarBrand>
+                        <Nav className='navbar-nav ml-auto' style={{ margin: '10px' }}>
+                            <NavItem style={{ margin: '10px' }}>
+                                <Link to='/Profile/5c845bf9be7413697c0fb1c5' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
+                            </NavItem>
+                            <NavItem style={{ margin: '10px' }}>
+                                <Link to='/Receipts' className='nav-link' style={{ cursor: 'pointer' }}>Receipts</Link>
+                            </NavItem>
+                            <NavItem style={{ margin: '10px' }}>
+                                <Link to='/Creator/testfeed' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>
+                            </NavItem>
+                            <NavItem style={{ margin: '10px' }}>
+                                <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>
+                            </NavItem>
+                        </Nav>
                     </Container>
                 </Navbar>
             </div>
+            ) : <div/>
         );
     }
 }

@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+* {
+  box-sizing: border-box;
+}
+
+.register-title h1 {
+  font-weight: 300;
+  font-size: 40px;
+  font-family: 'Oswald', sans-serif;
+  text-decoration-color: #c91717;
+  margin-top: 40px;
+}
+
+#Register {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background: #333;
+  color: #fff;
+  overflow: hidden;
+  height: 100%;
+}
+
+.register h1, h2,
+h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+.register-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.register-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.register-right {
+  flex: 1;
+}
+
+/* Sign In */
+.register-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  padding-bottom: 1rem;
+}
+
+.register-content form {
+  width: 80%;
+  padding-bottom: 3rem;
+}
+
+.register-content .register-title {
+  margin-bottom: 8vh;
+}
+
+.register-content .register-title img {
+  width: 300px;
+}
+
+.register-content label {
+  font-size: 0.9rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+.register-content .register-input {
+  margin-bottom: 1.3rem;
+  width: 100%;
+  border-radius: 2px;
+  background: #181818;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 0.5rem 1rem;
+  line-height: 1.3rem;
+}
+
+.register-content .register-btn {
+  width: 100%;
+}
+
+.register-content .register-second-btn,
+.register-or,
+.register-links {
+  width: 60%;
+}
+
+.register-content .links a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.register-content .register-or {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+
+.register-content .register-or .hr {
+  flex: auto;
+  border: none;
+  height: 1px;
+  background: #aaa;
+}
+
+.register-content .register-or span {
+  color: #ccc;
+  padding: 0 0.8rem;
+}
+
+/* Showcase */
+#register-img-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center / cover;
+  height: 100%;
+  text-align: center;
+}
+
+#register-img-wrap .register-text {
+  font-size: 3rem;
+  width: 100%;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+#register-img-wrap .register-text {
+  width: 60%;
+  margin: auto;
+}
+
+/* Footer */
+#register-footer {
+  color: #ccc;
+  text-align: center;
+  font-size: 0.8rem;
+  max-width: 80%;
+  padding-top: 5rem;
+}
+
+#register-footer a {
+  color: #c91717;
+  text-decoration: underline;
+}
+
+/* Button */
+.register-btn {
+  padding: 0.7rem 1rem;
+  height: 2.7rem;
+  display: block;
+  border: 0;
+  border-radius: 2px;
+  font-weight: 500;
+  background: #c91717;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.register-btn:hover {
+  background-color: #c91717;
+}
+
+.register-second-btn {
+  padding: 0.7rem 1rem;
+  height: 2.7rem;
+  display: block;
+  border: 1px solid #f4f4f4;
+  border-radius: 2px;
+  font-weight: 500;
+  background: none;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.register-second-btn:hover {
+  border-color: #c91717;
+  color: #c91717;
+}
+
+/* Media Queries */
+@media (min-width: 1200px) {
+  .register-left {
+    flex: 4;
+  }
+
+  .register-right {
+    flex: 6;
+  }
+}
+
+@media (max-width: 768px) {
+  #register {
+    overflow: auto;
+  }
+
+  .register-right {
+    display: none;
+  }
+
+  .register-left {
+    justify-content: start;
+    margin-top: 4vh;
+  }
+
+  .register-content .register-title {
+    margin-bottom: 2vh;
+  }
+
+  .register-content .register-input {
+    margin-bottom: 0.7rem;
+  }
+
+  #register-footer {
+    padding-top: 1rem;
+  }
+}

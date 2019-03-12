@@ -22,7 +22,7 @@ const Landing = () => {
                 </div>
             </header>
             <main id='main'>
-                <section id='section-1' class='grid'>
+                <section id='section-1' className='grid'>
                     <div className='content-wrap'>
                         <h2 className='content-title'>Web & Application Development</h2>
                         <div className='content-text'>
@@ -32,7 +32,7 @@ const Landing = () => {
                         </div>
                     </div>
                 </section>
-                <section id='section-2' class='grid'>
+                <section id='section-2' className='grid'>
                     <ul>
                         <li>
                             <div className='card'>
@@ -66,14 +66,14 @@ const Landing = () => {
                         </li>
                     </ul>
                 </section>
-                <section id='selection-3' class='grid'>
+                <section id='selection-3' className='grid'>
                     <div className='content-wrap'>
                         <h2 className='content-title'>We handle all of your Digital Needs</h2>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, autem aliquid cum sed delectus
                             explicabo reiciendis magni laborum aperiam officiis.</p>
                     </div>
                 </section>
-                <section id='section-4' class='grid'>
+                <section id='section-4' className='grid'>
                     <div className='box'>
                         <h2 className='content-title'>Contact Me</h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo reprehenderit quos sunt laboriosam
