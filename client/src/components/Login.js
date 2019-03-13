@@ -70,7 +70,7 @@ class Login extends Component {
                             </div>
                             <div className='login-or'>
                                 <hr className='hr' />
-                                <apn>OR</apn>
+                                <span>OR</span>
                                 <hr className='hr' />
                             </div>
                             <Link to='/Register' className='login-second-btn'>Create an Account</Link>

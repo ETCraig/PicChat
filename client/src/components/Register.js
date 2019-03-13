@@ -157,19 +157,19 @@ class Register extends Component {
                             <form noValidate onSubmit={this.onSubmit}>
                                 <div>
                                     <label>User Name</label>
-                                    <input type='email' name='email' className='register-input' onChange={this.onChange} />
+                                    <input type='text' name='user_name' className='register-input' onChange={this.onChange} />
                                 </div>
                                 <div>
                                     <label>First Name</label>
-                                    <input type='password' name='password' className='register-input' onChange={this.onChange} />
+                                    <input type='text' name='first_name' className='register-input' onChange={this.onChange} />
                                 </div>
                                 <div>
                                     <label>Last Name</label>
-                                    <input type='password' name='password' className='register-input' onChange={this.onChange} />
+                                    <input type='text' name='last_name' className='register-input' onChange={this.onChange} />
                                 </div>
                                 <div>
                                     <label>Email</label>
-                                    <input type='password' name='password' className='register-input' onChange={this.onChange} />
+                                    <input type='email' name='email' className='register-input' onChange={this.onChange} />
                                 </div>
                                 <div>
                                     <label>Password</label>
@@ -177,20 +177,20 @@ class Register extends Component {
                                 </div>
                                 <div>
                                     <label>Confirm Password</label>
-                                    <input type='password' name='password' className='register-input' onChange={this.onChange} />
+                                    <input type='password' name='password2' className='register-input' onChange={this.onChange} />
                                 </div>
                                 <div>
                                     <label>Profile Handle</label>
-                                    <input type='password' name='password' className='register-input' onChange={this.onChange} />
+                                    <input type='text' name='handle' className='register-input' onChange={this.onChange} />
                                 </div>
-                                <button className='register-btn'>Sign In</button>
+                                <button className='register-btn'>Register</button>
                             </form>
                             <div className='register-links'>
                                 <a href='www.google.com'>Forgot Password</a>
                             </div>
                             <div className='register-or'>
                                 <hr className='hr' />
-                                <apn>OR</apn>
+                                <span>OR</span>
                                 <hr className='hr' />
                             </div>
                             <Link to='/Login' className='register-second-btn'>Login to your Account</Link>

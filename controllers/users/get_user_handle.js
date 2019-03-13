@@ -1,4 +1,5 @@
 const Users = require('../../models/Users');
+const Images = require('../../models/Image');
 const Subscriptions = require('../../models/Subscription');
 
 module.exports = get_user_handle = async (req, res) => {
@@ -25,11 +26,14 @@ module.exports = get_user_handle = async (req, res) => {
                 ]
             }
         );
+        let images = await Images.find({"by_creator": userData[0]._id});
+        console.log(images)
         console.log(checkSubscribed)
         const [user, subed] = await Promise.all([userData, checkSubscribed]);
         console.log(user, subed);
         let data = {
             user,
+            images,
             subscribed: false
         };
         console.log(subed.length)

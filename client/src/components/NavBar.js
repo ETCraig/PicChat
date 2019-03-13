@@ -28,16 +28,16 @@ class NavBar extends Component {
                 <div>
                 <Navbar style={{ background: isAuthenticated ? '#333' : 'transparent' }} >
                     <Container>
-                        <NavbarBrand style={{ color: isAuthenticated ? '#c91717' : 'transparent' }}><strong>PicChat</strong></NavbarBrand>
-                        <Nav className='navbar-nav ml-auto' style={{ margin: '10px' }}>
+                        <Link to='/Feed'><NavbarBrand style={{ color: isAuthenticated ? '#c91717' : 'transparent' }}><strong>PicChat</strong></NavbarBrand></Link>
+                        <Nav className='navbar-nav ml-auto' style={{ display: 'flex', flexDirection: 'row' }}>
                             <NavItem style={{ margin: '10px' }}>
-                                <Link to='/Profile/5c845bf9be7413697c0fb1c5' className='nav-link' style={{ cursor: 'pointer' }}>Profile</Link>
+                                <Link to='/Profile/5c845bf9be7413697c0fb1c5' className='nav-link' style={{ cursor: 'pointer', color: '#fff' }}>Profile</Link>
                             </NavItem>
                             <NavItem style={{ margin: '10px' }}>
-                                <Link to='/Receipts' className='nav-link' style={{ cursor: 'pointer' }}>Receipts</Link>
+                                <Link to='/Receipts' className='nav-link' style={{ cursor: 'pointer', color: '#fff' }}>Receipts</Link>
                             </NavItem>
                             <NavItem style={{ margin: '10px' }}>
-                                <Link to='/Creator/testfeed' className='nav-link' style={{ cursor: 'pointer' }}>User</Link>
+                                <Link to='/Creator/practice' className='nav-link' style={{ cursor: 'pointer',color: '#fff' }}>User</Link>
                             </NavItem>
                             <NavItem style={{ margin: '10px' }}>
                                 <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>

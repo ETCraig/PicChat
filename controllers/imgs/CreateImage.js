@@ -24,6 +24,7 @@ module.exports = create_image = async (req, res) => {
             console.log('Hit the Inside.')
             let uri = req.files[0];
             let { description, title, tags } = req.body;
+            if (typeof tags === 'string') tags = tags.split(',');
             console.log('URI', uri)
             var datauri = new ImageDatauri();
             datauri.format('.png', uri.buffer);

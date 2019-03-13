@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Elements } from 'react-stripe-elements';
 import { getProfileHandle } from '../services/Profile.Services';
+import { Link } from 'react-router-dom';
 import SubscribeModal from '../containers/SubscribeModal';
 import UnsubscribeModal from '../containers/UnsubscribeModal';
 
@@ -11,6 +12,7 @@ class OtherProfile extends Component {
 
         this.state = {
             user: [],
+            images: [],
             subscribed: false,
             subModal: false,
             unModal: false
@@ -27,6 +29,7 @@ class OtherProfile extends Component {
                     console.log(data);
                     this.setState({ user: data.user[0] });
                     this.setState({ subscribed: data.subscribed });
+                    this.setState({ images: data.images });
                     console.log(this.state.user, this.state.subscribed);
                 }
             });
@@ -67,6 +70,7 @@ class OtherProfile extends Component {
     }
     render() {
         let subscriber = this.state.subscribed;
+        let displayImages = this.state.images;
         return (
             <div>
                 <img src={this.state.user.avatar} alt='User Avatar' />
@@ -78,6 +82,31 @@ class OtherProfile extends Component {
                 </button>
                 {this.currentSubscribeModal()}
                 {this.currentUnsubscribeModal()}
+
+                {!subscriber ? (
+                    <div>
+                        <h3>Here's a Sample of this Creators Posts</h3>
+
+                    </div>
+                ) :
+                    displayImages.map((image, i) => {
+                        return (
+                            <div key={i}>
+                                <h1>{image.title}</h1>
+                                <img src={image.image_file} alt='Profile Post' style={{ width: '200px', height: '200px' }} />
+                                <Link to={`/view/${image._id}`} >View Image</Link>
+                            </div>
+                        );
+                    })}
+                {/* {displayImages.map((image, i) => {
+                    return (
+                        <div key={i}>
+                            <h1>{image.description}</h1>
+                            <img src={image.image_file} alt='Feed' style={{ width: '200px', height: '200px' }} />
+                            <Link to={`/view/${image._id}`} >View Image</Link>
+                        </div>
+                    );
+                })} */}
             </div>
         );
     }

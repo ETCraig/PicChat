@@ -7,8 +7,6 @@ class Feed extends Component {
         return(
             <div>
                 <CreatePosts />
-                <h1>Feed</h1>
-                <h3>You are authorized.</h3>
             </div>
         );
     }

@@ -10,7 +10,7 @@ class FeedImages extends Component {
         this.state = {
             feedImages: [],
             limit: 0,
-            maxLength: 4,
+            maxLength: 2,
             expanded: false,
             loadingFeed: false
         }
@@ -23,7 +23,7 @@ class FeedImages extends Component {
         this.feeedInit();
     }
     feeedInit() {
-        let limit = 4;
+        let limit = 2;
         getFeedImages(limit)
             .then(res => {
                 let { status, data } = res;
@@ -72,7 +72,7 @@ class FeedImages extends Component {
             )
         ) {
             this.setState({
-                limit: limit + 4
+                limit: limit + 2
             });
             this.reloadFeed();
         }
@@ -87,7 +87,8 @@ class FeedImages extends Component {
                 {displayImages.map((image, i) => {
                     return (
                         <div key={i}>
-                            <h1>{image.description}</h1>
+                            <h1>{image.title}</h1>
+                            <p>{image.description}</p>
                             <img src={image.image_file} alt='Feed' style={{ width: '200px', height: '200px' }} />
                             <Link to={`/view/${image._id}`} >View Image</Link>
                         </div>
