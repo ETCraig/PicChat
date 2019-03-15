@@ -99,7 +99,7 @@ class OtherProfile extends Component {
                             <div className="stats">
                                 <div className="stats-item">
                                     <span className="count">{count}</span>{" "}
-                                    {pluralize(count, "subscribers", "subscribers")}
+                                    {pluralize(count, "subscriber", "subscribers")}
                                 </div>
                             </div>
                         </div>
