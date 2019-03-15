@@ -1,6 +1,8 @@
 const Users = require('../../models/Users');
 const Images = require('../../models/Image');
+const Plan = require('../../models/Plan');
 const Subscriptions = require('../../models/Subscription');
+const stripe = require('../../validation/Stripe');
 
 module.exports = get_user_handle = async (req, res) => {
     try {
@@ -26,19 +28,27 @@ module.exports = get_user_handle = async (req, res) => {
                 ]
             }
         );
-        let images = await Images.find({"by_creator": userData[0]._id});
-        console.log(images)
-        console.log(checkSubscribed)
-        const [user, subed] = await Promise.all([userData, checkSubscribed]);
+        let planId = await Plan.findOne({ "creator_id": userData[0]._id });
+        console.log('Plan', planId);
+        let images = await Images.find({ "by_creator": userData[0]._id });
+        let getSubs = await stripe.subscriptions.list({ plan: planId.plan_id })
+        console.log(images);
+        console.log(checkSubscribed);
+        const [user, subed, subs] = await Promise.all([userData, checkSubscribed, getSubs]);
         console.log(user, subed);
         let data = {
             user,
             images,
-            subscribed: false
+            subscribed: false,
+            subscribers: 0
         };
         console.log(subed.length)
-        if(subed.length >= 1) {
+        if (subed.length >= 1) {
             data.subscribed = true
+        }
+        if (subs) {
+            console.log(subs.data.length);
+            data.subscribers = subs.data.length
         }
         console.log(data)
         res.status(200).json(data)

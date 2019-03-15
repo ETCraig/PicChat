@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/FeedImages.css';
 
 import CreatePost from './CreatePost';
+import Footer from '../components/Footer';
 import { getFeedImages } from '../services/Image.Services';
 import { Link } from 'react-router-dom';
 
@@ -100,6 +101,7 @@ class FeedImages extends Component {
                         );
                     })}
                 </div>
+                <Footer />
             </div>
         );
     }

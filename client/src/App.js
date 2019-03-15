@@ -16,7 +16,6 @@ import EditGeneral from './components/EditGeneral';
 import EditPassword from './components/EditPassword';
 import EditPaymentMethods from './components/EditPaymentMethods';
 import FeedImages from './containers/FeedImages';
-import Footer from './components/Footer';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
@@ -58,7 +57,6 @@ class App extends Component {
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
                 <SecureRoute path='/view/:image_id' exact component={ViewImage} />
               </Switch>
-            <Footer />
           </div>
         </Router>
     );
