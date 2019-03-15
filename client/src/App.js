@@ -15,7 +15,8 @@ import store from './store';
 import EditGeneral from './components/EditGeneral';
 import EditPassword from './components/EditPassword';
 import EditPaymentMethods from './components/EditPaymentMethods';
-import Feed from './components/Feed';
+import FeedImages from './containers/FeedImages';
+import Footer from './components/Footer';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
@@ -44,12 +45,11 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar />
-            {/* <Container> */}
               <Route path='/' exact component={Landing} />
               <Route path='/Login' exact component={Login} />
               <Route path='/Register' exact component={Register} />
               <Switch>
-                <SecureRoute path='/Feed' exact component={Feed} />
+                <SecureRoute path='/Feed' exact component={FeedImages} />
                 <SecureRoute path='/Receipts' exact component={Receipts} />
                 <SecureRoute path='/Profile/:userId' exact component={Profile} />
                 <SecureRoute path='/Creator/:handle' exact component={OtherProfile} />
@@ -58,7 +58,7 @@ class App extends Component {
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
                 <SecureRoute path='/view/:image_id' exact component={ViewImage} />
               </Switch>
-            {/* </Container> */}
+            <Footer />
           </div>
         </Router>
     );

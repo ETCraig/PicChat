@@ -26,7 +26,7 @@ class NavBar extends Component {
         return (
             isAuthenticated ? (
                 <div>
-                <Navbar style={{ background: isAuthenticated ? '#333' : 'transparent' }} >
+                <Navbar style={{ background: isAuthenticated ? '#000' : 'transparent' }} >
                     <Container>
                         <Link to='/Feed'><NavbarBrand style={{ color: isAuthenticated ? '#c91717' : 'transparent' }}><strong>PicChat</strong></NavbarBrand></Link>
                         <Nav className='navbar-nav ml-auto' style={{ display: 'flex', flexDirection: 'row' }}>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import '../styles/FeedImages.css';
 
+import CreatePost from './CreatePost';
 import { getFeedImages } from '../services/Image.Services';
 import { Link } from 'react-router-dom';
 
@@ -84,16 +86,20 @@ class FeedImages extends Component {
         let displayImages = this.state.feedImages;
         return (
             <div>
-                {displayImages.map((image, i) => {
-                    return (
-                        <div key={i}>
-                            <h1>{image.title}</h1>
-                            <p>{image.description}</p>
-                            <img src={image.image_file} alt='Feed' style={{ width: '200px', height: '200px' }} />
-                            <Link to={`/view/${image._id}`} >View Image</Link>
-                        </div>
-                    );
-                })}
+                <CreatePost />
+                <div style={{background: '#333', height: '100px'}} />
+                <div id='feed-images'>
+                    {displayImages.map((image, i) => {
+                        return (
+                            <div key={i} id='feed-image-wrap'>
+                                <h5>{image.title}</h5>
+                                <Link to={`/view/${image._id}`} >
+                                    <img src={image.image_file} alt='Feed' style={{ width: '225px', height: '225px' }} className='feed-image' />
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         );
     }

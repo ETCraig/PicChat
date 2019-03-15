@@ -10,7 +10,7 @@ import MongoImg from '../assets/bandwidth-close-up-computer-1148820.jpg';
 const Landing = () => {
     return (
         <body id='Landing'>
-            <header id='header' className='grid'>
+            <header id='header' className='landing-grid'>
                 <div className='bg-image'>
                     <div className='content-wrap'>
                         <h1>Welcome to PicChat</h1>
@@ -22,7 +22,7 @@ const Landing = () => {
                 </div>
             </header>
             <main id='main'>
-                <section id='section-1' className='grid'>
+                <section id='section-1' className='landing-grid'>
                     <div className='content-wrap'>
                         <h2 className='content-title'>Web & Application Development</h2>
                         <div className='content-text'>
@@ -32,7 +32,7 @@ const Landing = () => {
                         </div>
                     </div>
                 </section>
-                <section id='section-2' className='grid'>
+                <section id='section-2' className='landing-grid'>
                     <ul>
                         <li>
                             <div className='card'>
@@ -66,14 +66,14 @@ const Landing = () => {
                         </li>
                     </ul>
                 </section>
-                <section id='selection-3' className='grid'>
+                <section id='selection-3' className='landing-grid'>
                     <div className='content-wrap'>
                         <h2 className='content-title'>We handle all of your Digital Needs</h2>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, autem aliquid cum sed delectus
                             explicabo reiciendis magni laborum aperiam officiis.</p>
                     </div>
                 </section>
-                <section id='section-4' className='grid'>
+                <section id='section-4' className='landing-grid'>
                     <div className='box'>
                         <h2 className='content-title'>Contact Me</h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo reprehenderit quos sunt laboriosam
@@ -88,7 +88,7 @@ const Landing = () => {
                     </div>
                 </section>
             </main>
-            <footer id='main-footer' className='grid'>
+            <footer id='main-footer' className='landing-grid'>
                 <div>PicChat</div>
                 <a href='https://www.linkedin.com/in/ethan-craig-93000015a/' target='blank'><div>Project by E.T. Craig</div></a>
             </footer>

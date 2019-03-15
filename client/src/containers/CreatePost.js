@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
+import '../styles/CreateImg.css';
 import FeedImages from '../containers/FeedImages';
 import { Link } from 'react-router-dom';
 import { uploadNewImage } from '../services/Image.Services';
@@ -10,69 +11,20 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     container: {
-      display: "flex",
-      flexWrap: "wrap"
+        display: "flex",
+        flexWrap: "wrap"
     },
     dense: {
-      marginTop: 16
+        marginTop: 16
     },
     menu: {
-      width: 200
+        width: 200
     },
     button: {
-      marginTop: 40,
-      width: "100%"
+        marginTop: 40,
+        width: "100%"
     }
-  });
-
-const TagInputWrapper = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 0 16px 8px 16px;
-  position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  border-color: rgba(0, 0, 0, 0.38);
-
-  .wrap {
-    font-family: "Roboto", "Noto", sans-serif;
-    font-weight: 400;
-    white-space: initial;
-    overflow: initial;
-    text-overflow: initial;
-    font-size: 12px;
-    line-height: 16px;
-    margin-top: calc(20px - 12px);
-    color: rgba(0, 0, 0, 0.55);
-    margin-bottom: 3px;
-    position: relative;
-  }
-
-  .container {
-    min-height: 48px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-
-    div {
-      margin-right: 10px;
-      margin-bottom: 10px;
-    }
-
-    input {
-      border: 0px solid transparent;
-      margin-bottom: 10px;
-      width: min-content;
-      height: 32px;
-    }
-  }
-`;
+});
 
 class CreatePost extends Component {
     constructor() {
@@ -165,35 +117,43 @@ class CreatePost extends Component {
         ));
         return (
             <div>
-                {/* <form onSubmit={this.handleSubmit} encType="multipart/form-data"> */}
-                <img src={this.state.image} style={{ width: '200px', height: '200px' }} />
-                <input type="file" name="" id="" onChange={this.handleSelectedFile} />
-                <button onClick={this.handleUpload}>Upload</button>
-                <input name="title" onChange={this.handleChange} placeholder='title' />
-                <input name="description" onChange={this.handleChange} placeholder='description' />
-                <TagInputWrapper
-                    onClick={e => e.target.className !== 'MuiChip-label-135'
-                        ? this.tagInput.focus()
-                        : console.log('no')
-                    }
-                >
-                    <label className='wrap'>Tags</label>
-                    {displayTags}
-                    <div className='container'>
-                        <input
-                            ref={ref => { this.tagInput = ref }}
-                            onChange={this.handleTagChange}
-                            onKeyDown={this.handleTagDown}
-                            value={this.state.tag}
-                            placeholder='Tags'
-                        />
+                <div id='CreateImg'>
+                    <div className='image-wrap grid '>
+                        <img src={this.state.image} />
                     </div>
-                </TagInputWrapper>
-                <label>
-                    Enter comma-separated values
-                </label>
-                {/* </form> */}
-                <FeedImages />
+                    <div className='inputs-wrap grid'>
+                        <label>Title</label>
+                        <input name="title" className='create-title' onChange={this.handleChange} />
+                        <label>Description</label>
+                        <input name="description" className='create-desc' onChange={this.handleChange} />
+                        <div
+                            className='tags-wrapper grid'
+                            onClick={e => e.target.className !== 'MuiChip-label-135'
+                                ? this.tagInput.focus()
+                                : console.log('no')
+                            }
+                        >
+                            <div className='tags'>
+                                <label>Tags</label>
+                                <br />
+                                {displayTags}
+                            </div>
+                            <input
+                                id='tags-input'
+                                ref={ref => { this.tagInput = ref }}
+                                onChange={this.handleTagChange}
+                                onKeyDown={this.handleTagDown}
+                                value={this.state.tag}
+                                placeholder='Tags'
+                            />
+                        </div>
+                        <label className='direction'>Enter comma-separated values</label>
+                        <div className='btn-wrap'>
+                            <input type="file" name="" id="upload-btn" onChange={this.handleSelectedFile} />
+                            <button id="create-btn" onClick={this.handleUpload}>Upload</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
