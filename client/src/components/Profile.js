@@ -9,6 +9,8 @@ class Profile extends Component {
 
         this.state = {
             user: [],
+            images: [],
+            subscribers: 0
         }
     }
     componentDidMount() {
@@ -18,8 +20,8 @@ class Profile extends Component {
             console.log(res)
             let { data } = res;
             console.log(data)
-            this.setState({ user: data });
-            console.log(this.state.user)
+            this.setState({ ...data });
+            console.log(this.state)
         });
     }
     render() {
