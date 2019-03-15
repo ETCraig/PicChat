@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import '../styles/EditGeneral.css';
 
 import {
-    Container,
-    Col,
-    form,
-    label,
-    input,
-    Button
-} from 'reactstrap';
-import {
     changeUserName,
     changeEmail,
     changeFirstName,
@@ -137,43 +129,41 @@ class EditGeneral extends Component {
         return (
             <div>
                 <div id='edit-general'>
-                    <Container>
-                        <form>
-                            <img 
-                                src={this.state.avatar} 
-                                alt='User Avatar' 
-                                className='edit-avatar' 
-                            />
-                            <input type='file' onChange={this.handleSelectedFile} />
-                            <label>Username</label>
-                            <input
-                                name='user_name'
-                                placeholder={this.state.user.user_name}
-                                onChange={this.handleChange('user_name')}
-                            />
-                            <label>Email</label>
-                            <input
-                                name='email'
-                                placeholder={this.state.user.email}
-                                onChange={this.handleChange('email')}
-                            />
-                            <label>First Name</label>
-                            <input
-                                name='first_name'
-                                placeholder={this.state.user.first_name}
-                                onChange={this.handleChange('first_name')}
-                            />
-                            <label>Last Name</label>
-                            <input
-                                name='last_name'
-                                placeholder={this.state.user.last_name}
-                                onChange={this.handleChange('last_name')}
-                            />
-                            <button onClick={this.handleSubmit} className='save-btn'>
-                                Save Changes
+                    <form>
+                        <img
+                            src={this.state.avatar}
+                            alt='User Avatar'
+                            className='edit-avatar'
+                        />
+                        <input type='file' onChange={this.handleSelectedFile} />
+                        <label>Username</label>
+                        <input
+                            name='user_name'
+                            placeholder={this.state.user.user_name}
+                            onChange={this.handleChange('user_name')}
+                        />
+                        <label>Email</label>
+                        <input
+                            name='email'
+                            placeholder={this.state.user.email}
+                            onChange={this.handleChange('email')}
+                        />
+                        <label>First Name</label>
+                        <input
+                            name='first_name'
+                            placeholder={this.state.user.first_name}
+                            onChange={this.handleChange('first_name')}
+                        />
+                        <label>Last Name</label>
+                        <input
+                            name='last_name'
+                            placeholder={this.state.user.last_name}
+                            onChange={this.handleChange('last_name')}
+                        />
+                        <button onClick={this.handleSubmit} className='save-btn'>
+                            Save Changes
                         </button>
-                        </form>
-                    </Container>
+                    </form>
                     <Link to='/edit-password'>
                         <button className='edit-btn'>Edit Password</button>
                     </Link>
