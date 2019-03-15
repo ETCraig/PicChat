@@ -44,6 +44,7 @@ class Profile extends Component {
                                     <span className="count">{count}</span>{" "}
                                     {pluralize(count, "subscriber", "subscribers")}
                                 </div>
+
                             </div>
                             <br />
                             <Link to='/edit' style={{textDecoration: 'none'}}>
@@ -64,7 +65,7 @@ class Profile extends Component {
                         );
                     })}
                 </div>
-                <div style={{background: '#333', height: '16vh', marginTop: '-30px'}} />
+                <div style={{background: '#333', height: '19.5vh', marginTop: '-30px'}} />
                 <Footer />
             </div>
         );

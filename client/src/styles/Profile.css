@@ -8,6 +8,7 @@
 #user-images {
     max-width: 100%;
     margin: 0 auto 30px;
+    min-height: 255px;
 }
 
 #user-image-wrap {

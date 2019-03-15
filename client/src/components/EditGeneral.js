@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import '../styles/EditGeneral.css';
 
 import {
     Container,
     Col,
-    Form,
-    Label,
-    Input,
+    form,
+    label,
+    input,
     Button
 } from 'reactstrap';
 import {
@@ -15,6 +16,7 @@ import {
     changeLastName,
     changeUserAvatar
 } from '../services/Profile.Services';
+import Footer from './Footer';
 import { getUserProfile } from '../services/Profile.Services';
 import { Link } from 'react-router-dom';
 
@@ -41,7 +43,7 @@ class EditGeneral extends Component {
             console.log(res)
             let { data } = res;
             console.log(data)
-            this.setState({ user: data, avatar: data.avatar });
+            this.setState({ user: data.user, avatar: data.user.avatar });
             console.log(this.state)
         });
     }
@@ -134,49 +136,52 @@ class EditGeneral extends Component {
     render() {
         return (
             <div>
-                <Container>
-                    <Form>
-                        <Col>
-                            <img src={this.state.avatar} alt='User Avatar' style={{ width: '200px', height: '200px' }} />
-                            <Input type='file' onChange={this.handleSelectedFile} />
-                        </Col>
-                        <Col>
-                            <Label>Username</Label>
-                            <Input
+                <div id='edit-general'>
+                    <Container>
+                        <form>
+                            <img 
+                                src={this.state.avatar} 
+                                alt='User Avatar' 
+                                className='edit-avatar' 
+                            />
+                            <input type='file' onChange={this.handleSelectedFile} />
+                            <label>Username</label>
+                            <input
                                 name='user_name'
                                 placeholder={this.state.user.user_name}
                                 onChange={this.handleChange('user_name')}
                             />
-                        </Col>
-                        <Col>
-                            <Label>Email</Label>
-                            <Input
+                            <label>Email</label>
+                            <input
                                 name='email'
                                 placeholder={this.state.user.email}
                                 onChange={this.handleChange('email')}
                             />
-                        </Col>
-                        <Col>
-                            <Label>First Name</Label>
-                            <Input
+                            <label>First Name</label>
+                            <input
                                 name='first_name'
                                 placeholder={this.state.user.first_name}
                                 onChange={this.handleChange('first_name')}
                             />
-                        </Col>
-                        <Col>
-                            <Label>Last Name</Label>
-                            <Input
+                            <label>Last Name</label>
+                            <input
                                 name='last_name'
                                 placeholder={this.state.user.last_name}
                                 onChange={this.handleChange('last_name')}
                             />
-                        </Col>
-                        <Button onClick={this.handleSubmit}>Save Changes</Button>
-                    </Form>
-                </Container>
-                <Link to='/edit-password'><button>Edit Password</button></Link>
-                <Link to='/payment-methods'><button>Payment Methods</button></Link>
+                            <button onClick={this.handleSubmit} className='save-btn'>
+                                Save Changes
+                        </button>
+                        </form>
+                    </Container>
+                    <Link to='/edit-password'>
+                        <button className='edit-btn'>Edit Password</button>
+                    </Link>
+                    <Link to='/payment-methods'>
+                        <button className='edit-btn'>Payment Methods</button>
+                    </Link>
+                </div>
+                <Footer />
             </div>
         );
     }
