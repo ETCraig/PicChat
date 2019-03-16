@@ -1,0 +1,100 @@
+#view-image {
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-weight: 300;
+    background: #333;
+    color: #fff;
+    overflow: hidden;
+    min-height: 82vh;
+}
+
+#view-wrapper {
+    width: 100%;
+    max-width: 565px;
+    display: flex;
+}
+
+#view-wrapper label {
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+#view-wrapper button {
+    padding: 0.7rem 1rem;
+    height: 2.7rem;
+    /* display: block; */
+    border: 1px solid #f4f4f4;
+    border-radius: 2px;
+    font-weight: 500;
+    background: none;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.5s;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#view-wrapper button:hover {
+    border-color: #c91717;
+    color: #c91717;
+}
+
+.view-img-wrap {
+    margin-right: 20px;
+    text-align: center;
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+}
+
+.view-img-wrap img {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    border-radius: 50px;
+}
+
+.view-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.likes-wrap {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.save-img-btn {
+    padding: 0.7rem 1rem;
+    height: 2.7rem;
+    border: 0;
+    border-radius: 2px;
+    font-weight: 500;
+    background: #c91717;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+@media (max-width: 700px) {
+    #view-image {
+      flex-direction: column;
+    }
+    #view-wrapper {
+      flex-direction: column;
+      align-items: center
+    }
+}

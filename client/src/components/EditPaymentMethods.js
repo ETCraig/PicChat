@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import '../styles/EditPayments.css';
 
-import AddPaymentMethod from '../containers/AddPaymentMethod';
+import AddPaymentModal from '../containers/AddPaymentModal';
 import { capitalize } from '../utils/Capitalize';
 import { Elements } from 'react-stripe-elements';
+import Footer from './Footer';
 import { getPaymentMethods, deletePaymentMethod } from '../services/Stripe.Services';
 import styled from 'styled-components';
 
@@ -25,6 +27,7 @@ const MainColumn = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 const OptionGrid = styled.div`
   width: 100%;
@@ -38,7 +41,7 @@ const PaymentOption = styled.div`
   display: flex;
   align-items: center;
   align-self: center;
-  width: 100%;
+  width: 60%;
   padding: 4px 30px 4px 30px;
   margin-bottom: 10px;
   .brand {
@@ -129,7 +132,7 @@ class EditPaymentMethods extends Component {
         } else {
             return (
                 <Elements>
-                    <AddPaymentMethod />
+                    <AddPaymentModal />
                 </Elements>
             )
         }
@@ -152,39 +155,44 @@ class EditPaymentMethods extends Component {
         let { paymentMethods } = this.state;
         // let { handlePaymentModal } = this.context;
         return (
-            <Container>
-                <MainColumn>
-                    <h3>Payment Options</h3>
-                    <p>An overview of your payment methods.</p>
-                    <h5>Credits and Debits</h5>
-                    <OptionGrid>
-                        {paymentMethods.length ? paymentMethods.map((source, index) => (
-                            <PaymentOption key={index}>
-                                <button onClick={() => this.handleDelete(source.id)}>Delete</button>
+            <div>
+                <div id='edit-pay'>
+                    <Container>
+                        <MainColumn>
+                            <h3>Payment Options</h3>
+                            <p>An overview of your payment methods.</p>
+                            <h5>Credits and Debits</h5>
+                            <OptionGrid>
+                                {paymentMethods.length ? paymentMethods.map((source, index) => (
+                                    <PaymentOption key={index}>
+                                        <button onClick={() => this.handleDelete(source.id)}>Delete</button>
 
-                                <InfoContainer>
-                                    <InfoLast>
-                                        {capitalize(source.card.funding)} **{source.card.last4}
-                                    </InfoLast>
-                                    <InfoExp>
-                                        {source.card.exp_month}/
+                                        <InfoContainer>
+                                            <InfoLast>
+                                                {capitalize(source.card.funding)} **{source.card.last4}
+                                            </InfoLast>
+                                            <InfoExp>
+                                                {source.card.exp_month}/
                                         {source.card.exp_year.toString().substr(2, 2)}
-                                    </InfoExp>
-                                </InfoContainer>
-                            </PaymentOption>
-                        )) :
-                            <div>
-                                <p>No credit or debit cards on file.</p>
-                            </div>}
-                    </OptionGrid>
-                    <h5>Add a New Payment Method</h5>
+                                            </InfoExp>
+                                        </InfoContainer>
+                                    </PaymentOption>
+                                )) :
+                                    <div>
+                                        <p>No credit or debit cards on file.</p>
+                                    </div>}
+                            </OptionGrid>
+                            <h5>Add a New Payment Method</h5>
 
-                    <h5>Credit or Debit Cards</h5>
-                    <p>SideCoach accepts all major credit and debit cards.</p>
-                    <button onClick={this.currentModal}>Add a card</button>
-                </MainColumn>
-                {this.handleModal()}
-            </Container>
+                            <h5>Credit or Debit Cards</h5>
+                            <p>SideCoach accepts all major credit and debit cards.</p>
+                            <button onClick={this.currentModal} id='open-modal'>Add a card</button>
+                        </MainColumn>
+                        {this.handleModal()}
+                    </Container>
+                </div>
+                <Footer />
+            </div>
         );
     }
 }

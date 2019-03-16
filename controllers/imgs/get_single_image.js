@@ -28,12 +28,14 @@ module.exports = get_single_image = async (req, res) => {
         console.log('DATA', data);
         let creatorId = data.creator._id;
         console.log('CREATOR', creatorId)
-        const findSubscription = await Subscriptions.findOne({
-            "from_user": userId,
+        console.log(userId)
+        let findSubscription = await Subscriptions.findOne({
             "to_creator": creatorId,
+            "from_user": userId,
             "active": true
         });
-        const findSavedImage = await ImageLibrary.findOne({
+        console.log(findSubscription)
+        let findSavedImage = await ImageLibrary.findOne({
             "user": userId,
             "image": imageId
         });
