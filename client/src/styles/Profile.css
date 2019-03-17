@@ -47,13 +47,14 @@
     height: 100px;
     margin-right: 20px;
     text-align: center;
+    margin-top: -10px;
 }
 
 .avatar-wrap img {
     display: inline-block;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+    width: 175px;
+    height: 175px;
+    border-radius: 100px;
 }
 
 .user-details {
@@ -89,5 +90,13 @@
     #user-header {
       flex-direction: column;
       align-items: center
+    }
+    .avatar-wrap {
+        margin-right: 0px;
+    }
+    .avatar-wrap img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
     }
   }
