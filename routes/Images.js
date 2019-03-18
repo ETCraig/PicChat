@@ -4,6 +4,7 @@ const passport = require('passport');
 
 const GET_FEED_IMAGES = require('../controllers/imgs/get_feed_images');
 const GET_SINGLE_IMAGE = require('../controllers/imgs/get_single_image');
+const GET_SAVED_IMAGES = require('../controllers/imgs/get_saved_images');
 const LIKE_CREATOR_IMAGE = require('../controllers/imgs/like_creator_image');
 const SAVE_CREATOR_IMAGE = require('../controllers/imgs/save_creator_image');
 const UNLIKE_CREATOR_IMAGE = require('../controllers/imgs/dislike_creator_image');
@@ -58,6 +59,13 @@ router.post('/dislike/:image_id',
         session: false
     }),
     UNLIKE_CREATOR_IMAGE
+);
+
+router.get('/library',
+    passport.authenticate('jwt', {
+        session: false
+    }),
+    GET_SAVED_IMAGES
 );
 
 module.exports = router;
