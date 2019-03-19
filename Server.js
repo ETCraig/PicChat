@@ -1,4 +1,5 @@
 const express = require('express');
+require("dotenv").config()
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -6,17 +7,13 @@ const passport = require('passport');
 const path = require('path');
 const delegateRoutes = require('./routes/DelegateRoutes');
 
-require("dotenv").config({
-    path: path.join(__dirname, "../.env")
-});
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
-const DB = process.env.mongoURI;
+const DB = require('./config/Keys').mongoURI;
 
 mongoose.set('useFindAndModify', false);
 mongoose.connect(DB)
