@@ -1,0 +1,21 @@
+{
+    "name": "PicChat",
+    "description": "Web app made using the MERN Stack with Stripe and AWS.",
+    "scripts": {
+    },
+    "env": {
+    },
+    "formation": {
+      "web": {
+        "quantity": 1
+      }
+    },
+    "addons": [
+  
+    ],
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ]
+  }

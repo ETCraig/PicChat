@@ -6,6 +6,10 @@ const passport = require('passport');
 const path = require('path');
 const delegateRoutes = require('./routes/DelegateRoutes');
 
+require('dotenv').config({
+    path: path.join(__dirname, './.env'),
+});
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
