@@ -2,17 +2,22 @@ const Image = require('../../models/Image');
 
 const AWS = require('aws-sdk');
 const multer = require('multer');
-const { AwsKeys, AwsBuckets } = require('../../config/Keys');
+const { 
+    AwsBuckets, 
+    accessKeyId,
+    secretAccessKey,
+    region
+} = require('../../config/Keys');
 
-const bucketName = AwsBuckets.bucketName;
+const bucketName = AwsBuckets;
 var ImageDatauri = require('datauri'),
     storage = multer.memoryStorage(),
     upload = multer({ storage: storage }).any();
 
 AWS.config.update({
-    accessKeyId: AwsKeys.accessKeyId,
-    secretAccessKey: AwsKeys.secretAccessKey,
-    region: AwsKeys.region
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey,
+    region: region
 });
 
 const S3 = new AWS.S3({ useAccelerateEndpoint: true });

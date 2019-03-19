@@ -1,8 +1,13 @@
 const Users = require('../../models/Users');
 const AWS = require('aws-sdk');
-const { AwsKeys, AwsBuckets } = require('../../config/Keys');
+const { 
+    AwsBuckets, 
+    accessKeyId,
+    secretAccessKey,
+    region
+ } = require('../../config/Keys');
 const multer = require('multer');
-const bucketName = AwsBuckets.bucketName;
+const bucketName = AwsBuckets;
 
 var AvatarDatauri = require("datauri"),
     storage = multer.memoryStorage(),
@@ -11,9 +16,9 @@ var AvatarDatauri = require("datauri"),
     }).any();
 
 AWS.config.update({
-    accessKeyId: AwsKeys.accessKeyId,
-    secretAccessKey: AwsKeys.secretAccessKey,
-    region: AwsKeys.region
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKey,
+    region: region
 });
 
 const S3 = new AWS.S3({ useAccelerateEndpoint: true });

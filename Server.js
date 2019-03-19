@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
 const DB = require('./config/Keys').mongoURI;
-
+console.log(DB)
 mongoose.set('useFindAndModify', false);
 mongoose.connect(DB)
     .then(() => console.log('MongoDB Connected.'))
@@ -27,14 +27,16 @@ require('./config/Passport')(passport);
 delegateRoutes(app);
 
 // //Serve Static Assets in Production
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, './client/build', 'index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    })
-  })
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
+  
 
-const Port = process.env.PORT || 8000;
+const Port = process.env.PORT || 5000;
 
 app.listen(Port, () => console.log(`Server is working on port ${Port}.`));
