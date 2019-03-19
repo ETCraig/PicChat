@@ -1,9 +1,9 @@
 const path = require("path");
 
 require("dotenv").config({
-    path: path.join(__dirname, ".env")
+    path: path.join(__dirname, "../.env")
 });
-console.log(process.env.secret_key)
+console.log(process.env.mongoURI)
 module.exports = {
     mongoURI: process.env.mongoURI,
     secretOrKey: process.env.secret,
