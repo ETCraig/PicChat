@@ -1,11 +1,122 @@
 import React, { Component } from 'react';
 
+import {connect} from 'react-redux';
 import { getSearchQuery } from '../services/Search.Services';
 import { Link } from 'react-router-dom';
 import Downshift, { resetIdCounter } from 'downshift';
 import debounce from 'lodash.debounce';
-import SearchIcon from '@material-ui/core/icons/Search';
-import Styled from 'styled-components';
+import SearchIcon from '@material-ui/icons/Search';
+import styled from 'styled-components';
+
+const Container = styled.Container`
+  display: flex;    
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  font-size: 14px;
+  button {
+    cursor: pointer;
+    border-radius: 0px 3px 3px 0px;
+    border-color: var(--PrimaryColorHover);
+
+    background: var(--PrimaryColor);
+    svg {
+      color: white;
+    }
+    &:hover {
+      background-color: var(--PrimaryColorHover);
+    }
+  }
+  .downshift {
+    width: 100%;
+    input {
+      height: 100%;
+    }
+  }
+`;
+
+const DropDownLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
+  li {
+    display: flex;
+    height: 35px;
+    padding: 10px;
+    color: initial;
+    align-items: center;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    .user-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
+    }
+    .icon-wrapper {
+    }
+    .icon-wrapper {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.5;
+      margin-right: 5px;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    img {
+      margin-right: 8px;
+    }
+  }
+`;
+
+const Results = styled.ul`
+  ${props => !props.results && "display: none"}
+  position: absolute;
+  top: 100%;
+  border: 1px solid #ccc;
+  width: calc(100% - 59.09px);
+  border-top: 0px;
+  background: white;
+  list-style: none;
+  border-radius: 0px 0px 3px 3px;
+  padding-left: 0px;
+  .no-result {
+    height: 32px;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+  }
+  .loading {
+    height: 1px;
+    border: 0px;
+    overflow: hidden;
+  }
+`;
+
+const DownshiftWrapper = styled.Container`
+  display: flex;    
+  #search {
+    width: 100%;
+    height: 32px;
+    border: 1px solid #ccc;
+    border-right-width: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+`;
+
+const SearchButton = styled.button`
+  display: flex;
+  justify-content: center;
+  width: 64px;
+  height: 32px;
+  background: white;
+`;
 
 class Search extends Component {
     constructor(props) {
@@ -100,11 +211,130 @@ class Search extends Component {
         let { results, searchQuery } = this.state;
         console.log(this.state);
         return (
-            <div>
-                
-            </div>
+            <Container>
+                <Downshift
+                    itemToString={item =>
+                        item === null ? ''
+                            : item.type === null
+                                ? '' : item.type === 'image'
+                                    ? item.title : item.type === 'user'
+                                        ? item.user_name : ''
+                    }
+                >
+                    {({
+                        getInputProps,
+                        getItemProps,
+                        isOpen,
+                        inputValue,
+                        highlightedIndex
+                    }) => (
+                            <div>
+                                <DownshiftWrapper searchActive={isOpen && results.length > 0}>
+                                    <input
+                                        value={this.state.searchQuery}
+                                        {...getInputProps({
+                                            type: 'search',
+                                            placeholder: 'Search',
+                                            id: 'search',
+                                            onChange: e => {
+                                                e.persist();
+                                                this.onSearch(e);
+                                            },
+                                            onKeyDown: e => {
+                                                this.handleKeyDown(e);
+                                            }
+                                        })}
+                                    />
+                                    <SearchButton
+                                        {...getInputProps({
+                                            type: 'button',
+                                            id: 'searchbutton',
+                                            onClick: e => {
+                                                this.onSearchClick(inputValue);
+                                                this.setState({
+                                                    results: []
+                                                });
+                                            }
+                                        })}
+                                    >
+                                        <SearchIcon />
+                                    </SearchButton>
+                                    {isOpen && results.length > 0 && (
+                                        <Results results={results}>
+                                            {!this.state.loading && results.length !== 0
+                                                ? results.map((item, index) => {
+                                                    let {
+                                                        type,
+                                                        handle, _id,
+                                                        title,
+                                                        avatar,
+                                                        path,
+                                                        icon,
+                                                        iconClass
+                                                    } = item;
+                                                    if (type === 'user') {
+                                                        return (
+                                                            <DropDownLink
+                                                                {...getInputProps({ item })}
+                                                                key={index}
+                                                                to={`/Creator/${handle}`}
+                                                            >
+                                                                <li>
+                                                                    <img src={avatar} />
+                                                                    {item.user_name}
+                                                                </li>
+                                                            </DropDownLink>
+                                                        );
+                                                    } else if (type === 'image') {
+                                                        return (
+                                                            <DropDownLink
+                                                                highlighted={index === highlightedIndex}
+                                                                {...getItemProps({ item })}
+                                                                key={index}
+                                                                to={`/view/${_id}`}
+                                                            >
+                                                                <li>
+                                                                    <div className='icon-wrapper'>
+                                                                        <i className='fas fa-image' />
+                                                                    </div>
+                                                                    {title}
+                                                                </li>
+                                                            </DropDownLink>
+                                                        );
+                                                    } else if (type === 'page') {
+                                                        return (
+                                                            <DropDownLink
+                                                                highlighted={index === 'page'}
+                                                                {...getItemProps({ item })}
+                                                                key={index}
+                                                                to={path}
+                                                            >
+                                                                <li>
+                                                                    <div>
+                                                                        <i className={iconClass} />
+                                                                    </div>
+                                                                    {title}
+                                                                </li>
+                                                            </DropDownLink>
+                                                        )
+                                                    }
+                                                })
+                                                : null}
+                                        </Results>
+                                    )}
+                                </DownshiftWrapper>
+                            </div>
+                        )}
+                </Downshift>
+            </Container>
         );
     }
 }
 
-export default Search;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    }
+}
+
+export default connect(mapStateToProps)(Search);

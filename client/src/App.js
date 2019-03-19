@@ -24,7 +24,7 @@ import Receipts from './components/Receipts';
 import OtherProfile from './components/OtherProfile';
 import Profile from './components/Profile';
 import Register from './components/Register';
-import Search from './containers/Search';
+import Search from './components/Search';
 import ViewImage from './components/ViewImage';
 
 if (localStorage.jwt) {

@@ -8,7 +8,7 @@ function delegateRoutesFor(app) {
     app.use('/api/images', images)
     app.use('/api/users', users)
     app.use('/api/stripe', stripe)
-    app.user('/api/search', search)
+    app.use('/api/search', search)
     return app;
 }
 
