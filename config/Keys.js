@@ -5,8 +5,8 @@ require("dotenv").config({
 });
 
 module.exports = {
-    mongoURI: JSON.parse(process.env.mongoURI),
-    secretOrKey: JSON.parse(process.env.secrets),
+    mongoURI: process.env.mongoURI,
+    secretOrKey: process.env.secret,
     stripeKeys: JSON.parse(process.env.stripeKeys),
     AwsKeys: JSON.parse(process.env.AwsKeys),
     AwsBuckets: JSON.parse(process.env.AwsBuckets)

@@ -6,13 +6,17 @@ const passport = require('passport');
 const path = require('path');
 const delegateRoutes = require('./routes/DelegateRoutes');
 
+require("dotenv").config({
+    path: path.join(__dirname, "../.env")
+});
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
-const DB = require('./config/Keys').mongoURI;
+const DB = process.env.mongoURI;
 
 mongoose.set('useFindAndModify', false);
 mongoose.connect(DB)
