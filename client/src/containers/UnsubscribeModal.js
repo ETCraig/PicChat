@@ -14,7 +14,7 @@ function UnsubscribeModal(props) {
         let creatorId = props.creator
         unsubscribeFromCreator(creatorId)
             .then(res => {
-                let {status, data} = res;
+                let {status} = res;
                 if(status === 200) {
                     console.log('Success');
                 } else {

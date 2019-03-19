@@ -17,7 +17,7 @@ const handleChange = change => { };
 const handleFocus = () => { };
 const handleReady = () => { };
 
-const Label = styled.p`
+const Label = styled.label`
   color: #fff;
   font-size: 0.9rem;
   line-height: 2rem;
@@ -28,77 +28,11 @@ const ElementGroup = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-const ElementNewGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 10px;
-`;
 const SubElementGroup = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-right: 10px;
-`;
-const styles = theme => ({
-    paper: {
-        position: "absolute",
-        width: 500,
-        height: 470,
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
-        outline: "none"
-    },
-
-    newCheck: {
-        padding: 0,
-        marginRight: 10,
-        display: "initial"
-    },
-
-    button1: {
-        marginBottom: theme.spacing.unit,
-        marginTop: 15,
-        height: 29,
-        textTransform: "initial",
-        width: "auto",
-        background: "#2489EA",
-        color: "white",
-        "&hover": {
-            background: "rgb(34, 127, 214)"
-        }
-    },
-    button2: {
-        marginBottom: theme.spacing.unit,
-        width: "inherit",
-        height: 29,
-        textTransform: "initial"
-    },
-    input: {
-        display: "none"
-    }
-});
-
-const LabelInput = styled.input`
-  width: 100%;
-
-  box-sizing: border-box;
-
-  /* height: 40px; */
-
-  /* padding: 10px 12px; */
-  padding: 6px 6px;
-
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background-color: #f0f0f0;
-
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
 `;
 
 const Form = styled.form.attrs({

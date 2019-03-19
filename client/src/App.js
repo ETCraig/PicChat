@@ -24,7 +24,7 @@ import Receipts from './components/Receipts';
 import OtherProfile from './components/OtherProfile';
 import Profile from './components/Profile';
 import Register from './components/Register';
-import Search from './components/Search';
+// import Search from './components/Search';
 import ViewImage from './components/ViewImage';
 
 if (localStorage.jwt) {
@@ -59,7 +59,7 @@ class App extends Component {
                 <SecureRoute path='/Library' exact component={Library} />
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
                 <SecureRoute path='/view/:image_id' exact component={ViewImage} />
-                <SecureRoute path='/Search' exact component={Search} />
+                {/* <SecureRoute path='/Search' exact component={Search} /> */}
               </Switch>
           </div>
         </Router>

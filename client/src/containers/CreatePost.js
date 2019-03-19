@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 
-import axios from 'axios';
 import Chip from '@material-ui/core/Chip';
 import '../styles/CreateImg.css';
-import FeedImages from '../containers/FeedImages';
-import { Link } from 'react-router-dom';
 import { uploadNewImage } from '../services/Image.Services';
-import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -130,7 +126,7 @@ class CreatePost extends Component {
             <div>
                 <div id='CreateImg'>
                     <div className='image-wrap grid '>
-                        <img src={this.state.image} value={this.state.image} />
+                        <img src={this.state.image} value={this.state.image} alt='New Post' />
                     </div>
                     <div className='inputs-wrap grid'>
                         <label>Title</label>

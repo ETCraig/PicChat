@@ -59,7 +59,7 @@ class EditGeneral extends Component {
         }
     }
     handleSubmit = () => {
-        const { avatar, user_name, email, first_name, last_name, uri } = this.state;
+        const { user_name, email, first_name, last_name, uri } = this.state;
         console.log(uri)
         if (uri) {
             var data = new FormData();

@@ -9,7 +9,7 @@ import MongoImg from '../assets/bandwidth-close-up-computer-1148820.jpg';
 
 const Landing = () => {
     return (
-        <body id='Landing'>
+        <div id='Landing'>
             <header id='header' className='landing-grid'>
                 <div className='bg-image'>
                     <div className='content-wrap'>
@@ -68,7 +68,7 @@ const Landing = () => {
                 </section>
                 <section id='selection-3' className='landing-grid'>
                     <div className='content-wrap'>
-                        <h2 className='content-title'>We handle all of your Digital Needs</h2>
+                        <h2 className='content-title'>Lorem ipsum dolor sit</h2>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, autem aliquid cum sed delectus
                             explicabo reiciendis magni laborum aperiam officiis.</p>
                     </div>
@@ -92,7 +92,7 @@ const Landing = () => {
                 <div>PicChat</div>
                 <a href='https://www.linkedin.com/in/ethan-craig-93000015a/' target='blank'><div>Project by E.T. Craig</div></a>
             </footer>
-        </body>
+        </div>
     );
 }
 

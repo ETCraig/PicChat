@@ -31,7 +31,7 @@ class Receipts extends Component {
         });
     }
     reloadFeed() {
-        let { limit, maxLength, receipt } = this.state;
+        let { limit, receipt } = this.state;
         if (receipt && receipt.length < this.state.maxLength) {
             this.setState({
                 loadingReceipts: true
@@ -78,7 +78,7 @@ class Receipts extends Component {
         window.removeEventListener('scroll', this.handleBtn);
     }
     render() {
-        let { receipt, loadingReceipts } = this.state;
+        let { receipt } = this.state;
         return (
             <div>
                 {receipt && receipt.map((receipts, i) => {

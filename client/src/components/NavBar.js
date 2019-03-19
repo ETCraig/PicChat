@@ -10,8 +10,7 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Container,
-    Input,
+    Container
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 
@@ -41,10 +40,10 @@ class NavBar extends Component {
                                 <Link to='/Receipts' className='nav-link' style={{ cursor: 'pointer', color: '#fff' }}>Receipts</Link>
                             </NavItem>
                             <NavItem style={{ margin: '10px' }}>
-                                <Link to='/Search' className='nav-link' style={{ cursor: 'pointer',color: '#fff' }}>Search</Link>
+                            <Link to='/Creator/Subscribe' className='nav-link' style={{ cursor: 'pointer', color: '#fff' }}>Creator</Link>
                             </NavItem>
                             <NavItem style={{ margin: '10px' }}>
-                                <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer' }}>Logout</NavLink>
+                                <NavLink onClick={this.onLogoutClick.bind(this)} className='nav-link' style={{ cursor: 'pointer', color: '#ccc' }}>Logout</NavLink>
                             </NavItem>
                         </Nav>
                     </Container>
