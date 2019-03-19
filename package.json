@@ -4,14 +4,13 @@
   "description": "A mix between the ideas of Instagram and Ifunny.",
   "main": "Server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "client-install": "npm install --prefix client",
     "start": "node Server.js",
-    "server": "nodemon Server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],  
   "author": "E.T. Craig",
   "license": "ISC",
   "dependencies": {
