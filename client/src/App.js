@@ -17,6 +17,7 @@ import EditPassword from './components/EditPassword';
 import EditPaymentMethods from './components/EditPaymentMethods';
 import FeedImages from './containers/FeedImages';
 import Landing from './components/Landing';
+import Library from './containers/Library';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Receipts from './components/Receipts';
@@ -54,6 +55,7 @@ class App extends Component {
                 <SecureRoute path='/Creator/:handle' exact component={OtherProfile} />
                 <SecureRoute path='/edit' exact component={EditGeneral} />
                 <SecureRoute path='/edit-password' exact component={EditPassword} />
+                <SecureRoute path='/Library' exact component={Library} />
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
                 <SecureRoute path='/view/:image_id' exact component={ViewImage} />
               </Switch>

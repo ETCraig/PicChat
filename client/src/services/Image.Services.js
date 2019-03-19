@@ -168,4 +168,27 @@ export const dislikeCreatorImage = async (image_id) => {
         });
 }
 
+export const getSavedImages = async (limit) => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+
+    return axios.get(`api/images/library?page=1&limit=${limit}`, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: {data}
+            } = err;
+            if(data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+} 
+
 export default uploadNewImage;

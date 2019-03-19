@@ -99,6 +99,17 @@ class CreatePost extends Component {
                 .then(({ status, data }) => {
                     if (status === 200) {
                         console.log('Success.');
+                        this.setState({
+                            selectedFile: null,
+                            description: '',
+                            title: '',
+                            image: '',
+                            tags: [],
+                            tag: '',
+                            fileType: '',
+                            mimeType: '',
+                            uri: ''
+                        });
                     } else {
                         console.log('Err.');
                     }
@@ -119,13 +130,13 @@ class CreatePost extends Component {
             <div>
                 <div id='CreateImg'>
                     <div className='image-wrap grid '>
-                        <img src={this.state.image} />
+                        <img src={this.state.image} value={this.state.image} />
                     </div>
                     <div className='inputs-wrap grid'>
                         <label>Title</label>
-                        <input name="title" className='create-title' onChange={this.handleChange} />
+                        <input value={this.state.title} name="title" className='create-title' onChange={this.handleChange} />
                         <label>Description</label>
-                        <input name="description" className='create-desc' onChange={this.handleChange} />
+                        <input value={this.state.description} name="description" className='create-desc' onChange={this.handleChange} />
                         <div
                             className='tags-wrapper grid'
                             onClick={e => e.target.className !== 'MuiChip-label-135'
