@@ -6,10 +6,6 @@ const passport = require('passport');
 const path = require('path');
 const delegateRoutes = require('./routes/DelegateRoutes');
 
-require('dotenv').config({
-    path: path.join(__dirname, './.env'),
-});
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,7 +27,7 @@ delegateRoutes(app);
 
 // //Serve Static Assets in Production
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'), function(err) {
+    res.sendFile(path.join(__dirname, './client/build', 'index.html'), function(err) {
       if (err) {
         res.status(500).send(err)
       }
