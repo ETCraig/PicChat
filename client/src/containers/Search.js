@@ -200,7 +200,7 @@ class Search extends Component {
         let { keyCode } = e;
 
         if (searchQuery && keyCode === 13) {
-            history.push(`/Search?q=${searchQuery}`);
+            history.push(`/Browse?q=${searchQuery}`);
             this.setState({
                 results: []
             });
@@ -211,7 +211,7 @@ class Search extends Component {
         let { history } = this.props;
         let { searchQuery } = this.state;
         if (searchQuery) {
-            history.push(`/Search?q=${searchQuery}`);
+            history.push(`/Browse?q=${searchQuery}`);
             this.setState({
                 results: []
             });

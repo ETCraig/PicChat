@@ -144,3 +144,26 @@ export const getReceiptsList = async limit => {
             throw err;
         });
 }
+
+export const getProfileItem = async userid => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": 'application/json'
+        }
+    };
+
+    return axios.get(`/api/stripe/item/${userid}`, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}

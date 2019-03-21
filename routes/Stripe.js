@@ -5,6 +5,7 @@ const passport = require('passport');
 const CREATE_PAYMENT_METHOD = require('../controllers/stripe/create_payment_method');
 const DELETE_PAYMENT_METHOD = require('../controllers/stripe/delete_payment_method');
 const GET_PAYMENT_METHODS = require('../controllers/stripe/get_payment_methods');
+const GET_PROFILE_ITEM = require('../controllers/stripe/get_profile_item');
 const GET_RECEIPTS_LIST = require('../controllers/stripe/get_receipts_list');
 const SUBSCRIBE_TO_CREATOR = require('../controllers/stripe/subscribe_to_creator');
 const UNSUBSCRIBE_FROM_CREATOR = require('../controllers/stripe/unsubscribe_from_coach');
@@ -49,6 +50,10 @@ router.get('/receipts',
         session: false
     }),
     GET_RECEIPTS_LIST
+);
+
+router.get('/item/:userid', 
+    GET_PROFILE_ITEM
 );
 
 module.exports = router;
