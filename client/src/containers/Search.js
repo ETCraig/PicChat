@@ -293,11 +293,11 @@ class Search extends Component {
                               <DropDownLink
                                 {...getItemProps({ item })}
                                 key={index}
-                                to={`/${handle}`}
+                                to={`/Creator/${handle}`}
                               >
                                 <li>
                                   <img className="user-icon" src={avatar} />
-                                  {item.full_name}
+                                  {item.user_name}
                                 </li>
                               </DropDownLink>
                             );
@@ -311,7 +311,7 @@ class Search extends Component {
                               >
                                 <li>
                                   <div className="icon-wrapper">
-                                    <i className="fas fa-video" />
+                                    <i className="fas fa-image" />
                                   </div>
                                   {title}
                                 </li>
