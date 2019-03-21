@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import history from './History';
+
 //Dependencies 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { clearCurrentUser } from './actions/UserActions';
 // import { Container } from 'reactstrap';
 import jwt_decode from 'jwt-decode';
@@ -43,7 +45,7 @@ if (localStorage.jwt) {
 class App extends Component {
   render() {
     return (
-        <Router>
+        <Router history={history}>
           <div className="App">
             <NavBar />
               <Route path='/' exact component={Landing} />

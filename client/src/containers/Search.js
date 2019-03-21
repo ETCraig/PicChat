@@ -8,6 +8,8 @@ import debounce from 'lodash.debounce';
 import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
 
+import history from '../History';
+
 const Container = styled.div`
   display: flex;    
   width: 100%;
@@ -72,10 +74,6 @@ const DropDownLink = styled(Link)`
       margin-right: 8px;
     }
   }
-  ${props =>
-    props.highlighted
-      ? "background: rgba(0, 0, 0, 0.5);"
-      : "background: white;"}
 `;
 
 const Results = styled.ul`
@@ -195,7 +193,7 @@ class Search extends Component {
     }, 300);
 
     handleKeyDown = e => {
-        let { history } = this.props;
+        // let { history } = this.props;
         let { searchQuery } = this.state;
         let { keyCode } = e;
 
