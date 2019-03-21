@@ -13,6 +13,7 @@ import {
     Container
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import Search from '../containers/Search';
 
 class NavBar extends Component {
 
@@ -21,7 +22,7 @@ class NavBar extends Component {
         this.props.logoutUser();
     }
     render() {
-        const { isAuthenticated } = this.props.auth;
+        const { isAuthenticated, history } = this.props.auth;
         console.log(isAuthenticated)
         return (
             isAuthenticated ? (
@@ -29,6 +30,9 @@ class NavBar extends Component {
                 <Navbar style={{ background: isAuthenticated ? '#000' : 'transparent' }} >
                     <Container>
                         <Link to='/Feed'><NavbarBrand style={{ color: isAuthenticated ? '#c91717' : 'transparent' }}><strong>PicChat</strong></NavbarBrand></Link>
+                        <NavItem>
+                            <Search history={history} />
+                        </NavItem>
                         <Nav className='navbar-nav ml-auto' style={{ display: 'flex', flexDirection: 'row' }}>
                             <NavItem style={{ margin: '10px' }}>
                                 <Link to='/Profile/5c845bf9be7413697c0fb1c5' className='nav-link' style={{ cursor: 'pointer', color: '#fff' }}>Profile</Link>

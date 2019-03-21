@@ -14,8 +14,7 @@ const Landing = () => {
                 <div className='bg-image'>
                     <div className='content-wrap'>
                         <h1>Welcome to PicChat</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel praesentium dicta blanditiis ipsam iusto
-                        dolore totam. Eaque deleniti repellat ratione?</p>
+                        <p>Join an ever growing community and subscribe to the creators who's content you enjoy!</p>
                         <Link to='/Login' className='btn'>Login</Link>
                         <Link to='/Register' className='btn'>Register</Link>
                     </div>
@@ -26,9 +25,7 @@ const Landing = () => {
                     <div className='content-wrap'>
                         <h2 className='content-title'>Web & Application Development</h2>
                         <div className='content-text'>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis obcaecati esse architecto facilis rem
-                            quam quos repellat ea, voluptates vitae vero eligendi nam eius eaque officiis ab ullam asperiores
-                            qui, suscipit voluptatem placeat numquam perspiciatis ex. Quae quis excepturi voluptate.</p>
+                            <p>PicChat is a full stack application built using the MERN stack ( Mongo - Express - React - NodeJS ). It allows users to create a secure personal account with JWT which will be given a unique customer and plan ID via the Stripe API. They cna then create their own posts using MongoDB and AWS and view, like, save, and comment the posts of others. Using Stripe users can maintain multiple payment options and use them to subscribe to other users allowing them to view those users posts in their feed. They can also edit the details of their account and their personal library of saved posts.</p>
                         </div>
                     </div>
                 </section>
@@ -39,8 +36,7 @@ const Landing = () => {
                                 <img src={StripeImg} alt="Background" />
                                 <div className='card-content'>
                                     <h3 className='card-title'>Stripe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere excepturi tenetur
-                                        officia ab adipisci harum error incidunt maxime! Rerum!</p>
+                                    <p>Stripes software allows individuals and businesses to receive payments over the Internet. Stripe provides the technical, fraud prevention, and banking infrastructure</p>
                                 </div>
                             </div>
                         </li>
@@ -49,8 +45,7 @@ const Landing = () => {
                                 <img src={AwsImg} alt="Background" />
                                 <div className='card-content'>
                                     <h3 className='card-title'>AWS</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere excepturi tenetur
-                                        officia ab adipisci harum error incidunt maxime! Rerum!</p>
+                                    <p>Amazon Web Services is a subsidiary of Amazon that provides on-demand cloud computing platforms to individuals, companies and governments, on a metered pay-as-you-go basis.</p>
                                 </div>
                             </div>
                         </li>
@@ -59,8 +54,7 @@ const Landing = () => {
                                 <img src={MongoImg} alt="Background" />
                                 <div className='card-content'>
                                     <h3 className='card-title'>MongoDB</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum facere excepturi tenetur
-                                        officia ab adipisci harum error incidunt maxime! Rerum!</p>
+                                    <p>MongoDB is a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.</p>
                                 </div>
                             </div>
                         </li>
@@ -68,23 +62,19 @@ const Landing = () => {
                 </section>
                 <section id='selection-3' className='landing-grid'>
                     <div className='content-wrap'>
-                        <h2 className='content-title'>Lorem ipsum dolor sit</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, autem aliquid cum sed delectus
-                            explicabo reiciendis magni laborum aperiam officiis.</p>
+                        <h2 className='content-title'>Always Learning and Changing</h2>
+                        <p>This application is still being built up, styled, and improved. So any bugs, issues with the responsiveness, or of the like please feel free to let me know.</p>
                     </div>
                 </section>
                 <section id='section-4' className='landing-grid'>
                     <div className='box'>
                         <h2 className='content-title'>Contact Me</h2>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo reprehenderit quos sunt laboriosam
-                            optio impedit minima animi saepe hic unde?</p>
+                        <p>I'm always looking for new opportunities to learn and grow as both a developer and as an individual.</p>
                         <p>devethancraig@gmail.com</p>
                     </div>
                     <div className='box'>
                         <h2 className='content-title'>About Me</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium, inventore repudiandae? Maxime
-                            qui dolorum excepturi officiis mollitia corporis neque quisquam sequi sit, inventore, quibusdam
-                            magnam iste consequatur libero, repellendus eligendi.</p>
+                        <p>I've been growing in the field of software development over the past two years. With two online certifications and having graduated from DevMountain Provo, I'm currently contracting for a StartUp Company in Orem Utah and searching for the right company to join and contribute my skills to.</p>
                     </div>
                 </section>
             </main>

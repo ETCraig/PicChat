@@ -2,29 +2,36 @@ const Users = require('../../models/Users');
 const Image = require('../../models/Image');
 
 module.exports = get_search_query = async (req, res) => {
+    console.log(req.query.q)
     let { q, limit, nousers, noimages } = req.query;
+    console.log('QUERY', limit, q)
     try {
         let itemsToReturn = [];
-
+        console.log('IN')
         if (!nousers) {
-            let users = await Users.find(
-                { $or: [{ user_name: { $regex: new RegExp(q, 'i', 'g') } }, { handle: { $regex: new RegExp(q, 'i', 'g') } }] }, {
+            console.log('IN IN')
+            let user = await Users.find(
+                { $or: [{ user_name: { $regex: new RegExp(q, "i", "g") } }, { handle: { $regex: new RegExp(q, "i", "g") } }] }, {
                     first_name: 0,
                     last_name: 0,
                     email: 0,
                     password: 0,
-                    date: 0
-                }
-            )
-                .limit(Number(limit))
-                .sort({
-                    date: -1,
-                    user_name: -1
-                });
-            if (users) {
-                users.forEach(({ user_name, _id, avatar, handle }, index) => { itemsToReturn.push({ type: 'user', search_string: `${full_name}${handle}`, handle, user_name, _id, avatar }) })
+                    date: 0,
+                    stripe_customer_id: 0,
+                    __v: 0
+            })
+            .limit(Number(limit))
+            .sort({
+                // date: -1,
+                user_name: -1
+            });
+            console.log('Passed', user)
+            if (user) {
+                console.log(true)
+                user.forEach(({ user_name, _id, avatar, handle }, index) => { itemsToReturn.push({ type: 'user', search_string: `${user_name}${handle}`, handle, user_name, _id, avatar }) })
             }
         }
+        console.log('Boy')
 
         if (!noimages) {
             let images = await Image.find(
