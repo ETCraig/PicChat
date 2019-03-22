@@ -284,7 +284,8 @@ class Search extends Component {
                             avatar,
                             path,
                             icon,
-                            iconClass
+                            iconClass,
+                            image_file
                           } = item;
                           if (type === "user") {
                             return (
@@ -309,7 +310,7 @@ class Search extends Component {
                               >
                                 <li>
                                   <div className="icon-wrapper">
-                                    <i className="fas fa-image" />
+                                    <img className="user-icon" src={image_file} />
                                   </div>
                                   {title}
                                 </li>

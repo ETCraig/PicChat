@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { MoreVert } from '@material-ui/icons';
-import { getSingleImage } from '../services/Image.Services';
+import { getSearchedImage } from '../services/Image.Services';
 
 import history from '../History';
 
@@ -21,7 +21,7 @@ const styles = theme => ({
 
 const Container = styled.div`
   width: 100%;
-
+  background: #eaeaea;
   display: flex;
   justify-content: center;
   /* height: 138px; */
@@ -170,9 +170,9 @@ const ImageThumb = styled.img`
 
 const Thumbnail = styled.img`
   display: block;
-  width: 100%;
+  width: 50%;
   /* max-width: 245px; */
-  height: 100%;
+  height: 50%;
   min-height: 138px;
   position: absolute;
   z-index: 5;
@@ -252,39 +252,24 @@ class ImageItem extends Component {
     super(props);
 
     this.state = {
-      index: "",
-      _id: "",
       by_creator: {
-        full_name: "",
-        _id: ""
+        avatar: '',
+        handle: '',
+        user_name: ''
       },
-      image_file: "",
-      title: "",
-      created: "",
-      description: "",
+      created: '',
+      description: '',
+      dislikes: 0,
+      likes: 0,
+      tags: [],
+      title: '',
+      _id: ''
     }
     this.loadData = this.loadData.bind(this);
   }
 
   componentDidMount() {
     this.loadData();
-  }
-
-  loadData = () => {
-    let { _id, index } = this.props;
-
-    getSingleImage(_id)
-      .then(({ status, data }) => {
-        if (status === 200) {
-          console.log(data)
-          this.setState({
-            ...data
-          });
-        }
-      })
-      .catch(err => {
-        throw err;
-      });
   }
 
   handleNavigation = () => {
@@ -298,12 +283,23 @@ class ImageItem extends Component {
   render() {
     let {
       title,
-      by_coach: { handle, avatar },
+      image_file,
+      by_creator: { handle, avatar, user_name },
       description,
+      likes,
       _id,
     } = this.state;
     return (
       <Container className='image-item'>
+
+        <ThumbWrapper className="thumb-wrapper">
+          <Thumbnail
+            onClick={e => this.handleNavigation()}
+            className="thumbnail"
+            src={image_file}
+          />
+        </ThumbWrapper>
+
         <ImageInfoBlock className="image-info-block">
           <img className="avatar" src={avatar} />
           <div className="info-block-wrapper">
@@ -326,9 +322,12 @@ class ImageItem extends Component {
             <div className="meta-block">
               <div className="meta-data">
                 <ByUser onClick={() => this.props.history.push(`/Creator/${handle}`)}>
-                  {handle} <i className="fas fa-check-circle" />
+                  {user_name} <i className="fas fa-check-circle" />
                 </ByUser>
                 <BulletTag>•</BulletTag>
+                <ViewCountTag>
+                  {likes} {pluralize(likes, "like ", "likes ")}
+                </ViewCountTag>
               </div>
             </div>
           </div>
@@ -339,6 +338,22 @@ class ImageItem extends Component {
         </ImageInfoBlock>
       </Container>
     );
+  }
+  loadData = () => {
+    let { _id, index } = this.props;
+    console.log('ID', _id)
+    getSearchedImage(_id)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          console.log(data)
+          this.setState({
+            ...data
+          });
+        }
+      })
+      .catch(err => {
+        throw err;
+      });
   }
 }
 

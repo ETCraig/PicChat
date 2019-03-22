@@ -36,13 +36,15 @@ module.exports = get_search_query = async (req, res) => {
         if (!noimages) {
             let images = await Image.find(
                 { $or: [{ title: { $regex: new RegExp(q, 'i', 'g') } }, { description: { $regex: new RegExp(q, 'i', 'g') } }] }, {
-
+                    comments: 0,
+                    modified: 0
                 }
             )
                 .populate('by_creator', ['avatar', 'handle', 'user_name'])
                 .limit(Number(limit))
+                // console.log('IMAGES', images)
             if (images.length > 0) {
-                images.forEach(({ _id, tags, description, title, likes, dislikes }, index) => { itemsToReturn.push({ type: 'image', _id, search_string: `${title}${description}${tags.map(tag => tag)}`, title }) })
+                images.forEach(({ _id, tags, description, title, image_file, likes, dislikes }, index) => { itemsToReturn.push({ type: 'image', _id, search_string: `${title}${description}${tags.map(tag => tag)}`, description, image_file, title }) })
             }
         }
         itemsToReturn.sort((a, b) => {

@@ -55,13 +55,15 @@ function Browse(props) {
                     {data &&
                         data.map((item, index) => {
                             let { type, _id } = item;
-                            if (type === "user") {
-                                return <UserItem history={history} _id={_id} key={index} />;
+                            if (type === 'user') {
+                                return <UserItem history={history} _id={_id} key={index} />
+                            } else if (type === "image") {
+                                return <ImageItem history={history} _id={_id} key={index} />
                             }
                         })}
                 </ResultGrid>
             </Container>
-            <div style={{marginTop: '30px', background: '#333'}} />
+            <div style={{ marginTop: '30px', background: '#333' }} />
             <Footer />
         </div>
     );

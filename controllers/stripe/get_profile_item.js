@@ -40,12 +40,10 @@ module.exports = get_profile_item = async (req, res) => {
                 ]
             }
         );
-            console.log('CHECKED')
         let planId = await Plan.findOne({ "creator_id": userid });
         let getSubs = await stripe.subscriptions.list({ plan: planId.plan_id })
 
         const [foundProfile, imageCount, subs, subed] = await Promise.all([findProfilePromise, findImagesPromise, getSubs, checkSubscribed]);
-        console.log('GOING TO DATA')
         let data = {
             user: {...foundProfile._doc},
             subscribed: false,
@@ -64,7 +62,6 @@ module.exports = get_profile_item = async (req, res) => {
             data.subscribed = true
         }
         if (subs) {
-            console.log(subs.data.length);
             data.subscribersCount = subs.data.length
         }
         // if (followingIDS.includes(userid)) {

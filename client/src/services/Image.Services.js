@@ -182,13 +182,36 @@ export const getSavedImages = async (limit) => {
         .then(res => res)
         .catch(err => {
             let {
-                response: {data}
+                response: { data }
             } = err;
-            if(data) {
+            if (data) {
                 store.dispatch(getErrors(data));
             }
             throw err;
         });
-} 
+}
+
+export const getSearchedImage = async _id => {
+    const jwt = getJWT();
+
+    let auth = {
+        headers: {
+            Authorization: jwt,
+            "Content-Type": "application/json"
+        }
+    };
+    console.log(_id)
+    return axios.get(`/api/images/search/${_id}`, auth)
+        .then(res => res)
+        .catch(err => {
+            let {
+                response: { data }
+            } = err;
+            if (data) {
+                store.dispatch(getErrors(data));
+            }
+            throw err;
+        });
+}
 
 export default uploadNewImage;
