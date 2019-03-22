@@ -17,7 +17,7 @@ module.exports = get_user_handle = async (req, res) => {
                 'email'
             ]
         );
-        console.log(userData)
+        console.log('userData', userData)
         console.log(userData[0]._id)
         let checkSubscribed = await Subscriptions.find(
             {

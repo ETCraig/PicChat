@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -260,7 +261,7 @@ class UserItem extends Component {
       user
     } = this.state;
     console.log(user)
-    let { _id: handle, avatar, user_name } = user;
+    let { _id: userid, handle, avatar, user_name } = user;
     console.log(user)
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -298,9 +299,11 @@ class UserItem extends Component {
           </ProfileInfoBlock>
           <FollowBlock>
             {!isMe &&
-              <Button onClick={() => this.props.history.push(`/Creator/${handle}`)} variant="outlined" color="primary">
-                {subscribed ? "Subscribed  " : subscribedYou ? "Subscribe Back  " : "Subscribe"}
-              </Button>
+              <Link to={`/Creator/${handle}`}>
+                <Button variant="outlined" color="primary">
+                  {subscribed ? "Subscribed  " : subscribedYou ? "Subscribe Back  " : "Subscribe"}
+                </Button>
+              </Link>
             }
           </FollowBlock>
         </Container>
