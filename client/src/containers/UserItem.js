@@ -4,23 +4,23 @@ import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import {
-    getProfileItem,
-    unsubscribeFromCreator,
-    subscribeToCreator
+  getProfileItem,
+  unsubscribeFromCreator,
+  subscribeToCreator
 } from '../services/Stripe.Services';
 import { pluralize } from '../utils/Pluralize';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
-    button: {
-        padding: 5
-    },
-    input: {
-        display: "none"
-    },
-    followButton: {
-        width: '100%'
-    }
+  button: {
+    padding: 5
+  },
+  input: {
+    display: "none"
+  },
+  followButton: {
+    width: '100%'
+  }
 });
 
 const Container = styled.article`
@@ -28,6 +28,7 @@ const Container = styled.article`
   width: 100%;
   height: 138px;
   position: relative;
+  background: #eaeaea;
   /* border: 1px solid black; */
 
   .title-wrapper {
@@ -206,136 +207,134 @@ const DescriptionStyles = styled.p`
 `;
 
 class UserItem extends Component {
-    static propTypes = {
-        _id: PropTypes.string.isRequired
-    };
-    constructor(props) {
-        super(props);
+  static propTypes = {
+    _id: PropTypes.string.isRequired
+  };
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            subscribed: false,
-            // subscribers: [],
-            // subscribersCount: 0,
-            // subscribingCount: 0,
-            subscribedYou: false,
-            // imageCount: 0,
-            isMe: false,
-            user: {
-                avatar: "",
-                user_name: "",
-                handle: "",
-                _id: ""
-            }
+    this.state = {
+      subscribed: false,
+      subscribersCount: 0,
+      subscribedYou: false,
+      imageCount: 0,
+      isMe: false,
+      user: {
+        avatar: "",
+        user_name: "",
+        handle: "",
+        _id: ""
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  subscribeUser = userid => {
+    subscribeToCreator(userid)
+      .then(res => {
+        let { data, status } = res;
+        if (status === 200) {
+          this.setState({
+            ...data
+          });
         }
-    }
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
 
-    componentDidMount() {
-        this.loadData();
-    }
+  unsubscribeUser = userid => {
+    unsubscribeFromCreator(userid)
+      .then(res => {
+        let { data, status } = res;
+        if (status === 200) {
+          this.setState({
+            ...data
+          });
+        }
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
 
-    subscribeUser = userid => {
-        subscribeToCreator(userid)
-            .then(res => {
-                let { data, status } = res;
-                if (status === 200) {
-                    this.setState({
-                        ...data
-                    });
+  render() {
+    let {
+      subscribed,
+      subscribersCount,
+      imageCount,
+      subscribedYou,
+      isMe,
+      user
+    } = this.state;
+    console.log(user)
+    let { _id: userid, handle, avatar, user_name } = user;
+    console.log(user)
+    return (
+      <Container>
+        <AvatarBlock onClick={() => this.props.history.push(`/Creator/${handle}`)} avatar={avatar}>
+          <div className="avatar"></div>
+        </AvatarBlock>
+
+        <ProfileInfoBlock className="profile-info-block">
+          <div className="info-block-wrapper">
+            <div className="title-wrapper">
+              <span onClick={() => this.props.history.push(`/Creator/${handle}`)} className="title">
+                {user_name}
+              </span>
+            </div>
+
+            <div className="meta-block">
+              <div className="meta-data">
+                <FollowersTag>
+                  {subscribersCount} {pluralize(subscribersCount, "subscriber ", "subscribers ")}
+                </FollowersTag>
+                {imageCount > 0 &&
+                  <BulletTag>•</BulletTag>
                 }
-            })
-            .catch(err => {
-                throw err;
-            });
-    }
 
-    unsubscribeUser = userid => {
-        unsubscribeFromCreator(userid)
-            .then(res => {
-                let { data, status } = res;
-                if (status === 200) {
-                    this.setState({
-                        ...data
-                    });
+                {imageCount > 0 &&
+                  <FollowersTag>
+                    {imageCount} {pluralize(imageCount, "image ", "images ")}
+                  </FollowersTag>
                 }
-            })
-            .catch(err => {
-                throw err;
-            });
-    }
 
-    render() {
-        let {
-            subscribed,
-            // subscribers,
-            // subscriberCount,
-            // subscribingCount,
-            // imageCount,
-            subscribedYou,
-            isMe,
-            user
-        } = this.state;
-        let { _id: userid, handle, avatar, user_name } = user;
-        return (
-            <Container>
-                <AvatarBlock onClick={() => this.props.history.push(`/Creator/${handle}`)} avatar={avatar}>
-                    <div className="avatar"></div>
-                </AvatarBlock>
-
-                <ProfileInfoBlock className="profile-info-block">
-                    <div className="info-block-wrapper">
-                        <div className="title-wrapper">
-                            <span onClick={() => this.props.history.push(`/Creator/${handle}`)} className="title">
-                                {user_name}
-                            </span>
-                        </div>
-
-                        {/* <div className="meta-block">
-                            <div className="meta-data">
-                                <FollowersTag>
-                                    {subscriberCount} {pluralize(subscriberCount, "subscriber ", "subscribers ")}
-                                </FollowersTag>
-                                {imageCount > 0 &&
-                                    <BulletTag>•</BulletTag>
-                                }
-
-                                {imageCount > 0 &&
-                                    <FollowersTag>
-                                        {imageCount} {pluralize(imageCount, "image ", "images ")}
-                                    </FollowersTag>
-                                }
-
-                            </div>
-                        </div> */}
-                    </div>
-                </ProfileInfoBlock>
-                <FollowBlock>
-                    {!isMe &&
-                        <Button onClick={() => subscribed ? this.unsubscribeUser(userid) : this.subscribeUser(userid)} variant="outlined" color="primary">
-                            {subscribed ? "Subscribed  " : subscribedYou ? "Subscribe Back  " : "Subscribe"}
-                        </Button>
-                    }
-                </FollowBlock>
-            </Container>
-        );
-    }
-    loadData = () => {
-        let { _id, index } = this.props;
-        getProfileItem(_id)
-            .then(({ status, data }) => {
-                if (status === 200) {
-                  console.log(data)
-                    this.setState({
-                        ...data
-                    });
-                }
-            });
-    }
+              </div>
+            </div>
+          </div>
+        </ProfileInfoBlock>
+        <FollowBlock>
+          {!isMe &&
+            <Button onClick={() => this.props.history.push(`/Creator/${handle}`)} variant="outlined" color="primary">
+              {subscribed ? "Subscribed  " : subscribedYou ? "Subscribe Back  " : "Subscribe"}
+            </Button>
+          }
+        </FollowBlock>
+      </Container>
+    );
+  }
+  loadData = () => {
+    let { _id, index } = this.props;
+    getProfileItem(_id)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          console.log(data)
+          this.setState({
+            ...data
+          });
+        }
+      });
+  }
 }
 
 const mapStateToProps = state => {
-    return {
-        auth: state.auth
-    }
+  return {
+    auth: state.auth
+  }
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(UserItem));

@@ -35,7 +35,7 @@ class NavBar extends Component {
                 <div>
                 <Navbar style={{ background: isAuthenticated ? '#000' : 'transparent' }} >
                     <Container>
-                        <Link to='/Feed'><NavbarBrand style={{ color: isAuthenticated ? '#c91717' : 'transparent' }}><strong>PicChat</strong></NavbarBrand></Link>
+                        <Link to='/Feed'><NavbarBrand style={{ color: isAuthenticated ? '#c91717' : 'transparent', fontSize: '2rem' }}><strong>PicChat</strong></NavbarBrand></Link>
                             <Search history={history} />
                         <Nav className='navbar-nav ml-auto' style={{ display: 'flex', flexDirection: 'row' }}>
                             <NavItem style={{ margin: '10px' }}>

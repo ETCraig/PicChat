@@ -2,6 +2,9 @@ const User = require('../../models/Users');
 const jwt = require('jsonwebtoken');
 let { secretOrKey } = require('../../config/Keys');
 const Image = require('../../models/Image');
+const Plan = require('../../models/Plan');
+const Subscriptions = require('../../models/Subscription');
+const stripe = require('../../validation/Stripe');
 
 module.exports = get_profile_item = async (req, res) => {
     console.log('HIT the BACK')
@@ -26,15 +29,29 @@ module.exports = get_profile_item = async (req, res) => {
             'handle',
         ]);
 
-        // const findImagesPromise = await Image.find({ by_creator: userid }).countDocuments();
+        const findImagesPromise = await Image.find({ by_creator: userid }).countDocuments();
         
-        // const [foundProfile, imageCount] = await Promise.all([findProfilePromise, findImagesPromise]);
+        let checkSubscribed = await Subscriptions.find(
+            {
+                $and: [
+                    { "to_creator": userid },
+                    { "from_user": req.user.id },
+                    { "active": true }
+                ]
+            }
+        );
+            console.log('CHECKED')
+        let planId = await Plan.findOne({ "creator_id": userid });
+        let getSubs = await stripe.subscriptions.list({ plan: planId.plan_id })
+
+        const [foundProfile, imageCount, subs, subed] = await Promise.all([findProfilePromise, findImagesPromise, getSubs, checkSubscribed]);
         console.log('GOING TO DATA')
         let data = {
-            ...findProfilePromise._doc,
+            user: {...foundProfile._doc},
             subscribed: false,
+            subscribersCount: 0,
             subscribedYou: false,
-            // imageCount,
+            imageCount,
             isMe: false
         }
         console.log(data)
@@ -43,7 +60,13 @@ module.exports = get_profile_item = async (req, res) => {
                 data.isMe = true;
             }
         }
-
+        if (subed.length >= 1) {
+            data.subscribed = true
+        }
+        if (subs) {
+            console.log(subs.data.length);
+            data.subscribersCount = subs.data.length
+        }
         // if (followingIDS.includes(userid)) {
         //     data.followed = true
         // }

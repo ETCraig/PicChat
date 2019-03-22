@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+
+import Footer from './Footer';
 import { getSearchQuery } from '../services/Search.Services';
 import ImageItem from '../containers/ImageItem';
 import UserItem from '../containers/UserItem';
@@ -8,6 +10,7 @@ const queryString = require("query-string");
 
 const Container = styled.div`
   padding: 40px;
+  background: #333;
 `;
 
 const FilterBar = styled.div`
@@ -45,18 +48,22 @@ function Browse(props) {
     });
 
     return (
-        <Container>
-            <FilterBar />
-            <ResultGrid>
-                {data &&
-                    data.map((item, index) => {
-                        let { type, _id } = item;
-                        if (type === "user") {
-                            return <UserItem history={history} _id={_id} key={index} />;
-                        }
-                    })}
-            </ResultGrid>
-        </Container>
+        <div>
+            <Container>
+                <FilterBar />
+                <ResultGrid>
+                    {data &&
+                        data.map((item, index) => {
+                            let { type, _id } = item;
+                            if (type === "user") {
+                                return <UserItem history={history} _id={_id} key={index} />;
+                            }
+                        })}
+                </ResultGrid>
+            </Container>
+            <div style={{marginTop: '30px', background: '#333'}} />
+            <Footer />
+        </div>
     );
 }
 

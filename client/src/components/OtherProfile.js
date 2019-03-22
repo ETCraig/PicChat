@@ -42,7 +42,7 @@ class OtherProfile extends Component {
             });
     }
     handleSubscribeModal() {
-        this.setState({ subModal: true })
+        this.setState({ subModal: true });
     }
     handleUnsubscribeModal() {
         this.setState({ unModal: true });
