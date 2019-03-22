@@ -154,7 +154,7 @@ export const getProfileItem = async userid => {
             "Content-Type": 'application/json'
         }
     };
-
+    console.log('GET BY _ID')
     return axios.get(`/api/stripe/item/${userid}`, auth)
         .then(res => res)
         .catch(err => {

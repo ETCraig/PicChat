@@ -214,11 +214,11 @@ class UserItem extends Component {
 
         this.state = {
             subscribed: false,
-            subscribers: [],
-            subscribersCount: 0,
-            subscribingCount: 0,
-            imageCount: 0,
+            // subscribers: [],
+            // subscribersCount: 0,
+            // subscribingCount: 0,
             subscribedYou: false,
+            // imageCount: 0,
             isMe: false,
             user: {
                 avatar: "",
@@ -266,10 +266,10 @@ class UserItem extends Component {
     render() {
         let {
             subscribed,
-            subscribers,
-            subscriberCount,
-            subscribingCount,
-            imageCount,
+            // subscribers,
+            // subscriberCount,
+            // subscribingCount,
+            // imageCount,
             subscribedYou,
             isMe,
             user
@@ -289,7 +289,7 @@ class UserItem extends Component {
                             </span>
                         </div>
 
-                        <div className="meta-block">
+                        {/* <div className="meta-block">
                             <div className="meta-data">
                                 <FollowersTag>
                                     {subscriberCount} {pluralize(subscriberCount, "subscriber ", "subscribers ")}
@@ -305,7 +305,7 @@ class UserItem extends Component {
                                 }
 
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </ProfileInfoBlock>
                 <FollowBlock>
@@ -323,6 +323,7 @@ class UserItem extends Component {
         getProfileItem(_id)
             .then(({ status, data }) => {
                 if (status === 200) {
+                  console.log(data)
                     this.setState({
                         ...data
                     });

@@ -52,7 +52,10 @@ router.get('/receipts',
     GET_RECEIPTS_LIST
 );
 
-router.get('/item/:userid', 
+router.get('/item/:userid',
+    passport.authenticate('jwt', {
+        session: false
+    }),
     GET_PROFILE_ITEM
 );
 

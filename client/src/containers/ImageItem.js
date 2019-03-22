@@ -8,13 +8,15 @@ import PropTypes from 'prop-types';
 import { MoreVert } from '@material-ui/icons';
 import { getSingleImage } from '../services/Image.Services';
 
+import history from '../History';
+
 const styles = theme => ({
-    button: {
-        padding: 5
-    },
-    input: {
-        display: "none"
-    }
+  button: {
+    padding: 5
+  },
+  input: {
+    display: "none"
+  }
 });
 
 const Container = styled.div`
@@ -243,105 +245,107 @@ const DescriptionStyles = styled.p`
 `;
 
 class ImageItem extends Component {
-    static propTypes = {
-        _id: PropTypes.string.isRequired
-    };
-    constructor(props) {
-        super(props);
+  static propTypes = {
+    _id: PropTypes.string.isRequired
+  };
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            index: "",
-            _id: "",
-            by_creator: {
-                full_name: "",
-                _id: ""
-            },
-            image_file: "",
-            title: "",
-            created: "",
-            description: "",
+    this.state = {
+      index: "",
+      _id: "",
+      by_creator: {
+        full_name: "",
+        _id: ""
+      },
+      image_file: "",
+      title: "",
+      created: "",
+      description: "",
+    }
+    this.loadData = this.loadData.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  loadData = () => {
+    let { _id, index } = this.props;
+
+    getSingleImage(_id)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          console.log(data)
+          this.setState({
+            ...data
+          });
         }
-        this.loadData = this.loadData.bind(this);
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
+
+  handleNavigation = () => {
+    let { _id } = this.state;
+    let subscribed = true;
+    if (subscribed) {
+      history.push(`/view/${_id}`);
     }
+  }
 
-    componentDidMount() {
-        this.loadData();
-    }
+  render() {
+    let {
+      title,
+      by_coach: { handle, avatar },
+      description,
+      _id,
+    } = this.state;
+    return (
+      <Container className='image-item'>
+        <ImageInfoBlock className="image-info-block">
+          <img className="avatar" src={avatar} />
+          <div className="info-block-wrapper">
+            <div className="title-wrapper">
+              <span className="title" onClick={e => this.handleNavigation()}>
+                {" "}
+                {title}
+              </span>
+              <IconButton
+                color="secondary"
+                classes={{
+                  root: "dropdown-dots"
+                }}
+                aria-label="Add an alarm"
+              >
+                <MoreVert />
+              </IconButton>
+            </div>
 
-    handleNavigation = () => {
-        let { _id } = this.state;
-        let subscribed = true;
-        // if (subscribed) {
-        //     history.push(`/view/${_id}`);
-        // }
-    }
+            <div className="meta-block">
+              <div className="meta-data">
+                <ByUser onClick={() => this.props.history.push(`/Creator/${handle}`)}>
+                  {handle} <i className="fas fa-check-circle" />
+                </ByUser>
+                <BulletTag>•</BulletTag>
+              </div>
+            </div>
+          </div>
 
-    render() {
-        let {
-            title,
-            by_coach: { handle, avatar },
-            description,
-            _id,
-        } = this.state;
-        return (
-            <Container className='image-item'>
-                <ImageInfoBlock className="image-info-block">
-                    <img className="avatar" src={avatar} />
-                    <div className="info-block-wrapper">
-                        <div className="title-wrapper">
-                            <span className="title" onClick={e => this.handleNavigation()}>
-                                {" "}
-                                {title}
-                            </span>
-                            <IconButton
-                                color="secondary"
-                                classes={{
-                                    root: "dropdown-dots"
-                                }}
-                                aria-label="Add an alarm"
-                            >
-                                <MoreVert />
-                            </IconButton>
-                        </div>
-
-                        <div className="meta-block">
-                            <div className="meta-data">
-                                <ByUser onClick={() => this.props.history.push(`/Creator/${handle}`)}>
-                                    {handle} <i className="fas fa-check-circle" />
-                                </ByUser>
-                                <BulletTag>•</BulletTag>
-                            </div>
-                        </div>
-                    </div>
-
-                    <DescriptionStyles className="description">
-                        {description}
-                    </DescriptionStyles>
-                </ImageInfoBlock>
-            </Container>
-        );
-    }
-    loadData = () => {
-        let { _id, index } = this.props;
-
-        getSingleImage(_id)
-            .then(({ status, data }) => {
-                if (status === 200) {
-                    this.setState({
-                        ...data
-                    });
-                }
-            })
-            .catch(err => {
-                throw err;
-            });
-    }
+          <DescriptionStyles className="description">
+            {description}
+          </DescriptionStyles>
+        </ImageInfoBlock>
+      </Container>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-    return {
-        auth: state.auth
-    }
+  return {
+    auth: state.auth
+  }
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(ImageItem));

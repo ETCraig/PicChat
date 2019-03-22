@@ -4,6 +4,7 @@ let { secretOrKey } = require('../../config/Keys');
 const Image = require('../../models/Image');
 
 module.exports = get_profile_item = async (req, res) => {
+    console.log('HIT the BACK')
     if (req.headers.authorization) {
         const token = req.headers.authorization.split(" ")[1];
         if (token) {
@@ -18,25 +19,25 @@ module.exports = get_profile_item = async (req, res) => {
         let { userid } = req.params;
 
         let findProfilePromise = await User.findOne(
-            { user: userid }
+            { _id: userid }
         ).populate('user', [
             'avatar',
             'user_name',
             'handle',
         ]);
 
-        const findImagesPromise = await Image.find({ by_creator: userid }).countDocuments();
-
-        const [foundProfile, imageCount] = await Promise.all([findProfilePromise, findImagesPromise]);
-
+        // const findImagesPromise = await Image.find({ by_creator: userid }).countDocuments();
+        
+        // const [foundProfile, imageCount] = await Promise.all([findProfilePromise, findImagesPromise]);
+        console.log('GOING TO DATA')
         let data = {
-            ...foundProfile.doc,
+            ...findProfilePromise._doc,
             subscribed: false,
             subscribedYou: false,
-            imageCount,
+            // imageCount,
             isMe: false
         }
-
+        console.log(data)
         if (req.user) {
             if (userid === req.user.id.toString()) {
                 data.isMe = true;

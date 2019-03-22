@@ -206,7 +206,7 @@ class Search extends Component {
     }
 
     onSearchClick = () => {
-        let { history } = this.props;
+        // let { history } = this.props;
         let { searchQuery } = this.state;
         if (searchQuery) {
             history.push(`/Browse?q=${searchQuery}`);
