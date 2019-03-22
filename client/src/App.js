@@ -38,7 +38,7 @@ if (localStorage.jwt) {
   if (decoded.exp < currentTime) {
     store.dispatch(logoutUser());
     store.dispatch(clearCurrentUser());
-    this.props.history.push('/Login');
+    this.props.history.push('/');
   }
 }
 
@@ -51,7 +51,6 @@ class App extends Component {
               <Route path='/' exact component={Landing} />
               <Route path='/Login' exact component={Login} />
               <Route path='/Register' exact component={Register} />
-              <Route path='/Browse' exact component={Browse} />
               <Switch>
                 <SecureRoute path='/Feed' exact component={FeedImages} />
                 <SecureRoute path='/Receipts' exact component={Receipts} />
@@ -62,6 +61,7 @@ class App extends Component {
                 <SecureRoute path='/Library' exact component={Library} />
                 <SecureRoute path='/payment-methods' exact component={EditPaymentMethods} />
                 <SecureRoute path='/view/:image_id' exact component={ViewImage} />
+                <Route path='/Browse' exact component={Browse} />
               </Switch>
           </div>
         </Router>

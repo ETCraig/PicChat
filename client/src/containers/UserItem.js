@@ -25,10 +25,13 @@ const styles = theme => ({
 
 const Container = styled.article`
   display: flex;
-  width: 100%;
-  height: 138px;
+  width: 95%;
+  height: 150px;
   position: relative;
   background: #eaeaea;
+  align-items: center;
+  align-self: center;
+  justify-content: space-evenly;
   /* border: 1px solid black; */
 
   .title-wrapper {
@@ -189,21 +192,6 @@ const AvatarBlock = styled.div`
     background-position: 50%;
     background-size: cover;
   }
-
-`
-
-const DescriptionStyles = styled.p`
-  color: hsl(0, 0%, 53.3%);
-  padding-top: 8px;
-  margin-bottom: 8px;
-  display: block;
-  line-height: 1.3rem;
-  max-height: 3.6rem;
-  overflow: hidden;
-  font-size: 0.8rem;
-  font-weight: 400;
-  text-transform: none;
-  word-break: break-word;
 `;
 
 class UserItem extends Component {
@@ -272,53 +260,55 @@ class UserItem extends Component {
       user
     } = this.state;
     console.log(user)
-    let { _id: userid, handle, avatar, user_name } = user;
+    let { _id: handle, avatar, user_name } = user;
     console.log(user)
     return (
-      <Container>
-        <AvatarBlock onClick={() => this.props.history.push(`/Creator/${handle}`)} avatar={avatar}>
-          <div className="avatar"></div>
-        </AvatarBlock>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Container>
+          <AvatarBlock onClick={() => this.props.history.push(`/Creator/${handle}`)} avatar={avatar}>
+            <div className="avatar"></div>
+          </AvatarBlock>
 
-        <ProfileInfoBlock className="profile-info-block">
-          <div className="info-block-wrapper">
-            <div className="title-wrapper">
-              <span onClick={() => this.props.history.push(`/Creator/${handle}`)} className="title">
-                {user_name}
-              </span>
-            </div>
+          <ProfileInfoBlock className="profile-info-block">
+            <div className="info-block-wrapper">
+              <div className="title-wrapper">
+                <span onClick={() => this.props.history.push(`/Creator/${handle}`)} className="title">
+                  {user_name}
+                </span>
+              </div>
 
-            <div className="meta-block">
-              <div className="meta-data">
-                <FollowersTag>
-                  {subscribersCount} {pluralize(subscribersCount, "subscriber ", "subscribers ")}
-                </FollowersTag>
-                {imageCount > 0 &&
-                  <BulletTag>•</BulletTag>
-                }
-
-                {imageCount > 0 &&
+              <div className="meta-block">
+                <div className="meta-data">
                   <FollowersTag>
-                    {imageCount} {pluralize(imageCount, "image ", "images ")}
+                    {subscribersCount} {pluralize(subscribersCount, "subscriber ", "subscribers ")}
                   </FollowersTag>
-                }
+                  {imageCount > 0 &&
+                    <BulletTag>•</BulletTag>
+                  }
 
+                  {imageCount > 0 &&
+                    <FollowersTag>
+                      {imageCount} {pluralize(imageCount, "image ", "images ")}
+                    </FollowersTag>
+                  }
+
+                </div>
               </div>
             </div>
-          </div>
-        </ProfileInfoBlock>
-        <FollowBlock>
-          {!isMe &&
-            <Button onClick={() => this.props.history.push(`/Creator/${handle}`)} variant="outlined" color="primary">
-              {subscribed ? "Subscribed  " : subscribedYou ? "Subscribe Back  " : "Subscribe"}
-            </Button>
-          }
-        </FollowBlock>
-      </Container>
+          </ProfileInfoBlock>
+          <FollowBlock>
+            {!isMe &&
+              <Button onClick={() => this.props.history.push(`/Creator/${handle}`)} variant="outlined" color="primary">
+                {subscribed ? "Subscribed  " : subscribedYou ? "Subscribe Back  " : "Subscribe"}
+              </Button>
+            }
+          </FollowBlock>
+        </Container>
+      </div>
     );
   }
   loadData = () => {
-    let { _id, index } = this.props;
+    let { _id } = this.props;
     getProfileItem(_id)
       .then(({ status, data }) => {
         if (status === 200) {

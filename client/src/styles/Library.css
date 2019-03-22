@@ -6,6 +6,15 @@
     background: #eaeaea;
 }
 
+.library-title {
+    margin-left: -500px;
+}
+
+.library-title h2 {
+    font-size: 50px;
+    font-weight: 600
+}
+
 #library-images {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

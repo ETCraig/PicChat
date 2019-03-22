@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { getErrors } from '../actions/ErrorActions';
-import store from '../store';
 
 export const getSearchQuery = (query) => {
     console.log(query)

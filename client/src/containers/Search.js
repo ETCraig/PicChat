@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { getSearchQuery } from '../services/Search.Services';
 import { Link } from 'react-router-dom';
-import Downshift, { resetIdCounter } from 'downshift';
+import Downshift from 'downshift';
 import debounce from 'lodash.debounce';
 import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
@@ -217,7 +217,7 @@ class Search extends Component {
     }
 
     render() {
-        let { results, searchQuery } = this.state;
+        let { results } = this.state;
         console.log(this.state);
         return (
             <Container>
@@ -239,7 +239,7 @@ class Search extends Component {
             getItemProps,
             isOpen,
             inputValue,
-            highlightedIndex
+            // highlightedIndex
           }) => (
             <div className="downshift">
               <DownshiftWrapper searchActive={isOpen && results.length > 0}>
@@ -283,7 +283,6 @@ class Search extends Component {
                             title,
                             avatar,
                             path,
-                            icon,
                             iconClass,
                             image_file
                           } = item;
@@ -295,7 +294,7 @@ class Search extends Component {
                                 to={`/Creator/${handle}`}
                               >
                                 <li>
-                                  <img className="user-icon" src={avatar} />
+                                  <img className="user-icon" src={avatar} alt='User Avatar' />
                                   {item.user_name}
                                 </li>
                               </DropDownLink>
@@ -303,14 +302,14 @@ class Search extends Component {
                           } else if (type === "image") {
                             return (
                               <DropDownLink
-                                highlighted={index === highlightedIndex}
+                                // highlighted={index === highlightedIndex}
                                 {...getItemProps({ item })}
                                 key={index}
                                 to={`/watch/${_id}`}
                               >
                                 <li>
                                   <div className="icon-wrapper">
-                                    <img className="user-icon" src={image_file} />
+                                    <img className="user-icon" src={image_file} alt='Post' />
                                   </div>
                                   {title}
                                 </li>
@@ -319,7 +318,7 @@ class Search extends Component {
                           } else if (type === "page") {
                             return (
                               <DropDownLink
-                                highlighted={index === highlightedIndex}
+                                // highlighted={index === highlightedIndex}
                                 {...getItemProps({ item })}
                                 key={index}
                                 to={path}

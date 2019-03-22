@@ -18,7 +18,7 @@ import Search from '../containers/Search';
 class NavBar extends Component {
 
     componentDidMount() {
-        const {history} = this.props;
+        // const {history} = this.props;
     }
     onLogoutClick(e) {
         e.preventDefault();

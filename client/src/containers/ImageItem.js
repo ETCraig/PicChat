@@ -20,11 +20,11 @@ const styles = theme => ({
 });
 
 const Container = styled.div`
-  width: 100%;
+  width: 95%;
   background: #eaeaea;
   display: flex;
-  justify-content: center;
-  /* height: 138px; */
+  justify-content: space-evenly;
+  height: 150px;
 
   .title-wrapper {
     max-height: 24px;
@@ -121,11 +121,6 @@ const BulletTag = styled.span`
   padding-right: 5px;
 `;
 
-const DateTag = styled.div`
-  font-size: 0.8rem;
-  color: #606060;
-`;
-
 const ThumbWrapper = styled.div`
   width: 100%;
   /* max-width: 246px; */
@@ -135,42 +130,9 @@ const ThumbWrapper = styled.div`
   min-height: 138px;
 `;
 
-const DurationTag = styled.span`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 4px;
-  color: hsl(0, 0%, 100%);
-  background-color: hsl(0, 0%, 6.7%);
-  opacity: 0.8;
-  padding: 2px 4px;
-  border-radius: 2px;
-  letter-spacing: 0.5px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  line-height: 0.8rem;
-  display: flex;
-  -ms-flex-direction: row;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-  display: inline-flex;
-  z-index: 6;
-`;
-
-const ImageThumb = styled.img`
-  display: block;
-
-  width: 100%;
-  height: 100%;
-  min-height: 138px;
-`;
-
 const Thumbnail = styled.img`
   display: block;
-  width: 50%;
+  width: 40%;
   /* max-width: 245px; */
   height: 50%;
   min-height: 138px;
@@ -286,61 +248,62 @@ class ImageItem extends Component {
       image_file,
       by_creator: { handle, avatar, user_name },
       description,
-      likes,
-      _id,
+      likes
     } = this.state;
     return (
-      <Container className='image-item'>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Container className='image-item'>
 
-        <ThumbWrapper className="thumb-wrapper">
-          <Thumbnail
-            onClick={e => this.handleNavigation()}
-            className="thumbnail"
-            src={image_file}
-          />
-        </ThumbWrapper>
+          <ThumbWrapper className="thumb-wrapper">
+            <Thumbnail
+              onClick={e => this.handleNavigation()}
+              className="thumbnail"
+              src={image_file}
+            />
+          </ThumbWrapper>
 
-        <ImageInfoBlock className="image-info-block">
-          <img className="avatar" src={avatar} />
-          <div className="info-block-wrapper">
-            <div className="title-wrapper">
-              <span className="title" onClick={e => this.handleNavigation()}>
-                {" "}
-                {title}
-              </span>
-              <IconButton
-                color="secondary"
-                classes={{
-                  root: "dropdown-dots"
-                }}
-                aria-label="Add an alarm"
-              >
-                <MoreVert />
-              </IconButton>
-            </div>
+          <ImageInfoBlock className="image-info-block">
+            <img className="avatar" src={avatar} alt='Creator Avatar' />
+            <div className="info-block-wrapper">
+              <div className="title-wrapper">
+                <span className="title" onClick={e => this.handleNavigation()}>
+                  {" "}
+                  {title}
+                </span>
+                <IconButton
+                  color="secondary"
+                  classes={{
+                    root: "dropdown-dots"
+                  }}
+                  aria-label="Add an alarm"
+                >
+                  <MoreVert />
+                </IconButton>
+              </div>
 
-            <div className="meta-block">
-              <div className="meta-data">
-                <ByUser onClick={() => this.props.history.push(`/Creator/${handle}`)}>
-                  {user_name} <i className="fas fa-check-circle" />
-                </ByUser>
-                <BulletTag>•</BulletTag>
-                <ViewCountTag>
-                  {likes} {pluralize(likes, "like ", "likes ")}
-                </ViewCountTag>
+              <div className="meta-block">
+                <div className="meta-data">
+                  <ByUser onClick={() => this.props.history.push(`/Creator/${handle}`)}>
+                    {user_name} <i className="fas fa-check-circle" />
+                  </ByUser>
+                  <BulletTag>•</BulletTag>
+                  <ViewCountTag>
+                    {likes} {pluralize(likes, "like ", "likes ")}
+                  </ViewCountTag>
+                </div>
               </div>
             </div>
-          </div>
 
-          <DescriptionStyles className="description">
-            {description}
-          </DescriptionStyles>
-        </ImageInfoBlock>
-      </Container>
+            <DescriptionStyles className="description">
+              {description}
+            </DescriptionStyles>
+          </ImageInfoBlock>
+        </Container>
+      </div>
     );
   }
   loadData = () => {
-    let { _id, index } = this.props;
+    let { _id } = this.props;
     console.log('ID', _id)
     getSearchedImage(_id)
       .then(({ status, data }) => {
