@@ -6,30 +6,40 @@ import {
     ModalHeader,
     ModalBody
 } from 'reactstrap';
-import {unsubscribeFromCreator} from '../services/Stripe.Services';
+import { unsubscribeFromCreator } from '../services/Stripe.Services';
 
-function UnsubscribeModal(props) {
-    const handleUnsubscribe = e => {
-        console.log(props.creator);
-        let creatorId = props.creator
+class UnsubscribeModal extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isOpen: true,
+            creator_id: props.creator
+        }
+    }
+    handleUnsubscribe = e => {
+        let creatorId = this.state.creator_id;
         unsubscribeFromCreator(creatorId)
             .then(res => {
-                let {status} = res;
-                if(status === 200) {
+                let { status } = res;
+                if (status === 200) {
                     console.log('Success');
+                    this.setState({ isOpen: false })
                 } else {
                     console.log('Err');
                 }
             });
     }
-    return (
-        <Modal isOpen={true}>
-            <ModalBody>
-                <ModalHeader>Are you Sure?</ModalHeader>
-                <Button onClick={handleUnsubscribe}>Yes</Button>
-            </ModalBody>
-        </Modal>
-    );
+    render() {
+        return (
+            <Modal isOpen={this.state.isOpen}>
+                <ModalBody>
+                    <ModalHeader>Are you Sure?</ModalHeader>
+                    <Button onClick={this.handleUnsubscribe}>Yes</Button>
+                </ModalBody>
+            </Modal>
+        );
+    }
 }
 
 export default UnsubscribeModal;
