@@ -1,7 +1,7 @@
 const Receipts = require('../../models/Receipts');
 
 module.exports = get_receipts_list = async (req, res) => {
-    let limit = req.query;
+    let {limit} = req.query;
     let user = req.user._id;
     try {
         let maxLength = await Receipts.find({"user": user}).countDocuments();

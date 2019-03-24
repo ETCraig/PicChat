@@ -13,7 +13,7 @@ class FeedImages extends Component {
         this.state = {
             feedImages: [],
             limit: 0,
-            maxLength: 2,
+            maxLength: 4,
             expanded: false,
             loadingFeed: false
         }
@@ -26,7 +26,7 @@ class FeedImages extends Component {
         this.feeedInit();
     }
     feeedInit() {
-        let limit = 2;
+        let limit = 4;
         getFeedImages(limit)
             .then(res => {
                 let { status, data } = res;
@@ -37,8 +37,8 @@ class FeedImages extends Component {
             });
     }
     reloadFeed() {
-        let { limit, maxLength, feedImages } = this.state;
-        if (feedImages && feedImages.length < maxLength) {
+        let { limit, feedImages } = this.state;
+        if (feedImages && feedImages.length < this.state.maxLength) {
             this.setState({
                 loadingFeed: true
             });
@@ -75,7 +75,7 @@ class FeedImages extends Component {
             )
         ) {
             this.setState({
-                limit: limit + 2
+                limit: limit + 4
             });
             this.reloadFeed();
         }
@@ -84,13 +84,13 @@ class FeedImages extends Component {
         window.removeEventListener('scroll', this.handleScroll);
     }
     render() {
-        let displayImages = this.state.feedImages;
+        let feedImages = this.state.feedImages;
         return (
             <div>
                 <CreatePost />
                 <div style={{background: '#333', height: '100px'}} />
                 <div id='feed-images'>
-                    {displayImages.map((image, i) => {
+                    {feedImages && feedImages.map((image, i) => {
                         return (
                             <div key={i} id='feed-image-wrap'>
                                 <h5>{image.title}</h5>

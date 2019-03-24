@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import '../styles/Receipts.css';
 
+import Footer from './Footer';
 import { getReceiptsList } from '../services/Stripe.Services';
 
 class Receipts extends Component {
@@ -81,16 +83,21 @@ class Receipts extends Component {
         let { receipt } = this.state;
         return (
             <div>
-                {receipt && receipt.map((receipts, i) => {
-                    return(
-                        <div key={i}>
-                            <h5>{receipts.amount}</h5>
-                            <h5>{receipts.currency}</h5>
-                            <h5>{receipts.time}</h5>
-                            <a href={receipts.receipt_url} target='blank'><h5>Digital Receipt</h5></a>
-                        </div>
-                    );
-                })}
+                <div id='receipts-wrap'>
+                    <div id='user-receipts'>
+                        {receipt && receipt.map((receipts, i) => {
+                            return (
+                                <div key={i} id='user-receipts-wrap'>
+                                    <h5>Cost: {receipts.amount}</h5>
+                                    <h5>Currency:{receipts.currency}</h5>
+                                    <h5>Date: {receipts.time}</h5>
+                                    <h5>Click <a href={receipts.receipt_url} target='blank'>here</a> to view your Digital Receipt.</h5>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+                <Footer />
             </div>
         );
     }

@@ -1,0 +1,33 @@
+#receipts-wrap {
+    height: 85vh;
+    background: #333;
+}
+
+#user-receipts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px;
+    background: #333;
+}
+
+#user-receipts {
+    max-width: 100%;
+    margin: auto 30px;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+#user-receipts-wrap {
+    position: relative;
+    background: #eaeaea;
+    color: #333;
+}
+
+#user-receipts-wrap h5 {
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}

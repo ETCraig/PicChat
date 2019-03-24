@@ -40,7 +40,7 @@ export const getFeedImages = async limit => {
         }
     };
 
-    return axios.get(`api/images/feed?page=1&limit=${limit}`, auth)
+    return axios.get(`/api/images/feed?page=1&limit=${limit}`, auth)
         .then(res => res)
         .catch(err => {
             let {

@@ -3,7 +3,7 @@ const Image = require('../../models/Image');
 
 module.exports = get_saved_images = async (req, res) => {
     let userId = req.user.id;
-    let limit = req.query;
+    let {limit} = req.query;
     console.log(userId)
     try {
         let images = await ImageLibrary.find(

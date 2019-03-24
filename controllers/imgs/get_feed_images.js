@@ -2,7 +2,8 @@ const Image = require('../../models/Image');
 const Subscriptions = require('../../models/Subscription');
 
 module.exports = get_feed_images = async (req, res) => {
-    let limit = req.query;
+    let {limit} = req.query;
+    console.log(limit)
     let user = req.user._id;
     try {
         console.log('USER', user)
@@ -17,7 +18,7 @@ module.exports = get_feed_images = async (req, res) => {
             .sort({ date: -1 })
             .limit(Number(limit));
         console.log('IMAGES', images)
-        let maxLength = images.length;
+        let maxLength = await Image.find({ "by_creator": creatorArray }).countDocuments();
         console.log('LENGTH', maxLength)
         let data = {
             feedImages,
