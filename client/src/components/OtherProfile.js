@@ -106,7 +106,7 @@ class OtherProfile extends Component {
                     </div>
                 </div>
 
-                <div id='profile-images'>
+                <div id='profile-images' style={{background: '#333', height: '350px'}}>
                     {!subscriber ? (
                         <div>
                             <h3>Here's a Sample of this Creators Posts</h3>

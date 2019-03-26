@@ -88,7 +88,7 @@ class FeedImages extends Component {
         return (
             <div>
                 <CreatePost />
-                <div style={{background: '#333', height: '100px'}} />
+                <div style={{background: '#333', height: '220px'}} />
                 <div id='feed-images'>
                     {feedImages && feedImages.map((image, i) => {
                         return (
